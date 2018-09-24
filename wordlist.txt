@@ -1,8 +1,228 @@
-hint
-提示
-1
-1
-bug
-巴哥
-1
-1
+plethora
+过多的
+0
+0
+alias
+别名
+0
+0
+attributes
+属性
+0
+0
+analogues
+类似物
+0
+0
+threshold
+临界值
+0
+0
+elementwise
+逐个元素地
+0
+0
+modify
+改变
+0
+0
+correspond to
+相当于
+0
+0
+upcasting
+向上的
+0
+0
+unary
+一元的
+0
+0
+cumulative
+累积的
+0
+0
+transpose
+移项
+0
+0
+adjoint
+伴随矩阵
+0
+0
+conjugated
+共轭
+0
+0
+explicitly
+明确地
+0
+0
+prerequisite
+先决条件，前提，必要条件
+0
+0
+prepend
+预先考虑，预先计划，预谋
+0
+0
+indices
+index的复数
+0
+0
+repetitions
+反复; 重复( repetition的名词复数 ); 复制品; 副本
+0
+0
+eigenvalue
+本征值
+0
+0
+multiplicity
+多样性
+0
+0
+histogram
+柱状图
+0
+0
+interface
+连接
+0
+0
+scalar
+标量的; 梯状的; 分等级的; 数量的;
+0
+0
+pad with
+用…填充;
+0
+0
+intrinsic
+本征; 固有的，内在的，本质的;
+0
+0
+identical
+同一的; 完全同样的，相同的; 恒等的; 同卵的;
+0
+0
+subtleties
+巧妙; 细微( subtlety的名词复数 ); 精细; 细微的差别等;
+0
+0
+arbitrary
+乱; 随意的，任性的，随心所欲的; 主观的，武断的; 霸道的，专制的，专横的，独断独行的;
+0
+0
+presumably
+大概; 可能; 想来; 据推测;
+0
+0
+generic
+一般的; 类的，属性的; 不受商标保护的;
+0
+0
+utility
+公用事业; 功用，效用;
+0
+0
+tabular data
+表列数据;
+0
+0
+in a nutshell
+一言以蔽之; 简言之; 简单地; 简约地;
+0
+0
+mandatory
+强制的; 命令的; 受委托的;
+0
+0
+delimeter
+[计] 定界符;
+0
+0
+decomposed
+已分解的，已腐烂的;
+0
+0
+notable
+显著的; 著名的; 值得注意的;
+0
+0
+hinder
+vt:阻碍，妨碍; 成为阻碍;adj:后面的，后方的;
+0
+0
+validate
+证实; 使合法化，使有法律效力; 使生效; 批准，确认;
+0
+0
+underscore character
+下划线字符;
+0
+0
+lambda functions
+λ演算,例如函数f(x)= x + 2可以用lambda演算表示为λx.x + 2
+0
+0
+cumbersome
+笨重的; 麻烦的; 累赘的，难以携带的; 缓慢复杂的，冗长的
+0
+0
+complementary
+互补的; 补充的，补足的
+0
+0
+corresponding
+相当的，对应的; 通信的; 符合的，符合。。; 一致的
+0
+0
+blob
+二进制大对象
+0
+0
+derive from
+由…起源; 取自;
+0
+0
+bracket
+n. 支架，悬臂; 括弧; 类别，等级; [数] 同类项;vt. 为…装托架; 把…括在一起; 把…分类; 排除;
+0
+0
+stride of an array
+数组步长，是程序设计时，相邻数组元素在内存中的开始地址的距离，度量单位可以是字节或者数组元素个数。
+0
+0
+resultant
+adj.因而发生的，结果必然产生的; [物] 组合的，合成的;n.结果，后果; 合力，合成力，合成[运动]，[数]结式，消元式，[物]合量，组合，[化]生成物，（反应）产物; [数学] 合矢量：等价于一组向量的一个单个向量;
+0
+0
+handy
+方便的; 手巧的; 手边的，附近的; 便于使用的;
+0
+0
+ellipsis
+n.（语法结构上的） 省略;
+0
+0
+trailing
+adj.拖尾的; 曳尾的; 被拖动的; 蔓延的;
+0
+0
+clobbering
+In software engineering, clobbering a file or computer memory is overwriting its contents. 
+0
+0
+contiguous
+adj.接触的，邻近的，共同的;
+0
+0
+versatile
+adj.多才多艺的; 多功能的; （指工具、机器等） 多用途的; 有多种学问、技能或职业的;
+0
+0
+concatenate
+vt.把 （一系列事件、事情等）联系起来;adj.连接的，联系在一起的;
+0
+0
