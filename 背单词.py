@@ -15,7 +15,7 @@ def read(filename):
     fpt = {}
     res = re.split('\n', strn)
     for i in range(1, len(res), 4):
-        fpt[res[i-1]] = [res[i], int(res[i+1]), int(res[i+2])]
+        fpt[res[i-1]] = [res[i], int(res[i+1]), int(res[i+2]), int(res[i+1])-int(res[i+2])]
     f.close()
     return fpt
 
@@ -29,12 +29,22 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.1.2")
+    print("背单词v1.2.0")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
     print("4:查找单词")
     print("5:手动保存")
+    print("6:错题集")
+
+
+def mistake_collection(wordlist):
+    soup = []
+    for i in wordlist:
+        if wordlist[i][1]-wordlist[i][2]>0:
+            soup.append([i, wordlist[i][1], wordlist[i][1]-wordlist[i][2]])
+    soup.sort(key=lambda x: float(x[2])/float(x[1]), reverse=True)
+    return soup
 
 
 def find_word(wordlist):
@@ -90,6 +100,7 @@ def random_test(a, wordlist, filename):
                 print("你已经全部都答完啦！重新开始吗？(Y/N)")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
                 write(filename, wordlist)
                 chx = input()
                 if chx == "Y" or chx == "y":
@@ -109,6 +120,8 @@ def random_test(a, wordlist, filename):
                 print("提示:上面的报错是骗你的，输入(Y/N)进入下一题吧！")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
                 write(filename, wordlist)
                 chx = input()
                 if chx == "Y" or chx == "y":
@@ -126,6 +139,8 @@ def random_test(a, wordlist, filename):
                 del a[p]
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
                 write(filename, wordlist)
                 random_test(a, wordlist, filename)
             else:
@@ -141,6 +156,8 @@ NameError: name 'hint' is not defined''')
                 print("提示：上面的报错是骗你的，输入(Y/N)进入下一题吧！")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
                 write(filename, wordlist)
                 chs = input()
                 if chs == "Y" or chs == "y":
@@ -153,6 +170,8 @@ NameError: name 'hint' is not defined''')
         print("还敢来吗?(Y/N)")
         wordlist[p][1] += 1
         wordlist[p][2] += 0
+        print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+              round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
         write(filename, wordlist)
         chs = input()
         if chs == "Y" or chs == "y":
@@ -222,6 +241,10 @@ def main(argv):
             find_word(a)
         elif b == "5":
             write(filename, a)
+        elif b == "6":
+            mistake_notebook = mistake_collection(a)
+            for i in mistake_notebook:
+                print(i[0], "做了", i[1], "次，错了", i[2], "次，错误率", round(float(i[2])/float(i[1])*100, 2), "%")
 
 
 if __name__ == '__main__':
