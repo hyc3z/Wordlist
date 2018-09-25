@@ -1,6 +1,6 @@
 plethora
 过多的
-2
+1
 1
 alias
 别名
@@ -12,7 +12,7 @@ attributes
 1
 analogues
 类似物
-3
+1
 1
 threshold
 临界值
@@ -36,8 +36,8 @@ upcasting
 1
 unary
 一元的
-4
-0
+1
+1
 cumulative
 累积的
 1
@@ -52,11 +52,11 @@ adjoint
 1
 conjugated
 共轭
-9
-8
+1
+1
 explicitly
 明确地
-2
+1
 1
 prerequisite
 先决条件，前提，必要条件
