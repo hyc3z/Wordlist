@@ -7,6 +7,9 @@ import getopt
 import subprocess
 import time
 from copy import deepcopy
+import matplotlib.pyplot as plt
+import numpy as np
+from selenium import webdriver
 
 
 def read(filename):
@@ -29,13 +32,39 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.2.0")
+    print("背单词v1.3.0")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
     print("4:查找单词")
     print("5:手动保存")
     print("6:错题集")
+    print("7:智能录入")
+    # print("8:显示图表")
+
+
+def on_progress():
+    print("该功能还在开发中！")
+
+
+def onpick3(event):
+    ind = event.ind
+    print('onpick3 scatter:', ind, np.take(x, ind), np.take(y, ind))
+
+
+def print_graph(a):
+    names = []
+    values_total = []
+    values_incorrect = []
+    for i in a:
+        names.append(i)
+        values_total.append(a[i][1])
+        values_incorrect.append(a[i][1]-a[i][2])
+    fig, q = plt.subplots()
+    col = plt.plot(names, values_total, 'o', names, values_incorrect, '^', picker = True)
+    fig.canvas.mpl_connect('pick_event', onpick3)
+    #q.suptitle('Study Result')
+    plt.show()
 
 
 def mistake_collection(wordlist):
@@ -207,6 +236,44 @@ def new_word(a):
         return False
 
 
+def new_word_auto(a):
+    print("输入英文:(输入 'exit()' 取消录入)")
+    word = input()
+    if word == "exit()":
+        print("已取消录入")
+        return False
+    if word in a:
+        print(word, "已经存在，请重新输入")
+        word = input()
+        if word == "exit()":
+            print("已取消录入")
+            return False
+    word_cn = ""
+    browser0 = webdriver.Chrome()
+    browser0.get("https://www.baidu.com/")
+    browser0.find_element_by_id("kw").send_keys(word)
+    browser0.find_element_by_id("su").click()
+    browser0.implicitly_wait(2)
+    # word_attributes = browser0.find_element_by_css_selector("span.op_dict_text1.c-gap-right")
+    # word_translates = browser0.find_element_by_css_selector("span.op_dict_text2")
+    word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
+    # for i in word_attributes and j in word_translates:
+    #     print(i+j)
+    #     word_cn = i+j
+    for i in word_result:
+        print(i.text)
+        word_cn += i.text
+        word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+    print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
+    cfm = input()
+    if cfm == "Y" or cfm == "y":
+        a[word] = [word_cn_complete, '0', '0']
+        return True
+    else:
+        print("已取消录入")
+        return False
+
+
 def show_word(a):
     for i in a:
         print(i, a[i][0])
@@ -245,6 +312,12 @@ def main(argv):
             mistake_notebook = mistake_collection(a)
             for i in mistake_notebook:
                 print(i[0], "做了", i[1], "次，错了", i[2], "次，错误率", round(float(i[2])/float(i[1])*100, 2), "%")
+        elif b == "7":
+            if new_word_auto(a):
+                write(filename, a)
+        elif b == "8":
+            # print_graph(a)
+            on_progress()
 
 
 if __name__ == '__main__':

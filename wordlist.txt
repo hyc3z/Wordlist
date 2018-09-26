@@ -242,3 +242,43 @@ annotation
 n.注释;
 1
 1
+thereafter
+adv.此后，在那之后; 〈罕〉据此;
+0
+0
+prompt
+adj.迅速的; 敏捷的; 立刻的; 准时的;v.提示; 促使; 导致; 鼓励;n.提示; 提示符; 激励; 提词;
+0
+0
+innermost
+adj.最深处的; 隐私的，最隐秘的;
+0
+0
+syntactically
+adv.依照句法地，在语句构成上;
+0
+0
+parenthesize
+vt.将…加上括弧，加插入语于;
+0
+0
+whereas
+conj.然而; 鉴于; 反之; n."鉴于…"：正式文件的介绍性陈述，开场白; 条件性陈述;
+0
+0
+albeit
+conj.虽然; 即使;
+0
+0
+concise
+adj.简约; 简明的，简洁的; 精炼;
+0
+0
+hereafter
+adv.今后，从此以后;
+0
+0
+retrieve
+vt.取回; 恢复; [计] 检索; 重新得到;vi.找回猎物;n.取回; 恢复，挽回; [计] 检索;[其他]第三人称单数：retrieves 现在分词：retrieving 过去式：retrieved 过去分词：retrieved
+0
+0
