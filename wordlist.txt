@@ -282,3 +282,7 @@ retrieve
 vt.取回; 恢复; [计] 检索; 重新得到;vi.找回猎物;n.取回; 恢复，挽回; [计] 检索;[其他]第三人称单数：retrieves 现在分词：retrieving 过去式：retrieved 过去分词：retrieved
 0
 0
+grumble
+vi.抱怨; 发牢骚; 嘟囔; （雷等） 隆隆响;vt.喃喃地说出;n.抱怨; 牢骚; 咕哝; （雷等的） 隆隆声;[其他]第三人称单数：grumbles 现在分词：grumbling 过去式：grumbled 过去分词：grumbled
+0
+0

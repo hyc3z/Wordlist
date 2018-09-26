@@ -318,6 +318,8 @@ def main(argv):
         elif b == "8":
             # print_graph(a)
             on_progress()
+        else:
+            on_progress()
 
 
 if __name__ == '__main__':
