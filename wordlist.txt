@@ -290,3 +290,35 @@ lexicographical
 adj.词典编纂的;
 0
 0
+recursively
+[词典][计] 递归地;
+0
+0
+right-justify
+vt.向右对齐;[其他]第三人称单数：right-justifies 现在分词：right-justifying 过去式：right-justified
+0
+0
+designate
+vt.指派; 指明，指出; 表明，意味着; 把…定名为;adj.指定而尚未上任的; 选出而尚未上任的;[其他]第三人称单数：designates 现在分词：designating 过去式：designated 过去分词：designated
+0
+0
+suite
+n.[计] （软件的） 套件; （房间，器具等） 一套，一副; [乐] 组曲; 随从;[其他]复数：suites
+0
+0
+opaque
+adj.不透明的; 无光泽的，晦暗的; 不传导性的; 含糊的，迟钝的;n.不透明，晦暗; [建] 遮檐; 遮光涂料;[其他]复数：opaques
+0
+0
+hierarchy
+n.[计] 分层，层次; 等级制度; 统治集团; 天使的级别或等级;[其他]复数：hierarchies
+0
+0
+colon
+n.冒号; <解>结肠; 科郎（哥斯达黎加货币单位）;[其他]复数：colons
+0
+0
+preceding
+adj.（时间或地点上） 在先的，在前的，前面的; 前述的; 上述的;v.在…之前发生（或出现）; 走在…前面; 先于; “precede”的现在分词;[其他]原型： precede
+0
+0

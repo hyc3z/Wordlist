@@ -35,7 +35,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.3.5")
+    print("背单词v1.3.6")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -232,7 +232,7 @@ def new_word(a):
     print(word, word_cn, "确认把这个单词加入列表吗?(Y/N)")
     cfm = input()
     if cfm == "Y" or cfm == "y":
-        a[word] = [word_cn, '0', '0']
+        a[word] = [word_cn, 0, 0]
         return True
     else:
         print("已取消录入")
@@ -271,7 +271,7 @@ def new_word_auto(a):
     print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
     cfm = input()
     if cfm == "Y" or cfm == "y":
-        a[word] = [word_cn_complete, '0', '0']
+        a[word] = [word_cn_complete, 0, 0]
         browser0.close()
         return True
     else:
