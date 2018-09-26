@@ -322,3 +322,23 @@ preceding
 adj.（时间或地点上） 在先的，在前的，前面的; 前述的; 上述的;v.在…之前发生（或出现）; 走在…前面; 先于; “precede”的现在分词;[其他]原型： precede
 0
 0
+unhandled
+adj.未用手触过的，未经处理过的;
+0
+0
+parenthesized
+v.将…加上括弧，加插入语于( parenthesize的过去式和过去分词 );[其他]原型： parenthesize
+0
+0
+thereof
+adv.其; 它的; 关于那; 由此;
+0
+0
+instance
+n.情况; 例子，实例; 要求，建议; [法] 诉讼手续;vt.举…为例;[其他]第三人称单数：instances 复数：instances 现在分词：instancing 过去式：instanced 过去分词：instanced
+0
+0
+implicitly
+adv.含蓄地; 暗示地; 无疑问地; 无保留地;
+0
+0

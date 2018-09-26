@@ -73,7 +73,7 @@ def print_graph(a):
 def mistake_collection(wordlist):
     soup = []
     for i in wordlist:
-        if wordlist[i][1]-wordlist[i][2]>0:
+        if (wordlist[i][1]-wordlist[i][2])>0:
             soup.append([i, wordlist[i][1], wordlist[i][1]-wordlist[i][2]])
     soup.sort(key=lambda x: float(x[2])/float(x[1]), reverse=True)
     return soup
