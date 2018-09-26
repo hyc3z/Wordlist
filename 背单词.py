@@ -10,6 +10,9 @@ from copy import deepcopy
 import matplotlib.pyplot as plt
 import numpy as np
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def read(filename):
@@ -32,7 +35,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.3.0")
+    print("背单词v1.3.5")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -40,7 +43,7 @@ def show_menu():
     print("5:手动保存")
     print("6:错题集")
     print("7:智能录入")
-    # print("8:显示图表")
+    print("8:显示图表")
 
 
 def on_progress():
@@ -63,7 +66,7 @@ def print_graph(a):
     fig, q = plt.subplots()
     col = plt.plot(names, values_total, 'o', names, values_incorrect, '^', picker = True)
     fig.canvas.mpl_connect('pick_event', onpick3)
-    #q.suptitle('Study Result')
+    plt.suptitle('in development...')
     plt.show()
 
 
@@ -250,10 +253,11 @@ def new_word_auto(a):
             return False
     word_cn = ""
     browser0 = webdriver.Chrome()
+    wait = WebDriverWait(browser0, 10)
     browser0.get("https://www.baidu.com/")
     browser0.find_element_by_id("kw").send_keys(word)
     browser0.find_element_by_id("su").click()
-    browser0.implicitly_wait(2)
+    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'op_dict3_english_result_table')))
     # word_attributes = browser0.find_element_by_css_selector("span.op_dict_text1.c-gap-right")
     # word_translates = browser0.find_element_by_css_selector("span.op_dict_text2")
     word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
@@ -263,11 +267,12 @@ def new_word_auto(a):
     for i in word_result:
         print(i.text)
         word_cn += i.text
-        word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+    word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
     print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
     cfm = input()
     if cfm == "Y" or cfm == "y":
         a[word] = [word_cn_complete, '0', '0']
+        browser0.close()
         return True
     else:
         print("已取消录入")
@@ -316,7 +321,7 @@ def main(argv):
             if new_word_auto(a):
                 write(filename, a)
         elif b == "8":
-            # print_graph(a)
+            print_graph(a)
             on_progress()
         else:
             on_progress()
