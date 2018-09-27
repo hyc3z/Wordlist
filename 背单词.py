@@ -35,7 +35,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.3.7")
+    print("背单词v1.4.0")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -43,11 +43,16 @@ def show_menu():
     print("5:手动保存")
     print("6:错题集")
     print("7:智能录入")
-    # print("8:显示图表")
+    print("8:显示图表")
+    print("9:统计数据")
 
 
 def on_progress():
     print("该功能还在开发中！")
+
+
+def statistics(a):
+    print("共有", len(a), "个单词收录。")
 
 
 def onpick3(event):
@@ -264,6 +269,7 @@ def new_word_auto(a):
     # for i in word_attributes and j in word_translates:
     #     print(i+j)
     #     word_cn = i+j
+    browser0.close()
     for i in word_result:
         print(i.text)
         word_cn += i.text
@@ -272,7 +278,6 @@ def new_word_auto(a):
     cfm = input()
     if cfm == "Y" or cfm == "y":
         a[word] = [word_cn_complete, 0, 0]
-        browser0.close()
         return True
     else:
         print("已取消录入")
@@ -323,6 +328,8 @@ def main(argv):
         elif b == "8":
             print_graph(a)
             on_progress()
+        elif b == "9":
+            statistics(a)
         else:
             on_progress()
 

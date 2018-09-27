@@ -342,3 +342,15 @@ implicitly
 adv.含蓄地; 暗示地; 无疑问地; 无保留地;
 0
 0
+semantic
+adj.<语>语义的，语义学的;
+0
+0
+syntax
+n.语法; 句法; 句法规则[分析]; 语构;
+0
+0
+partake
+vi.参与; 参加; 吃;n.参与者，分担者;[其他]第三人称单数：partakes 现在分词：partaking 过去式：partook 过去分词：partaken
+0
+0
