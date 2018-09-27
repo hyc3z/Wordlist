@@ -16,6 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchWindowException
 
+
 def read(filename):
     f = open(filename, "r")
     strn = f.read()
@@ -27,6 +28,26 @@ def read(filename):
     return fpt
 
 
+def read_date(filename):
+    f = open(filename, "r")
+    strn = f.read()
+    fpt = {}
+    res = re.split('\n', strn)
+    for i in range(1, len(res), 3):
+        fpt[res[i - 1]] = [int(res[i]), int(res[i+1])]
+    f.close()
+    return fpt
+
+
+def write_date(filename, b):
+    f = open(filename, "w+")
+    for i in b:
+        f.write(i + "\n")
+        f.write(str(b[i][0]) + '\n')
+        f.write(str(b[i][1]) + '\n')
+    f.close()
+
+
 def write(filename, a):
     f = open(filename, "w+")
     for i in a:
@@ -36,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.2")
+    print("背单词v1.4.3")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -52,8 +73,12 @@ def on_progress():
     print("该功能还在开发中！")
 
 
-def statistics(a):
+def statistics(a, cur_date, b):
     print("共有", len(a), "个单词收录。")
+    for i in b:
+        print(i, "录入了", b[i][0], "个单词", "做了", b[i][1], "题")
+    print("\n今天录入了", b[cur_date][0], "个单词", "做了", b[cur_date][1], "题")
+    os.system("pause")
 
 
 def onpick3(event):
@@ -218,7 +243,7 @@ NameError: name 'hint' is not defined''')
             return False
 
 
-def new_word(a):
+def new_word(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
     word = input()
     if word == "exit()":
@@ -239,13 +264,14 @@ def new_word(a):
     cfm = input()
     if cfm == "Y" or cfm == "y":
         a[word] = [word_cn, 0, 0]
+        b[cur_date][0] += 1
         return True
     else:
         print("已取消录入")
         return False
 
 
-def new_word_auto(a):
+def new_word_auto(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
     word = input()
     if word == "exit()":
@@ -283,6 +309,7 @@ def new_word_auto(a):
         cfm = input()
         if cfm == "Y" or cfm == "y":
             a[word] = [word_cn_complete, 0, 0]
+            b[cur_date][0] += 1
             return True
         else:
             print("已取消录入")
@@ -290,7 +317,6 @@ def new_word_auto(a):
     except NoSuchWindowException:
         print("窗口异常关闭，无法继续操作。")
         return False
-
 
 
 def show_word(a):
@@ -301,6 +327,13 @@ def show_word(a):
 def main(argv):
     filename = "wordlist.txt"
     a = read(filename)
+    datefile = "datefile.txt"
+    b = read_date(datefile)
+    cur_date = str(time.strftime('%Y-%m-%d', time.localtime()))
+    if cur_date not in b:
+        b[cur_date][0] = 0
+        b[cur_date][1] = 0
+    write_date(datefile, b)
     quiz_cache = deepcopy(a)
     b_shown = False
     options, args = getopt.getopt(argv, "3")
@@ -308,14 +341,16 @@ def main(argv):
         random_test(quiz_cache, a, filename)
     while True:
         show_menu()
-        b = str(input())
-        if b == "1":
+        c = str(input())
+        if c == "1":
             show_word(a)
             b_shown = True
-        elif b == "2":
-            if new_word(a):
+        elif c == "2":
+            if new_word(a, cur_date, b):
                 write(filename, a)
-        elif b == "3":
+                write_date(datefile, b)
+                print("今天共录入了", b[cur_date][0], "个单词，加油！")
+        elif c == "3":
             if b_shown:
                 path = os.getcwd()
                 os.system("cd "+path)
@@ -323,22 +358,24 @@ def main(argv):
                 sys.exit()
             else:
                 random_test(quiz_cache, a, filename)
-        elif b == "4":
+        elif c == "4":
             find_word(a)
-        elif b == "5":
+        elif c == "5":
             write(filename, a)
-        elif b == "6":
+        elif c == "6":
             mistake_notebook = mistake_collection(a)
             for i in mistake_notebook:
                 print(i[0], "做了", i[1], "次，错了", i[2], "次，错误率", round(float(i[2])/float(i[1])*100, 2), "%")
-        elif b == "7":
-            if new_word_auto(a):
+        elif c == "7":
+            if new_word_auto(a, cur_date, b):
                 write(filename, a)
-        elif b == "8":
+                write_date(datefile, b)
+                print("今天共录入了", b[cur_date][0], "个单词，加油！")
+        elif c == "8":
             print_graph(a)
             on_progress()
-        elif b == "9":
-            statistics(a)
+        elif c == "9":
+            statistics(a, cur_date, b)
         else:
             on_progress()
 
