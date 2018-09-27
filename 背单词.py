@@ -13,7 +13,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchWindowException
 
 def read(filename):
     f = open(filename, "r")
@@ -35,7 +36,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.0")
+    print("背单词v1.4.2")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -257,31 +258,39 @@ def new_word_auto(a):
             print("已取消录入")
             return False
     word_cn = ""
-    browser0 = webdriver.Chrome()
-    wait = WebDriverWait(browser0, 10)
-    browser0.get("https://www.baidu.com/")
-    browser0.find_element_by_id("kw").send_keys(word)
-    browser0.find_element_by_id("su").click()
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'op_dict3_english_result_table')))
-    # word_attributes = browser0.find_element_by_css_selector("span.op_dict_text1.c-gap-right")
-    # word_translates = browser0.find_element_by_css_selector("span.op_dict_text2")
-    word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
-    # for i in word_attributes and j in word_translates:
-    #     print(i+j)
-    #     word_cn = i+j
-    browser0.close()
-    for i in word_result:
-        print(i.text)
-        word_cn += i.text
-    word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
-    print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
-    cfm = input()
-    if cfm == "Y" or cfm == "y":
-        a[word] = [word_cn_complete, 0, 0]
-        return True
-    else:
-        print("已取消录入")
+    try:
+        browser0 = webdriver.Chrome()
+        wait = WebDriverWait(browser0, 5)
+        browser0.get("https://www.baidu.com/")
+        browser0.find_element_by_id("kw").send_keys(word)
+        browser0.find_element_by_id("su").click()
+        try:
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'op_dict3_english_result_table')))
+        except TimeoutException:
+            print("加载失败，未搜索到相关信息，尝试手动录入")
+            return False
+        # word_attributes = browser0.find_element_by_css_selector("span.op_dict_text1.c-gap-right")
+        # word_translates = browser0.find_element_by_css_selector("span.op_dict_text2")
+        word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
+        # for i in word_attributes and j in word_translates:
+        #     print(i+j)
+        #     word_cn = i+j
+        browser0.close()
+        for i in word_result:
+            word_cn += i.text
+        word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+        print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
+        cfm = input()
+        if cfm == "Y" or cfm == "y":
+            a[word] = [word_cn_complete, 0, 0]
+            return True
+        else:
+            print("已取消录入")
+            return False
+    except NoSuchWindowException:
+        print("窗口异常关闭，无法继续操作。")
         return False
+
 
 
 def show_word(a):
