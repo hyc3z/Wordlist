@@ -35,7 +35,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.3.6")
+    print("背单词v1.3.7")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -43,7 +43,7 @@ def show_menu():
     print("5:手动保存")
     print("6:错题集")
     print("7:智能录入")
-    print("8:显示图表")
+    # print("8:显示图表")
 
 
 def on_progress():
