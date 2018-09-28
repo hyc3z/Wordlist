@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.8")
+    print("背单词v1.4.9")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -120,7 +120,9 @@ def random_test(a, wordlist, filename):
     p3 = p
     egg = False
     print(a[p][0], " 对应哪个单词？(输入hint得到提示，输入exit()退出)")
-    ans = input()
+    ans = input().strip()
+    while len(ans) == 0:
+        ans = input().strip()
     if p == "hint":
         egg = True
     if ans == "exit()":
@@ -152,7 +154,9 @@ def random_test(a, wordlist, filename):
                 print("提供以下两个选择:", p, p2)
             else:
                 print("提供以下三个选择:", p2, p3, p)
-        ans = input()
+        ans = input().strip()
+        while len(ans) == 0:
+            ans = input().strip()
     if ans == p:
         if len(a) == 1:
             if not egg:
@@ -288,7 +292,9 @@ def random_test_hint_always(a, wordlist, filename):
             print("提供以下两个选择:", p, p2)
         else:
             print("提供以下三个选择:", p2, p3, p)
-    ans = input()
+    ans = input().strip()
+    while len(ans) == 0:
+        ans = input().strip()
     if ans == "exit()":
         return False
     if ans == p:
@@ -357,7 +363,9 @@ def new_word(a, cur_date, b):
             print("已取消录入")
             return False
     print("输入中文：(输入 'exit()' 取消录入)")
-    word_cn = input()
+    word_cn = input().strip()
+    while len(word_cn) == 0:
+        word_cn = input().strip()
     if word_cn == "exit()":
         print("已取消录入")
         return False
@@ -375,12 +383,16 @@ def new_word(a, cur_date, b):
 def new_word_auto(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
     word = input().strip()
+    while len(word) == 0:
+        word = input().strip()
     if word == "exit()":
         print("已取消录入")
         return False
     if word in a:
         print(word, "已经存在，请重新输入")
         word = input().strip()
+        while len(word) == 0:
+            word = input().strip()
         if word == "exit()":
             print("已取消录入")
             return False
