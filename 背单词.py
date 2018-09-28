@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.9")
+    print("背单词v1.4.10")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -137,23 +137,23 @@ def random_test(a, wordlist, filename):
             if len(a) == 1:
                 print("只有一个单词了！")
             elif len(a) == 2:
-                print("提供以下两个选择:", p, p2)
+                print("提供以下两个选择:", p, ",", p2)
             else:
-                print("提供以下三个选择:", p, p2, p3)
+                print("提供以下三个选择:", p, ",", p2, ",", p3)
         elif seed == 1:
             if len(a) == 1:
                 print("只有一个单词了！")
             elif len(a) == 2:
-                print("提供以下两个选择:", p2, p)
+                print("提供以下两个选择:", p2, ",", p)
             else:
-                print("提供以下三个选择:", p2, p, p3)
+                print("提供以下三个选择:", p2, ",", p, ",", p3)
         elif seed == 2:
             if len(a) == 1:
                 print("只有一个单词了！")
             elif len(a) == 2:
-                print("提供以下两个选择:", p, p2)
+                print("提供以下两个选择:", p, ",", p2)
             else:
-                print("提供以下三个选择:", p2, p3, p)
+                print("提供以下三个选择:", p2, ",", p3, ",", p)
         ans = input().strip()
         while len(ans) == 0:
             ans = input().strip()
@@ -275,23 +275,23 @@ def random_test_hint_always(a, wordlist, filename):
         if len(a) == 1:
             print("只有一个单词了！")
         elif len(a) == 2:
-            print("提供以下两个选择:", p, p2)
+            print("提供以下两个选择:", p, ",", p2)
         else:
-            print("提供以下三个选择:", p, p2, p3)
+            print("提供以下三个选择:", p, ",", p2, ",", p3)
     elif seed == 1:
         if len(a) == 1:
             print("只有一个单词了！")
         elif len(a) == 2:
-            print("提供以下两个选择:", p2, p)
+            print("提供以下两个选择:", p2, ",", p)
         else:
-            print("提供以下三个选择:", p2, p, p3)
+            print("提供以下三个选择:", p2, ",", p, ",", p3)
     elif seed == 2:
         if len(a) == 1:
             print("只有一个单词了！")
         elif len(a) == 2:
-            print("提供以下两个选择:", p, p2)
+            print("提供以下两个选择:", p, ",", p2)
         else:
-            print("提供以下三个选择:", p2, p3, p)
+            print("提供以下三个选择:", p2, ",", p3, ",", p)
     ans = input().strip()
     while len(ans) == 0:
         ans = input().strip()
