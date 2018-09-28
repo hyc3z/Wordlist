@@ -354,3 +354,7 @@ partake
 vi.参与; 参加; 吃;n.参与者，分担者;[其他]第三人称单数：partakes 现在分词：partaking 过去式：partook 过去分词：partaken
 0
 0
+recursive
+adj.回归的，递归的;
+0
+0

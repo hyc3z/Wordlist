@@ -15,7 +15,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchWindowException
-
+from selenium.common.exceptions import WebDriverException
 
 def read(filename):
     f = open(filename, "r")
@@ -301,10 +301,11 @@ def new_word_auto(a, cur_date, b):
         # for i in word_attributes and j in word_translates:
         #     print(i+j)
         #     word_cn = i+j
-        browser0.close()
+
         for i in word_result:
             word_cn += i.text
         word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+        browser0.close()
         print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
         cfm = input()
         if cfm == "Y" or cfm == "y":
@@ -316,6 +317,8 @@ def new_word_auto(a, cur_date, b):
             return False
     except NoSuchWindowException:
         print("窗口异常关闭，无法继续操作。")
+    except WebDriverException:
+        print("引擎异常，无法继续操作。")
         return False
 
 
