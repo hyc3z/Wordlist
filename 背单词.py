@@ -100,14 +100,17 @@ def print_graph(b):
 def mistake_collection(wordlist):
     soup = []
     for i in wordlist:
-        if (wordlist[i][1]-wordlist[i][2])>0:
+        if (wordlist[i][1]-wordlist[i][2]) > 0:
             soup.append([i, wordlist[i][1], wordlist[i][1]-wordlist[i][2]])
     soup.sort(key=lambda x: float(x[2])/float(x[1]), reverse=True)
     return soup
 
 
 def find_word(wordlist):
-    a = input("输入查找的单词：")
+    print("输入查找的单词：")
+    a = input().strip()
+    while len(a) == 0:
+        a = input().strip()
     if a in wordlist:
         print(a, wordlist[a][0])
     else:

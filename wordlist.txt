@@ -390,3 +390,15 @@ legitimate
 adj.合法的，合理的; 正规的; 合法婚姻所生的; 真正的，真实的;vt.使合法; 给予合法的地位; 通过法律手段给（私生子）以合法地位; 正式批准，授权;[其他]第三人称单数：legitimates 现在分词：legitimating 过去式：legitimated 过去分词：legitimated
 2
 1
+monotonic
+adj.单调的，无变化的;
+0
+0
+mangling
+[词典]矫直;[其他]原型： mangle
+0
+0
+likewise
+adv.同样地; 也，而且;
+0
+0
