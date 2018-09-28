@@ -8,8 +8,8 @@ alias
 3
 attributes
 属性
-3
-3
+4
+4
 analogues
 类似物
 2
@@ -36,8 +36,8 @@ upcasting
 1
 unary
 一元的
-2
-2
+3
+3
 cumulative
 累积的
 2

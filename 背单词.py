@@ -353,12 +353,16 @@ def random_test_hint_always(a, wordlist, filename):
 def new_word(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
     word = input().strip()
+    while len(word) == 0:
+        word = input().strip()
     if word == "exit()":
         print("已取消录入")
         return False
     if word in a:
         print(word, "已经存在，请重新输入")
         word = input().strip()
+        while len(word) == 0:
+            word = input().strip()
         if word == "exit()":
             print("已取消录入")
             return False
