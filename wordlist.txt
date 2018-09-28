@@ -438,3 +438,35 @@ homogeneous
 adj.均匀的; 同性质的，同类的; 由相同（或同类型）事物（或人）组成的; [数] 齐性的，齐次的;
 0
 0
+beget
+vt.<文>为…之生父; 产生，引起;[其他]第三人称单数：begets 现在分词：begetting 过去式：begot 过去分词：begotten
+0
+0
+peril
+n.危险; 冒险;vt.置…于危险中; 危及;[其他]第三人称单数：perils 复数：perils 现在分词：periling 过去式：periled 过去分词：periled
+0
+0
+unduly
+adv.过分地; 过度地; 不适当地; 不相称地;
+0
+0
+wary
+adj.谨慎的，小心翼翼的; 警戒的，警惕的;[其他]比较级：warier 最高级：wariest
+0
+0
+pathological
+adj.[医] 病理学的; 由疾病引起的; 病态的，疾病的;
+0
+0
+mitigate
+vt.使缓和，使减轻; 使平息;vi.减轻，缓和下来;[其他]第三人称单数：mitigates 现在分词：mitigating 过去式：mitigated 过去分词：mitigated
+0
+0
+summation
+n.总和; 总结; 概括; 加在一起;[其他]复数：summations
+0
+0
+appendix
+n.附录; 阑尾; 附加物;[其他]复数：appendixes
+0
+0

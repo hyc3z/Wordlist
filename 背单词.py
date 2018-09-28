@@ -58,7 +58,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.11")
+    print("背单词v1.4.12")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -531,4 +531,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    try:
+        main(sys.argv[1:])
+    except KeyboardInterrupt:
+        print("用户中断执行...")
