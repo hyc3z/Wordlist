@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.10")
+    print("背单词v1.4.11")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -114,7 +114,7 @@ def find_word(wordlist):
         print("未录入该单词")
 
 
-def random_test(a, wordlist, filename):
+def random_test(a, wordlist, filename, b, cur_date, datefile):
     p = choice(list(a))
     p2 = p
     p3 = p
@@ -163,6 +163,8 @@ def random_test(a, wordlist, filename):
                 print("你已经全部都答完啦！重新开始吗？(Y/N)")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                b[cur_date][1] += 1
+                write_date(datefile, b)
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
                 chx = input()
@@ -189,6 +191,8 @@ def random_test(a, wordlist, filename):
                 print("提示:上面的报错是骗你的，输入(Y/N)进入下一题吧！")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                b[cur_date][1] += 1
+                write_date(datefile, b)
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
@@ -208,10 +212,12 @@ def random_test(a, wordlist, filename):
                 del a[p]
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                b[cur_date][1] += 1
+                write_date(datefile, b)
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                random_test(a, wordlist, filename)
+                random_test(a, wordlist, filename, b, cur_date, datefile)
             else:
                 print(r'''Traceback (most recent call last):
   File "C:/PycharmProjects/背单词/背单词.py", line 176, in <module>
@@ -225,13 +231,15 @@ NameError: name 'hint' is not defined''')
                 print("提示：上面的报错是骗你的，输入(Y/N)进入下一题吧！")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
+                b[cur_date][1] += 1
+                write_date(datefile, b)
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
                 chs = input()
                 if chs == "Y" or chs == "y":
                     del a[p]
-                    random_test(a, wordlist, filename)
+                    random_test(a, wordlist, filename, b, cur_date, datefile)
                 else:
                     return False
     else:
@@ -239,6 +247,8 @@ NameError: name 'hint' is not defined''')
         print("还敢来吗?(Y/N)")
         wordlist[p][1] += 1
         wordlist[p][2] += 0
+        b[cur_date][1] += 1
+        write_date(datefile, b)
         print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
               round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
@@ -256,12 +266,12 @@ NameError: name 'hint' is not defined''')
                 sys.exit()
         else:
             if chs == "Y" or chs == "y":
-                random_test(a, wordlist, filename)
+                random_test(a, wordlist, filename, b, cur_date, datefile)
             else:
                 return False
 
 
-def random_test_hint_always(a, wordlist, filename):
+def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
     p = choice(list(a))
     p2 = p
     p3 = p
@@ -302,6 +312,8 @@ def random_test_hint_always(a, wordlist, filename):
             print("你已经全部都答完啦！重新开始吗？(Y/N)")
             wordlist[p][1] += 1
             wordlist[p][2] += 1
+            b[cur_date][1] += 1
+            write_date(datefile, b)
             print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
             write(filename, wordlist)
             chx = input()
@@ -319,15 +331,19 @@ def random_test_hint_always(a, wordlist, filename):
             del a[p]
             wordlist[p][1] += 1
             wordlist[p][2] += 1
+            b[cur_date][1] += 1
+            write_date(datefile, b)
             print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                   round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
             write(filename, wordlist)
-            random_test_hint_always(a, wordlist, filename)
+            random_test_hint_always(a, wordlist, filename, b, cur_date, datefile)
     else:
         print("正确答案是:", p)
         print("还敢来吗?(Y/N)")
         wordlist[p][1] += 1
         wordlist[p][2] += 0
+        b[cur_date][1] += 1
+        write_date(datefile, b)
         print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
               round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
@@ -345,7 +361,7 @@ def random_test_hint_always(a, wordlist, filename):
                 sys.exit()
         else:
             if chs == "Y" or chs == "y":
-                random_test_hint_always(a, wordlist, filename)
+                random_test_hint_always(a, wordlist, filename, b, cur_date, datefile)
             else:
                 return False
 
@@ -457,9 +473,9 @@ def main(argv):
     b_shown = False
     options, args = getopt.getopt(argv, "-3-4")
     if ('-3', '')in options or '3' in args:
-        random_test(quiz_cache, a, filename)
+        random_test(quiz_cache, a, filename, b, cur_date, datefile)
     elif ('-4', '')in options or '4' in args:
-        random_test_hint_always(quiz_cache, a, filename)
+        random_test_hint_always(quiz_cache, a, filename, b, cur_date, datefile)
     while True:
         show_menu()
         c = str(input())
@@ -478,7 +494,7 @@ def main(argv):
                 subprocess.Popen("背单词launcher.bat -3", creationflags=subprocess.CREATE_NEW_CONSOLE)
                 sys.exit()
             else:
-                random_test(quiz_cache, a, filename)
+                random_test(quiz_cache, a, filename, b, cur_date, datefile)
         elif c == "4":
             if b_shown:
                 path = os.getcwd()
@@ -486,7 +502,7 @@ def main(argv):
                 subprocess.Popen("背单词launcher.bat -4", creationflags=subprocess.CREATE_NEW_CONSOLE)
                 sys.exit()
             else:
-                random_test_hint_always(quiz_cache, a, filename)
+                random_test_hint_always(quiz_cache, a, filename, b, cur_date, datefile)
         elif c == "5":
             find_word(a)
         elif c == "6":
