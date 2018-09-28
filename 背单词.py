@@ -5,7 +5,7 @@ import sys
 import os
 import getopt
 import subprocess
-import time
+from datetime import date
 from copy import deepcopy
 import matplotlib.pyplot as plt
 from selenium import webdriver
@@ -468,7 +468,8 @@ def main(argv):
     a = read(filename)
     datefile = "datefile.txt"
     b = read_date(datefile)
-    cur_date = str(time.strftime('%Y-%m-%d', time.localtime()))
+    # cur_date = str(time.strftime('%Y-%m-%d', time.localtime()))
+    cur_date = str(date.today())
     if cur_date not in b:
         b[cur_date] = [0, 0]
     write_date(datefile, b)

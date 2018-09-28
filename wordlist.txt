@@ -402,3 +402,19 @@ likewise
 adv.同样地; 也，而且;
 0
 0
+pervade
+vt.遍及，弥漫; 渗透，充满;[其他]第三人称单数：pervades 现在分词：pervading 过去式：pervaded 过去分词：pervaded
+0
+0
+trivially
+adv.平凡地; 琐细地; 很一般的; 无能地;
+0
+0
+compact
+vt.压紧，（使）坚实; 把…弄紧密，把…弄结实; 使（文体）简洁，简化; 变紧密，变结实;adj.紧凑的; 简洁的，（文体等）紧凑的; 小巧易携带的; （物质） 致密的，（体格）结实的;n.协议; 条约; 带镜小粉盒; 小汽车;[其他]第三人称单数：compacts 现在分词：compacting 过去式：compacted 过去分词：compacted
+0
+0
+succinctly
+adv.简洁地; 简洁地，简便地;
+0
+0
