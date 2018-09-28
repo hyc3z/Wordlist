@@ -418,3 +418,23 @@ succinctly
 adv.简洁地; 简洁地，简便地;
 0
 0
+locale
+n.（事件发生的） 场所或地点;[其他]复数：locales
+0
+0
+intervening
+adj.发生于其间的; 介于中间的;v.干涉; 介入(intervene的现在分词); 调停; 介于…之间;[其他]原型： intervene
+0
+0
+semaphore
+n.臂板信号系统，（铁道）臂板信号装置;vt.发出信号，打旗语;[其他]第三人称单数：semaphores 复数：semaphores 现在分词：semaphoring 过去式：semaphored 过去分词：semaphored
+0
+0
+reproduce
+vt.复制，重现，再版; 生殖，繁殖;vt.再现; 使再次发生;[其他]第三人称单数：reproduces 现在分词：reproducing 过去式：reproduced 过去分词：reproduced
+0
+0
+homogeneous
+adj.均匀的; 同性质的，同类的; 由相同（或同类型）事物（或人）组成的; [数] 齐性的，齐次的;
+0
+0

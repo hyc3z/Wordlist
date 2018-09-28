@@ -15,6 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchWindowException
 from selenium.common.exceptions import WebDriverException
+from decimal import Decimal
 
 
 def read(filename):
@@ -102,7 +103,7 @@ def mistake_collection(wordlist):
     for i in wordlist:
         if (wordlist[i][1]-wordlist[i][2]) > 0:
             soup.append([i, wordlist[i][1], wordlist[i][1]-wordlist[i][2]])
-    soup.sort(key=lambda x: float(x[2])/float(x[1]), reverse=True)
+    soup.sort(key=lambda x: Decimal(float(x[2]))/Decimal(float(x[1])), reverse=True)
     return soup
 
 
