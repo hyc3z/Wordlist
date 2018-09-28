@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.3")
+    print("背单词v1.4.4")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -334,8 +334,7 @@ def main(argv):
     b = read_date(datefile)
     cur_date = str(time.strftime('%Y-%m-%d', time.localtime()))
     if cur_date not in b:
-        b[cur_date][0] = 0
-        b[cur_date][1] = 0
+        b[cur_date] = [0, 0]
     write_date(datefile, b)
     quiz_cache = deepcopy(a)
     b_shown = False
