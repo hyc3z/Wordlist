@@ -8,7 +8,6 @@ import subprocess
 import time
 from copy import deepcopy
 import matplotlib.pyplot as plt
-import numpy as np
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -16,6 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchWindowException
 from selenium.common.exceptions import WebDriverException
+
 
 def read(filename):
     f = open(filename, "r")
@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.4")
+    print("背单词v1.4.5")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -65,7 +65,7 @@ def show_menu():
     print("5:手动保存")
     print("6:错题集")
     print("7:智能录入")
-    print("8:显示图表")
+    print("8:显示图表v1.0.1")
     print("9:统计数据")
 
 
@@ -81,22 +81,17 @@ def statistics(a, cur_date, b):
     os.system("pause")
 
 
-def onpick3(event):
-    ind = event.ind
-    print('onpick3 scatter:', ind, np.take(x, ind), np.take(y, ind))
-
-
-def print_graph(a):
+def print_graph(b):
     names = []
     values_total = []
     values_incorrect = []
-    for i in a:
+    for i in b:
         names.append(i)
-        values_total.append(a[i][1])
-        values_incorrect.append(a[i][1]-a[i][2])
-    fig, q = plt.subplots()
-    col = plt.plot(names, values_total, 'o', names, values_incorrect, '^', picker = True)
-    fig.canvas.mpl_connect('pick_event', onpick3)
+        values_total.append(b[i][0])
+        values_incorrect.append(b[i][1])
+    plt.plot(names, values_total, '-', label="Input Count")
+    plt.plot(names, values_incorrect, '-', label="Quiz Count")
+    plt.legend()
     plt.suptitle('in development...')
     plt.show()
 
@@ -374,7 +369,7 @@ def main(argv):
                 write_date(datefile, b)
                 print("今天共录入了", b[cur_date][0], "个单词，加油！")
         elif c == "8":
-            print_graph(a)
+            print_graph(b)
             on_progress()
         elif c == "9":
             statistics(a, cur_date, b)
