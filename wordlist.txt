@@ -358,3 +358,27 @@ recursive
 adj.回归的，递归的;
 0
 0
+invocation
+n.祈祷; 乞求; 乞灵; 乞求神助;[其他]复数：invocations
+0
+0
+quirk
+n.怪癖; 奇事，巧合; 突然的弯曲;[其他]复数：quirks
+0
+0
+conceivably
+adv.令人信服地;
+0
+0
+invoke
+vt.乞灵，祈求; 提出或授引…以支持或证明; 召鬼; 借助;[其他]第三人称单数：invokes 现在分词：invoking 过去式：invoked 过去分词：invoked
+0
+0
+enforce
+vt.加强; 强迫服从; 实施，执行;[其他]第三人称单数：enforces 现在分词：enforcing 过去式：enforced 过去分词：enforced
+0
+0
+convention
+n.会议; 全体与会者; 国际公约; 惯例，习俗，规矩;[其他]复数：conventions
+0
+0

@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.5")
+    print("背单词v1.4.6")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -240,13 +240,13 @@ NameError: name 'hint' is not defined''')
 
 def new_word(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
-    word = input()
+    word = input().strip()
     if word == "exit()":
         print("已取消录入")
         return False
     if word in a:
         print(word, "已经存在，请重新输入")
-        word = input()
+        word = input().strip()
         if word == "exit()":
             print("已取消录入")
             return False
@@ -268,13 +268,13 @@ def new_word(a, cur_date, b):
 
 def new_word_auto(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
-    word = input()
+    word = input().strip()
     if word == "exit()":
         print("已取消录入")
         return False
     if word in a:
         print(word, "已经存在，请重新输入")
-        word = input()
+        word = input().strip()
         if word == "exit()":
             print("已取消录入")
             return False
