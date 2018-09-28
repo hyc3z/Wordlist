@@ -57,7 +57,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.7")
+    print("背单词v1.4.8")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -159,7 +159,7 @@ def random_test(a, wordlist, filename):
                 print("你已经全部都答完啦！重新开始吗？(Y/N)")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
-                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+                print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
                 chx = input()
                 if chx == "Y" or chx == "y":
@@ -185,8 +185,8 @@ def random_test(a, wordlist, filename):
                 print("提示:上面的报错是骗你的，输入(Y/N)进入下一题吧！")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
-                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
-                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+                print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
                 chx = input()
                 if chx == "Y" or chx == "y":
@@ -204,8 +204,8 @@ def random_test(a, wordlist, filename):
                 del a[p]
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
-                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
-                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+                print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
                 random_test(a, wordlist, filename)
             else:
@@ -221,8 +221,8 @@ NameError: name 'hint' is not defined''')
                 print("提示：上面的报错是骗你的，输入(Y/N)进入下一题吧！")
                 wordlist[p][1] += 1
                 wordlist[p][2] += 1
-                print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
-                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+                print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                      round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
                 chs = input()
                 if chs == "Y" or chs == "y":
@@ -235,8 +235,8 @@ NameError: name 'hint' is not defined''')
         print("还敢来吗?(Y/N)")
         wordlist[p][1] += 1
         wordlist[p][2] += 0
-        print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
-              round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+        print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+              round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
         chs = input()
         if len(a) == 1:
@@ -296,7 +296,7 @@ def random_test_hint_always(a, wordlist, filename):
             print("你已经全部都答完啦！重新开始吗？(Y/N)")
             wordlist[p][1] += 1
             wordlist[p][2] += 1
-            print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+            print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
             write(filename, wordlist)
             chx = input()
             if chx == "Y" or chx == "y":
@@ -313,8 +313,8 @@ def random_test_hint_always(a, wordlist, filename):
             del a[p]
             wordlist[p][1] += 1
             wordlist[p][2] += 1
-            print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
-                  round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+            print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+                  round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
             write(filename, wordlist)
             random_test_hint_always(a, wordlist, filename)
     else:
@@ -322,8 +322,8 @@ def random_test_hint_always(a, wordlist, filename):
         print("还敢来吗?(Y/N)")
         wordlist[p][1] += 1
         wordlist[p][2] += 0
-        print(wordlist[p][0], "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
-              round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%")
+        print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
+              round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
         chs = input()
         if len(a) == 1:
