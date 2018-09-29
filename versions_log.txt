@@ -72,3 +72,7 @@ v1.4.12
 增加KeyboardInterrupt处理方法
 用Decimal代替表示概率
 其他的一些小修改让程序更加易用
+
+v1.5.0
+本人python的学习暂时告一段落了，此项目可能会暂停更新一段时间
+v1.5.0是这个小程序的latest version，希望大家喜欢！

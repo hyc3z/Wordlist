@@ -470,3 +470,19 @@ appendix
 n.附录; 阑尾; 附加物;[其他]复数：appendixes
 0
 0
+glossary
+n.（书尾的） 词汇表，难词汇编;[其他]复数：glossaries
+0
+0
+concurrent
+adj.〈正式〉同时发生的; 同时完成的; 同时存在的;n.[数] 共点; 同时发生的事件;
+0
+0
+trail
+vt.跟踪，追踪; 拖曳：让…拖或飘扬在后面; 拖沓而行; 跟在…后面;vi.（在比赛等中） 输; （尤指跟在他人后面） 疲惫地走; （在比赛或其他竞赛中） 落后; 蔓生;n.小径; 足迹; 臭迹; 一缕;[其他]第三人称单数：trails 复数：trails 现在分词：trailing 过去式：trailed 过去分词：trailed
+0
+0
+buzzword
+n.（报刊等的） 时髦术语，流行行话;[其他]复数：buzzwords
+0
+0

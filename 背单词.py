@@ -7,6 +7,7 @@ import getopt
 import subprocess
 from datetime import date
 from copy import deepcopy
+import time
 import matplotlib.pyplot as plt
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -19,24 +20,34 @@ from decimal import Decimal
 
 
 def read(filename):
-    f = open(filename, "r")
-    strn = f.read()
-    fpt = {}
-    res = re.split('\n', strn)
-    for i in range(1, len(res), 4):
-        fpt[res[i-1]] = [res[i], int(res[i+1]), int(res[i+2]), int(res[i+1])-int(res[i+2])]
-    f.close()
+    try:
+        f = open(filename, "r")
+        strn = f.read()
+        fpt = {}
+        res = re.split('\n', strn)
+        for i in range(1, len(res), 4):
+            fpt[res[i-1]] = [res[i], int(res[i+1]), int(res[i+2]), int(res[i+1])-int(res[i+2])]
+        f.close()
+    except FileNotFoundError:
+        f = open(filename, "w+")
+        fpt = {}
+        f.close()
     return fpt
 
 
 def read_date(filename):
-    f = open(filename, "r")
-    strn = f.read()
-    fpt = {}
-    res = re.split('\n', strn)
-    for i in range(1, len(res), 3):
-        fpt[res[i - 1]] = [int(res[i]), int(res[i+1])]
-    f.close()
+    try:
+        f = open(filename, "r")
+        strn = f.read()
+        fpt = {}
+        res = re.split('\n', strn)
+        for i in range(1, len(res), 3):
+            fpt[res[i - 1]] = [int(res[i]), int(res[i+1])]
+        f.close()
+    except FileNotFoundError:
+        f = open(filename, "w+")
+        fpt = {}
+        f.close()
     return fpt
 
 
@@ -58,7 +69,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.4.12")
+    print("背单词v1.5.0")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -67,7 +78,7 @@ def show_menu():
     print("6:手动保存")
     print("7:错题集")
     print("8:智能录入")
-    print("9:显示图表v1.0.1")
+    print("9:显示图表")
     print("0:统计数据")
 
 
@@ -171,7 +182,9 @@ def random_test(a, wordlist, filename, b, cur_date, datefile):
                 write_date(datefile, b)
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                chx = input()
+                chx = input().strip()
+                while len(chx) == 0:
+                    chx = input().strip()
                 if chx == "Y" or chx == "y":
                     path = os.getcwd()
                     os.system("cd " + path)
@@ -200,7 +213,9 @@ def random_test(a, wordlist, filename, b, cur_date, datefile):
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                chx = input()
+                chx = input().strip()
+                while len(chx) == 0:
+                    chx = input().strip()
                 if chx == "Y" or chx == "y":
                     path = os.getcwd()
                     os.system("cd " + path)
@@ -240,7 +255,9 @@ NameError: name 'hint' is not defined''')
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                chs = input()
+                chs = input().strip()
+                while len(chs) == 0:
+                    chs = input().strip()
                 if chs == "Y" or chs == "y":
                     del a[p]
                     random_test(a, wordlist, filename, b, cur_date, datefile)
@@ -256,7 +273,9 @@ NameError: name 'hint' is not defined''')
         print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
               round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
-        chs = input()
+        chs = input().strip()
+        while len(chs) == 0:
+            chs = input().strip()
         if len(a) == 1:
             if chs == "Y" or chs == "y":
                 path = os.getcwd()
@@ -320,7 +339,9 @@ def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
             write_date(datefile, b)
             print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
             write(filename, wordlist)
-            chx = input()
+            chx = input().strip()
+            while len(chx) == 0:
+                chx = input().strip()
             if chx == "Y" or chx == "y":
                 path = os.getcwd()
                 os.system("cd " + path)
@@ -351,7 +372,9 @@ def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
         print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
               round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
-        chs = input()
+        chs = input().strip()
+        while len(chs) == 0:
+            chs = input().strip()
         if len(a) == 1:
             if chs == "Y" or chs == "y":
                 path = os.getcwd()
@@ -394,7 +417,9 @@ def new_word(a, cur_date, b):
         print("已取消录入")
         return False
     print(word, word_cn, "确认把这个单词加入列表吗?(Y/N)")
-    cfm = input()
+    cfm = input().strip()
+    while len(cfm) == 0:
+        cfm = input().strip()
     if cfm == "Y" or cfm == "y":
         a[word] = [word_cn, 0, 0]
         b[cur_date][0] += 1
@@ -420,8 +445,9 @@ def new_word_auto(a, cur_date, b):
         if word == "exit()":
             print("已取消录入")
             return False
-    word_cn = ""
+
     try:
+        word_cn = ""
         browser0 = webdriver.Chrome()
         wait = WebDriverWait(browser0, 5)
         browser0.get("https://www.baidu.com/")
@@ -432,19 +458,15 @@ def new_word_auto(a, cur_date, b):
         except TimeoutException:
             print("加载失败，未搜索到相关信息，尝试手动录入")
             return False
-        # word_attributes = browser0.find_element_by_css_selector("span.op_dict_text1.c-gap-right")
-        # word_translates = browser0.find_element_by_css_selector("span.op_dict_text2")
         word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
-        # for i in word_attributes and j in word_translates:
-        #     print(i+j)
-        #     word_cn = i+j
-
         for i in word_result:
             word_cn += i.text
         word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
-        browser0.close()
         print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
-        cfm = input()
+        browser0.close()
+        cfm = input().strip()
+        while len(cfm) == 0:
+            cfm = input().strip()
         if cfm == "Y" or cfm == "y":
             a[word] = [word_cn_complete, 0, 0]
             b[cur_date][0] += 1
@@ -483,7 +505,9 @@ def main(argv):
         random_test_hint_always(quiz_cache, a, filename, b, cur_date, datefile)
     while True:
         show_menu()
-        c = str(input())
+        c = input().strip()
+        while len(c) == 0:
+            c = input().strip()
         if c == "1":
             show_word(a)
             b_shown = True
