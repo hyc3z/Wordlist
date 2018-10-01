@@ -8,15 +8,19 @@ import subprocess
 from datetime import date
 from copy import deepcopy
 import time
+print("loading ... 25%")
 import matplotlib.pyplot as plt
+print("loading ... 50%")
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+print("loading ... 75%")
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchWindowException
 from selenium.common.exceptions import WebDriverException
 from decimal import Decimal
+print("loading ... 100%")
 
 
 def read(filename):
@@ -69,7 +73,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.5.0")
+    print("背单词v1.5.2")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -109,20 +113,30 @@ def print_graph(b):
     plt.show()
 
 
-def mistake_collection(wordlist):
+def mistake_collection(wordlist, b, cur_date, filename, datefile):
     soup = []
+    testsoup = {}
     for i in wordlist:
         if (wordlist[i][1]-wordlist[i][2]) > 0:
             soup.append([i, wordlist[i][1], wordlist[i][1]-wordlist[i][2]])
     soup.sort(key=lambda x: Decimal(float(x[2]))/Decimal(float(x[1])), reverse=True)
+    for i in soup:
+        print(i[0], "做了", i[1], "次，错了", i[2], "次，错误率", round(float(i[2]) / float(i[1]) * 100, 2), "%")
+        testsoup[i[0]] = wordlist[i[0]]
+    print("准备好进行错题测试吗？（y/n)")
+    chx = input().strip().lower()
+    while len(chx) == 0:
+        chx = input().strip().lower()
+    if chx == 'y':
+        random_test_hint_always(testsoup, wordlist, filename, b, cur_date, datefile)
     return soup
 
 
 def find_word(wordlist):
     print("输入查找的单词：")
-    a = input().strip()
+    a = input().strip().lower()
     while len(a) == 0:
-        a = input().strip()
+        a = input().strip().lower()
     if a in wordlist:
         print(a, wordlist[a][0])
     else:
@@ -135,9 +149,9 @@ def random_test(a, wordlist, filename, b, cur_date, datefile):
     p3 = p
     egg = False
     print(a[p][0], " 对应哪个单词？(输入hint得到提示，输入exit()退出)")
-    ans = input().strip()
+    ans = input().strip().lower()
     while len(ans) == 0:
-        ans = input().strip()
+        ans = input().strip().lower()
     if p == "hint":
         egg = True
     if ans == "exit()":
@@ -169,9 +183,9 @@ def random_test(a, wordlist, filename, b, cur_date, datefile):
                 print("提供以下两个选择:", p, ",", p2)
             else:
                 print("提供以下三个选择:", p2, ",", p3, ",", p)
-        ans = input().strip()
+        ans = input().strip().lower()
         while len(ans) == 0:
-            ans = input().strip()
+            ans = input().strip().lower()
     if ans == p:
         if len(a) == 1:
             if not egg:
@@ -182,9 +196,9 @@ def random_test(a, wordlist, filename, b, cur_date, datefile):
                 write_date(datefile, b)
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                chx = input().strip()
+                chx = input().strip().lower()
                 while len(chx) == 0:
-                    chx = input().strip()
+                    chx = input().strip().lower()
                 if chx == "Y" or chx == "y":
                     path = os.getcwd()
                     os.system("cd " + path)
@@ -213,9 +227,9 @@ def random_test(a, wordlist, filename, b, cur_date, datefile):
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                chx = input().strip()
+                chx = input().strip().lower()
                 while len(chx) == 0:
-                    chx = input().strip()
+                    chx = input().strip().lower()
                 if chx == "Y" or chx == "y":
                     path = os.getcwd()
                     os.system("cd " + path)
@@ -255,9 +269,9 @@ NameError: name 'hint' is not defined''')
                 print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
                       round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
                 write(filename, wordlist)
-                chs = input().strip()
+                chs = input().strip().lower()
                 while len(chs) == 0:
-                    chs = input().strip()
+                    chs = input().strip().lower()
                 if chs == "Y" or chs == "y":
                     del a[p]
                     random_test(a, wordlist, filename, b, cur_date, datefile)
@@ -273,9 +287,9 @@ NameError: name 'hint' is not defined''')
         print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
               round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
-        chs = input().strip()
+        chs = input().strip().lower()
         while len(chs) == 0:
-            chs = input().strip()
+            chs = input().strip().lower()
         if len(a) == 1:
             if chs == "Y" or chs == "y":
                 path = os.getcwd()
@@ -325,9 +339,9 @@ def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
             print("提供以下两个选择:", p, ",", p2)
         else:
             print("提供以下三个选择:", p2, ",", p3, ",", p)
-    ans = input().strip()
+    ans = input().strip().lower()
     while len(ans) == 0:
-        ans = input().strip()
+        ans = input().strip().lower()
     if ans == "exit()":
         return False
     if ans == p:
@@ -339,9 +353,9 @@ def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
             write_date(datefile, b)
             print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率", round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
             write(filename, wordlist)
-            chx = input().strip()
+            chx = input().strip().lower()
             while len(chx) == 0:
-                chx = input().strip()
+                chx = input().strip().lower()
             if chx == "Y" or chx == "y":
                 path = os.getcwd()
                 os.system("cd " + path)
@@ -372,9 +386,9 @@ def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
         print(p, "已做", wordlist[p][1], "次，正确", wordlist[p][2], "次，正确率",
               round(wordlist[p][2] / wordlist[p][1] * 100.0, 2), "%", '\n')
         write(filename, wordlist)
-        chs = input().strip()
+        chs = input().strip().lower()
         while len(chs) == 0:
-            chs = input().strip()
+            chs = input().strip().lower()
         if len(a) == 1:
             if chs == "Y" or chs == "y":
                 path = os.getcwd()
@@ -395,31 +409,31 @@ def random_test_hint_always(a, wordlist, filename, b, cur_date, datefile):
 
 def new_word(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
-    word = input().strip()
+    word = input().strip().lower()
     while len(word) == 0:
-        word = input().strip()
+        word = input().strip().lower()
     if word == "exit()":
         print("已取消录入")
         return False
     if word in a:
         print(word, "已经存在，请重新输入")
-        word = input().strip()
+        word = input().strip().lower()
         while len(word) == 0:
-            word = input().strip()
+            word = input().strip().lower()
         if word == "exit()":
             print("已取消录入")
             return False
     print("输入中文：(输入 'exit()' 取消录入)")
-    word_cn = input().strip()
+    word_cn = input().strip().lower()
     while len(word_cn) == 0:
-        word_cn = input().strip()
+        word_cn = input().strip().lower()
     if word_cn == "exit()":
         print("已取消录入")
         return False
     print(word, word_cn, "确认把这个单词加入列表吗?(Y/N)")
-    cfm = input().strip()
+    cfm = input().strip().lower()
     while len(cfm) == 0:
-        cfm = input().strip()
+        cfm = input().strip().lower()
     if cfm == "Y" or cfm == "y":
         a[word] = [word_cn, 0, 0]
         b[cur_date][0] += 1
@@ -431,17 +445,17 @@ def new_word(a, cur_date, b):
 
 def new_word_auto(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
-    word = input().strip()
+    word = input().strip().lower()
     while len(word) == 0:
-        word = input().strip()
+        word = input().strip().lower()
     if word == "exit()":
         print("已取消录入")
         return False
     if word in a:
         print(word, "已经存在，请重新输入")
-        word = input().strip()
+        word = input().strip().lower()
         while len(word) == 0:
-            word = input().strip()
+            word = input().strip().lower()
         if word == "exit()":
             print("已取消录入")
             return False
@@ -464,9 +478,9 @@ def new_word_auto(a, cur_date, b):
         word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
         print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
         browser0.close()
-        cfm = input().strip()
+        cfm = input().strip().lower()
         while len(cfm) == 0:
-            cfm = input().strip()
+            cfm = input().strip().lower()
         if cfm == "Y" or cfm == "y":
             a[word] = [word_cn_complete, 0, 0]
             b[cur_date][0] += 1
@@ -505,9 +519,9 @@ def main(argv):
         random_test_hint_always(quiz_cache, a, filename, b, cur_date, datefile)
     while True:
         show_menu()
-        c = input().strip()
+        c = input().strip().lower()
         while len(c) == 0:
-            c = input().strip()
+            c = input().strip().lower()
         if c == "1":
             show_word(a)
             b_shown = True
@@ -537,9 +551,7 @@ def main(argv):
         elif c == "6":
             write(filename, a)
         elif c == "7":
-            mistake_notebook = mistake_collection(a)
-            for i in mistake_notebook:
-                print(i[0], "做了", i[1], "次，错了", i[2], "次，错误率", round(float(i[2])/float(i[1])*100, 2), "%")
+            mistake_collection(a, b, cur_date, filename, datefile)
         elif c == "8":
             if new_word_auto(a, cur_date, b):
                 write(filename, a)
