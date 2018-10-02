@@ -9,18 +9,29 @@ from datetime import date
 from copy import deepcopy
 import time
 print("loading ... 25%")
-import matplotlib.pyplot as plt
-print("loading ... 50%")
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-print("loading ... 75%")
-from selenium.common.exceptions import TimeoutException
-from selenium.common.exceptions import NoSuchWindowException
-from selenium.common.exceptions import WebDriverException
-from decimal import Decimal
-print("loading ... 100%")
+try:
+    import matplotlib.pyplot as plt
+    print("loading ... 50%")
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.wait import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    print("loading ... 75%")
+    from selenium.common.exceptions import TimeoutException
+    from selenium.common.exceptions import NoSuchWindowException
+    from selenium.common.exceptions import WebDriverException
+    from decimal import Decimal
+    print("loading ... 100%")
+except ModuleNotFoundError:
+    print("模组安装不完全，是否自动下载安装？(y/n)")
+    chx = input().strip().lower()
+    while len(chx) == 0:
+        chx = input().strip().lower()
+    if chx == 'y':
+        subprocess.Popen("moduleInstaller.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+        sys.exit()
+    else:
+        sys.exit()
 
 
 def read(filename):
@@ -492,7 +503,18 @@ def new_word_auto(a, cur_date, b):
         print("窗口异常关闭，无法继续操作。")
     except WebDriverException:
         print("引擎异常，无法继续操作。")
-        return False
+        # print("模组安装不完全，是否自动下载安装？(y/n)")
+        # chk = input().strip().lower()
+        # while len(chk) == 0:
+        #     chk = input().strip().lower()
+        # if chk == 'y':
+        #     search_python = os.popen("where python")
+        #     info = search_python.readlines()  # 读取命令行的输出到一个list
+        #     print(info[0])
+        #     sys.exit()
+        # else:
+        #     sys.exit()
+    return False
 
 
 def show_word(a):
