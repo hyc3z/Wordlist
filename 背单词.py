@@ -92,7 +92,7 @@ def show_menu():
     print("5:查找单词")
     print("6:手动保存")
     print("7:错题集")
-    print("8:智能录入")
+    print("8:自动录入")
     print("9:显示图表")
     print("0:统计数据")
 
