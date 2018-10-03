@@ -1,15 +1,18 @@
-﻿import re
-from random import choice
-import random
-import sys
-import os
-import getopt
-import subprocess
-from datetime import date
-from copy import deepcopy
-import time
-print("loading ... 25%")
-try:
+﻿try:
+    import re
+    from random import choice
+    import random
+    import sys
+    import os
+    import getopt
+    import subprocess
+    import requests
+    from requests.exceptions import RequestException
+    import zipfile
+    from datetime import date
+    from copy import deepcopy
+    import time
+    print("loading ... 25%")
     import matplotlib.pyplot as plt
     print("loading ... 50%")
     from selenium import webdriver
@@ -32,6 +35,56 @@ except ModuleNotFoundError:
         sys.exit()
     else:
         sys.exit()
+except KeyboardInterrupt:
+    print("用户中断执行...")
+    sys.exit()
+
+minimum_requirement = 29
+maximum_support = 70
+chromedriver_lookup = {
+    "29": "2.4",
+    "30": "2.7",
+    "31": "2.9",
+    "32": "2.9",
+    "33": "2.10",
+    "34": "2.10",
+    "35": "2.10",
+    "36": "2.12",
+    "37": "2.12",
+    "38": "2.13",
+    "39": "2.14",
+    "40": "2.15",
+    "41": "2.15",
+    "42": "2.17",
+    "43": "2.20",
+    "44": "2.20",
+    "45": "2.20",
+    "46": "2.21",
+    "47": "2.21",
+    "48": "2.21",
+    "49": "2.22",
+    "50": "2.22",
+    "51": "2.23",
+    "52": "2.24",
+    "53": "2.26",
+    "54": "2.27",
+    "55": "2.28",
+    "56": "2.29",
+    "57": "2.29",
+    "58": "2.31",
+    "59": "2.32",
+    "60": "2.33",
+    "61": "2.34",
+    "62": "2.35",
+    "63": "2.36",
+    "64": "2.37",
+    "65": "2.38",
+    "66": "2.40",
+    "67": "2.41",
+    "68": "2.42",
+    "69": "2.42",
+    "70": "2.42"
+}
 
 
 def read(filename):
@@ -84,7 +137,7 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.5.2")
+    print("背单词v1.5.3")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -92,9 +145,11 @@ def show_menu():
     print("5:查找单词")
     print("6:手动保存")
     print("7:错题集")
-    print("8:自动录入")
-    print("9:显示图表")
-    print("0:统计数据")
+    print("8:自动录入chrome版")
+    print("9:自动录入requests版")
+    print("0:显示图表")
+    print("X:统计数据")
+    print("R:把所有单词替换成有道词典版本")
 
 
 def on_progress():
@@ -454,9 +509,179 @@ def new_word(a, cur_date, b):
         return False
 
 
-def new_word_auto(a, cur_date, b):
+def new_word_auto_chrome(a, cur_date, b):
+    try:
+        word_cn = ""
+        word_cn_complete_youdao = ""
+        word_cn_complete_baidu = ""
+        word_cn_complete_baidufanyi = ""
+        print("输入英文:(输入 'exit()' 取消录入)")
+        word = input().strip().lower()
+        while len(word) == 0:
+            word = input().strip().lower()
+        if word == "exit()":
+            print("已取消录入")
+            return False
+        if word in a:
+            print(word, "已经存在，请重新输入")
+            word = input().strip().lower()
+            while len(word) == 0:
+                word = input().strip().lower()
+            if word == "exit()":
+                print("已取消录入")
+                return False
+        try:
+            browser0 = webdriver.Chrome()
+        except WebDriverException:
+            print("Chrome无法正常打开，可能是未安装chromedriver，是否下载安装？(y/n)")
+            chk = input().strip().lower()
+            while len(chk) == 0:
+                chk = input().strip().lower()
+            if chk == 'y':
+                print('请打开chrome浏览器，右上角，下拉菜单选择"帮助"，"关于Google Chrome"，复制版本数字并粘贴在此处')
+                chromemirror_url = r"http://npm.taobao.org/mirrors/chromedriver/"
+                chromedriver_name = r"/chromedriver_win32.zip"
+                while True:
+                    ver_str = input().strip()
+                    if len(ver_str) < 2:
+                        print("请输入正确的版本号！")
+                    else:
+                        try:
+                            ver_num = int(ver_str[0:2])
+                            break
+                        except ValueError:
+                            print("请输入正确的版本号！")
+                try:
+                    download_url = chromemirror_url + chromedriver_lookup[
+                        ver_str] + chromedriver_name  # 记住字典里的key是字符串！所以不能用ver_num
+                    print(download_url)
+                    print("下载中...")
+                    r = requests.get(download_url)
+                    with open("chromedriver.zip", "wb") as code:
+                        code.write(r.content)
+                    z = zipfile.ZipFile('chromedriver.zip', 'r')
+                    print("解压中...")
+                    z.extractall(path=os.getcwd())
+                    z.close()
+                    print("安装完成！")
+                    subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+                    sys.exit()
+                except KeyError:
+                    if int(ver_num) < 29:
+                        print("很抱歉，您的chrome版本低于", minimum_requirement, "，无法使用该功能")
+                    elif int(ver_num) > 70:
+                        print("很抱歉，您的chrome版本高于", maximum_support, "，无法使用该功能")
+            else:
+                return False
+        wait = WebDriverWait(browser0, 5)
+        browser0.get("https://www.baidu.com/")
+        browser0.find_element_by_id("kw").send_keys(word)
+        browser0.find_element_by_id("su").click()
+        try:
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'pc')))
+            word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
+            if len(word_result) is not 0:
+                for i in word_result:
+                    word_cn += i.text
+                word_cn_complete_baidu = word_cn.replace('\n', "").replace('\r', "")
+            raise TimeoutException
+        except TimeoutException:
+            browser0.get("https://fanyi.baidu.com/?aldtype=85#en/zh/" + word)
+            try:
+                wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'dictionary-comment')))
+                word_result = browser0.find_elements_by_class_name('dictionary-comment')
+                for i in word_result:
+                    word_cn += i.text
+                word_cn_complete_baidufanyi = word_cn.replace('\n', "").replace('\r', "")
+                raise TimeoutException
+            except TimeoutException:
+                browser0.get("http://dict.youdao.com/w/eng/" + word + "/#keyfrom=dict2.index")
+                try:
+                    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'trans-container')))
+                    word_result = browser0.find_elements_by_css_selector('#phrsListTab > div.trans-container > ul > li')
+                    for i in word_result:
+                        word_cn += i.text
+                    word_cn_complete_youdao = word_cn.replace('\n', "").replace('\r', "")
+                    print(word_cn_complete_youdao)
+                except TimeoutException:
+                    return False
+        if len(word_cn_complete_baidu) is not 0:
+            print("1、百度搜索：", word_cn_complete_baidu)
+        else:
+            print("百度搜索未找到匹配结果。")
+        if len(word_cn_complete_baidufanyi) is not 0:
+            print("2、百度翻译：", word_cn_complete_baidufanyi)
+        else:
+            print("百度翻译未找到匹配结果。")
+        if len(word_cn_complete_youdao) is not 0:
+            print("3、有道词典：", word_cn_complete_youdao)
+        else:
+            print("有道词典未找到匹配结果。")
+        print("选择要录入的结果序号：")
+        cfm = input().strip().lower()
+        while len(cfm) == 0:
+            cfm = input().strip().lower()
+        if cfm == "1":
+            if len(word_cn_complete_baidu) is not 0:
+                a[word] = [word_cn_complete_baidu, 0, 0]
+                b[cur_date][0] += 1
+                return True
+            else :
+                print("已取消录入")
+                return False
+        elif cfm == "2":
+            if len(word_cn_complete_baidufanyi) is not 0:
+                a[word] = [word_cn_complete_baidufanyi, 0, 0]
+                b[cur_date][0] += 1
+                return True
+            else :
+                print("已取消录入")
+                return False
+        elif cfm == "3":
+            if len(word_cn_complete_youdao) is not 0:
+                a[word] = [word_cn_complete_youdao, 0, 0]
+                b[cur_date][0] += 1
+                return True
+            else :
+                print("已取消录入")
+                return False
+        else:
+            print("已取消录入")
+            return False
+    except NoSuchWindowException:
+        print("窗口异常关闭，无法继续操作。")
+    except WebDriverException:
+        print("引擎异常，无法继续操作。")
+
+
+
+def parse_one_page(document):
+    pattern = re.compile('''<div class="trans-container">\s*?<ul>\s*(.*?)\s*?</ul>''', re.S)
+    items1 = re.search(pattern, document)
+    pattern2 = re.compile("<li>(.*?)</li>", re.S)
+    items = re.findall(pattern2, items1.group())
+    return items
+
+
+def get_one_page(url):
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36'}
+        response = requests.get(url, headers=headers)
+        response.encoding = 'utf-8'
+        if response.status_code == 200:
+            return response.text
+        else:
+            print(response.status_code)
+            return
+    except RequestException:
+        return None
+
+
+def new_word_auto_requests(a, cur_date, b):
     print("输入英文:(输入 'exit()' 取消录入)")
     word = input().strip().lower()
+    word_cn = ""
     while len(word) == 0:
         word = input().strip().lower()
     if word == "exit()":
@@ -470,25 +695,13 @@ def new_word_auto(a, cur_date, b):
         if word == "exit()":
             print("已取消录入")
             return False
-
+    page_src = get_one_page("http://dict.youdao.com/w/eng/"+word+"/#keyfrom=dict2.index")
     try:
-        word_cn = ""
-        browser0 = webdriver.Chrome()
-        wait = WebDriverWait(browser0, 5)
-        browser0.get("https://www.baidu.com/")
-        browser0.find_element_by_id("kw").send_keys(word)
-        browser0.find_element_by_id("su").click()
-        try:
-            wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'op_dict3_english_result_table')))
-        except TimeoutException:
-            print("加载失败，未搜索到相关信息，尝试手动录入")
-            return False
-        word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
-        for i in word_result:
-            word_cn += i.text
+        items = parse_one_page(page_src)
+        for i in items:
+            word_cn += i
         word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
         print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
-        browser0.close()
         cfm = input().strip().lower()
         while len(cfm) == 0:
             cfm = input().strip().lower()
@@ -499,22 +712,30 @@ def new_word_auto(a, cur_date, b):
         else:
             print("已取消录入")
             return False
-    except NoSuchWindowException:
-        print("窗口异常关闭，无法继续操作。")
-    except WebDriverException:
-        print("引擎异常，无法继续操作。")
-        # print("模组安装不完全，是否自动下载安装？(y/n)")
-        # chk = input().strip().lower()
-        # while len(chk) == 0:
-        #     chk = input().strip().lower()
-        # if chk == 'y':
-        #     search_python = os.popen("where python")
-        #     info = search_python.readlines()  # 读取命令行的输出到一个list
-        #     print(info[0])
-        #     sys.exit()
-        # else:
-        #     sys.exit()
-    return False
+    except AttributeError:
+        print("有道词典未找到", word, "！")
+
+
+def replace_youdao(a):
+    k = deepcopy(a)
+    count = 0
+    total = len(k)
+    for word in a:
+        word_cn = ""
+        page_src = get_one_page("http://dict.youdao.com/w/eng/" + word + "/#keyfrom=dict2.index")
+        try:
+            items = parse_one_page(page_src)
+            for i in items:
+                word_cn += i
+            word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+            k[word][0] = word_cn_complete
+            count += 1
+            print(word, word_cn_complete, "替换成功", count, "/", total)
+        except AttributeError:
+            count += 1
+            print("有道词典未找到", word, "！")
+            continue
+    return k
 
 
 def show_word(a):
@@ -575,15 +796,23 @@ def main(argv):
         elif c == "7":
             mistake_collection(a, b, cur_date, filename, datefile)
         elif c == "8":
-            if new_word_auto(a, cur_date, b):
+            if new_word_auto_chrome(a, cur_date, b):
                 write(filename, a)
                 write_date(datefile, b)
                 print("今天共录入了", b[cur_date][0], "个单词，加油！")
         elif c == "9":
+            if new_word_auto_requests(a, cur_date, b):
+                write(filename, a)
+                write_date(datefile, b)
+                print("今天共录入了", b[cur_date][0], "个单词，加油！")
+        elif c == "0":
             print_graph(b)
             on_progress()
-        elif c == "0":
+        elif c == "x":
             statistics(a, cur_date, b)
+        elif c == "r":
+            a = replace_youdao(a)
+            write(filename, a)
         else:
             on_progress()
 

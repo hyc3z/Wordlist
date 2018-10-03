@@ -1,13 +1,13 @@
 plethora
-过多的
+n. 过多；过剩；[医] 多血症
 3
 3
 alias
-别名
+n. 别名，化名adv. 别名叫；化名为n. (Alias)人名；(西)阿利亚斯；(法)阿利亚；(阿尔巴)阿利亚丝
 4
 4
 attributes
-属性
+n. 属性（attribute的复数）v. 认为…属于；把…归咎于；确定…产生的时间（attribute的第三人称单数）
 5
 5
 analogues
@@ -15,7 +15,7 @@ analogues
 3
 3
 threshold
-临界值
+n. 入口；门槛；开始；极限；临界值
 3
 3
 elementwise
@@ -23,119 +23,119 @@ elementwise
 3
 3
 modify
-改变
+vt. 修改，修饰；更改vi. 修改
 2
 2
 correspond to
-相当于
+相当于…，符合于…
 2
 2
 upcasting
-向上的
+n. 向上转型v. 向上投掷（upcast的ing形式）
 2
 2
 unary
-一元的
+adj. [数] 一元的
 4
 4
 cumulative
-累积的
+adj. 累积的
 3
 3
 transpose
-移项
+vt. 调换；移项；颠倒顺序vi. 进行变换n. 转置阵
 4
 4
 adjoint
-伴随矩阵
+n. 伴随矩阵adj. 伴随的
 3
 3
 conjugated
-共轭
+adj. 共轭的；成对的
 2
 2
 explicitly
-明确地
+adv. 明确地；明白地
 2
 2
 prerequisite
-先决条件，前提，必要条件
+n. 先决条件adj. 首要必备的
 3
 3
 prepend
-预先考虑，预先计划，预谋
+vt. 预先考虑；预谋
 3
 3
 indices
-index的复数
+n. 指数；目录（index的复数）
 3
 3
 repetitions
-反复; 重复( repetition的名词复数 ); 复制品; 副本
+重复次数
 2
 2
 eigenvalue
-本征值
+n. [数] 特征值
 2
 2
 multiplicity
-多样性
+n. 多样性；[物] 多重性
 2
 2
 histogram
-柱状图
+n. [统计] 直方图；柱状图
 2
 2
 interface
-连接
+n. 界面；<计>接口；交界面v. （使通过界面或接口）接合，连接；[计算机]使联系vi. 相互作用（或影响）；交流，交谈
 2
 2
 scalar
-标量的; 梯状的; 分等级的; 数量的;
+adj. 标量的；数量的；梯状的，分等级的n. [数] 标量；[数] 数量
 2
 2
 pad with
-用…填充;
+用…填充
 3
 3
 intrinsic
-本征; 固有的，内在的，本质的;
+adj. 本质的，固有的
 3
 3
 identical
-同一的; 完全同样的，相同的; 恒等的; 同卵的;
+adj. 同一的；完全相同的n. 完全相同的事物
 2
 2
 subtleties
-巧妙; 细微( subtlety的名词复数 ); 精细; 细微的差别等;
+n. 微妙；阴险；敏锐（subtlety的复数）
 3
 3
 arbitrary
-乱; 随意的，任性的，随心所欲的; 主观的，武断的; 霸道的，专制的，专横的，独断独行的;
+adj. [数] 任意的；武断的；专制的
 2
 2
 presumably
-大概; 可能; 想来; 据推测;
+adv. 大概；推测起来；可假定
 2
 2
 generic
-一般的; 类的，属性的; 不受商标保护的;
+adj. 类的；一般的；属的；非商标的
 2
 2
 utility
-公用事业; 功用，效用;
+n. 实用；效用；公共设施；功用adj. 实用的；通用的；有多种用途的
 2
 2
 tabular data
-表列数据;
+列表数据
 3
 3
 in a nutshell
-一言以蔽之; 简言之; 简单地; 简约地;
+adv. 简单地，简约地；极其简括地说
 4
 4
 mandatory
-强制的; 命令的; 受委托的;
+adj. 强制的；托管的；命令的n. 受托者（等于mandatary）
 2
 2
 delimeter
@@ -143,23 +143,23 @@ delimeter
 2
 2
 decomposed
-已分解的，已腐烂的;
+adj. 已腐烂的，已分解的
 2
 2
 notable
-显著的; 著名的; 值得注意的;
+adj. 值得注意的，显著的；著名的n. 名人，显要人物
 3
 3
 hinder
-vt:阻碍，妨碍; 成为阻碍;adj:后面的，后方的;
+vi. 成为阻碍vt. 阻碍；打扰adj. 后面的n. (Hinder)人名；(芬)欣德
 2
 2
 validate
-证实; 使合法化，使有法律效力; 使生效; 批准，确认;
+vt. 证实，验证；确认；使生效
 2
 2
 underscore character
-下划线字符;
+下划线字符
 3
 3
 lambda functions
@@ -167,27 +167,27 @@ lambda functions
 3
 3
 cumbersome
-笨重的; 麻烦的; 累赘的，难以携带的; 缓慢复杂的，冗长的
+adj. 笨重的；累赘的；难处理的
 3
 3
 complementary
-互补的; 补充的，补足的
+adj. 补足的，补充的
 3
 3
 corresponding
-相当的，对应的; 通信的; 符合的，符合。。; 一致的
+adj. 相当的，相应的；一致的；通信的v. 类似（correspond的ing形式）；相配
 6
 5
 blob
-二进制大对象
+n. 一滴；一抹；难以名状的一团vt. 弄脏；把…做错vi. 得零分；弄错
 4
 4
 derive from
-由…起源; 取自;
+源出，来自，得自；衍生于
 2
 2
 bracket
-n. 支架，悬臂; 括弧; 类别，等级; [数] 同类项;vt. 为…装托架; 把…括在一起; 把…分类; 排除;
+n. 支架；括号；墙上凸出的托架vt. 括在一起；把…归入同一类；排除
 4
 4
 stride of an array
@@ -195,318 +195,330 @@ stride of an array
 4
 4
 resultant
-adj.因而发生的，结果必然产生的; [物] 组合的，合成的;n.结果，后果; 合力，合成力，合成[运动]，[数]结式，消元式，[物]合量，组合，[化]生成物，（反应）产物; [数学] 合矢量：等价于一组向量的一个单个向量;
+n. 合力；结果；[化学] 生成物adj. 结果的；合成的
 3
 3
 handy
-方便的; 手巧的; 手边的，附近的; 便于使用的;
+adj. 便利的；手边的，就近的；容易取得的；敏捷的n. (Handy)人名；(英)汉迪
 3
 3
 ellipsis
-n.（语法结构上的） 省略;
+n. 省略；省略符号；脱漏
 2
 2
 trailing
-adj.拖尾的; 曳尾的; 被拖动的; 蔓延的;
+adj. 后面的；拖尾的；牵引的；被拖动的；蔓延的n. 拖尾；泥浆彩饰v. 尾随（trail的ing形式）
 2
 2
 clobbering
-In software engineering, clobbering a file or computer memory is overwriting its contents. 
+vt. 击倒；痛打n. 衣服；软膏；环草胺除草剂
 2
 2
 contiguous
-adj.接触的，邻近的，共同的;
+adj. 连续的；邻近的；接触的
 3
 3
 versatile
-adj.多才多艺的; 多功能的; （指工具、机器等） 多用途的; 有多种学问、技能或职业的;
+adj. 多才多艺的；通用的，万能的；多面手的
 2
 2
 concatenate
-vt.把 （一系列事件、事情等）联系起来;adj.连接的，联系在一起的;
+vt. 连结；使连锁adj. 连结的；连锁的
 4
 4
 repository
-n.仓库; 贮藏室; 博物馆; 亲信;
+n. 贮藏室，仓库；知识库；智囊团
 2
 2
 antialias
-抗锯齿，平滑（图形处理中的用语）;
+n. 普通显示效果，反别名vt. 抗锯齿，平滑
 4
 4
 setter
-n.安放者，安装员; 作曲者; 排字者; 塞特种猎狗;
+n. [机] 调节器；作曲者；排字工人；安装员，从事安装的人
 2
 2
 annotation
-n.注释;
+n. 注释；注解；释文
 2
 2
 thereafter
-adv.此后，在那之后; 〈罕〉据此;
+adv. 其后；从那时以后
 1
 1
 prompt
-adj.迅速的; 敏捷的; 立刻的; 准时的;v.提示; 促使; 导致; 鼓励;n.提示; 提示符; 激励; 提词;
+adj. 敏捷的，迅速的；立刻的vt. 提示；促进；激起；（给演员）提白n. 提示；付款期限；DOS命令：改变DOS系统提示符的风格adv. 准时地
 1
 1
 innermost
-adj.最深处的; 隐私的，最隐秘的;
+adj. 内心的；最里面的，最深处的；秘密的
 3
 3
 syntactically
-adv.依照句法地，在语句构成上;
+adv. 依照句法地；在语句构成上
 3
 2
 parenthesize
-vt.将…加上括弧，加插入语于;
+vt. 加插入语于…；将…加上括弧
 3
 3
 whereas
-conj.然而; 鉴于; 反之; n."鉴于…"：正式文件的介绍性陈述，开场白; 条件性陈述;
+conj. 然而；鉴于；反之
 1
 1
 albeit
-conj.虽然; 即使;
+conj. 虽然；即使
 2
 2
 concise
-adj.简约; 简明的，简洁的; 精炼;
+adj. 简明的，简洁的
 2
 2
 hereafter
-adv.今后，从此以后;
+n. 将来；来世adv. 今后，从此以后
 2
 2
 retrieve
-vt.取回; 恢复; [计] 检索; 重新得到;vi.找回猎物;n.取回; 恢复，挽回; [计] 检索;[其他]第三人称单数：retrieves 现在分词：retrieving 过去式：retrieved 过去分词：retrieved
+vt. [计] 检索；恢复；重新得到vi. 找回猎物n. [计] 检索；恢复，取回
 2
 2
 grumble
-vi.抱怨; 发牢骚; 嘟囔; （雷等） 隆隆响;vt.喃喃地说出;n.抱怨; 牢骚; 咕哝; （雷等的） 隆隆声;[其他]第三人称单数：grumbles 现在分词：grumbling 过去式：grumbled 过去分词：grumbled
+vi. 抱怨；嘟囔n. 怨言vt. 喃喃地说出adv. 抱怨地表示；嘟囔地说
 1
 1
 lexicographical
-adj.词典编纂的;
+adj. 辞典编纂的
 2
 2
 recursively
-[词典][计] 递归地;
+adv. 递归地；递回地
 1
 1
 right-justify
-vt.向右对齐;[其他]第三人称单数：right-justifies 现在分词：right-justifying 过去式：right-justified
+向右对齐，靠右对齐
 1
 1
 designate
-vt.指派; 指明，指出; 表明，意味着; 把…定名为;adj.指定而尚未上任的; 选出而尚未上任的;[其他]第三人称单数：designates 现在分词：designating 过去式：designated 过去分词：designated
+vt. 指定；指派；标出；把…定名为adj. 指定的；选定的
 4
 3
 suite
-n.[计] （软件的） 套件; （房间，器具等） 一套，一副; [乐] 组曲; 随从;[其他]复数：suites
+n. （一套）家具；套房；组曲；（一批）随员，随从
 1
 1
 opaque
-adj.不透明的; 无光泽的，晦暗的; 不传导性的; 含糊的，迟钝的;n.不透明，晦暗; [建] 遮檐; 遮光涂料;[其他]复数：opaques
+adj. 不透明的；不传热的；迟钝的n. 不透明物vt. 使不透明；使不反光
 1
 1
 hierarchy
-n.[计] 分层，层次; 等级制度; 统治集团; 天使的级别或等级;[其他]复数：hierarchies
+n. 层级；等级制度
 2
 2
 colon
-n.冒号; <解>结肠; 科郎（哥斯达黎加货币单位）;[其他]复数：colons
+n. [解剖] 结肠；冒号（用于引语、说明、例证等之前）；科郎（哥斯达黎加货币单位）
 2
 2
 preceding
-adj.（时间或地点上） 在先的，在前的，前面的; 前述的; 上述的;v.在…之前发生（或出现）; 走在…前面; 先于; “precede”的现在分词;[其他]原型： precede
+adj. 在前的；前述的v. 在...之前（precede的ing形式）
 1
 1
 unhandled
-adj.未用手触过的，未经处理过的;
+adj. 未经手触过的；未处理过的
 1
 1
 parenthesized
-v.将…加上括弧，加插入语于( parenthesize的过去式和过去分词 );[其他]原型： parenthesize
+将……加上括弧（parenthesize的过去式和过去分词）
 1
 1
 thereof
-adv.其; 它的; 关于那; 由此;
+adv. 它的；由此；在其中；关于…；将它
 1
 1
 instance
-n.情况; 例子，实例; 要求，建议; [法] 诉讼手续;vt.举…为例;[其他]第三人称单数：instances 复数：instances 现在分词：instancing 过去式：instanced 过去分词：instanced
+n. 实例；情况；建议vt. 举...为例
 1
 1
 implicitly
-adv.含蓄地; 暗示地; 无疑问地; 无保留地;
+adv. 含蓄地；暗中地
 3
 2
 semantic
-adj.<语>语义的，语义学的;
+adj. 语义的；语义学的（等于semantical）
 1
 1
 syntax
-n.语法; 句法; 句法规则[分析]; 语构;
+n. 语法；句法；有秩序的排列
 1
 1
 partake
-vi.参与; 参加; 吃;n.参与者，分担者;[其他]第三人称单数：partakes 现在分词：partaking 过去式：partook 过去分词：partaken
+vi. 吃，喝；分享；参与；分担；带有某种性质vt. 分担；分享
 2
 2
 recursive
-adj.回归的，递归的;
+adj. [数] 递归的；循环的
 1
 1
 invocation
-n.祈祷; 乞求; 乞灵; 乞求神助;[其他]复数：invocations
+n. 祈祷；符咒；【法律】(法院对另案的)文件调取；(法权的)行使
 3
 3
 quirk
-n.怪癖; 奇事，巧合; 突然的弯曲;[其他]复数：quirks
+n. 怪癖；急转；借口n. (Quirk)人名；(英)夸克
 1
 1
 conceivably
-adv.令人信服地;
+adv. 令人信服地；可相信地；想得到地
 1
 1
 invoke
-vt.乞灵，祈求; 提出或授引…以支持或证明; 召鬼; 借助;[其他]第三人称单数：invokes 现在分词：invoking 过去式：invoked 过去分词：invoked
+vt. 调用；祈求；引起；恳求
 1
 1
 enforce
-vt.加强; 强迫服从; 实施，执行;[其他]第三人称单数：enforces 现在分词：enforcing 过去式：enforced 过去分词：enforced
+vt. 实施，执行；强迫，强制
 1
 1
 convention
-n.会议; 全体与会者; 国际公约; 惯例，习俗，规矩;[其他]复数：conventions
+n. 大会；[法] 惯例；[计] 约定；[法] 协定；习俗
 1
 1
 conceivable
-adj.可想到的，可相信的，可想像的，可能的;
+adj. 可能的；想得到的，可想像的
 1
 1
 legitimate
-adj.合法的，合理的; 正规的; 合法婚姻所生的; 真正的，真实的;vt.使合法; 给予合法的地位; 通过法律手段给（私生子）以合法地位; 正式批准，授权;[其他]第三人称单数：legitimates 现在分词：legitimating 过去式：legitimated 过去分词：legitimated
+adj. 合法的；正当的；合理的；正统的vt. 使合法；认为正当（等于legitimize）
 4
 3
 monotonic
-adj.单调的，无变化的;
+adj. 单调的；无变化的；产生单音调的
 1
 1
 mangling
-[词典]矫直;[其他]原型： mangle
+v. 矫直；碾压（mangle的ing形式）
 1
 1
 likewise
-adv.同样地; 也，而且;
+adv. 同样地；也
 1
 1
 pervade
-vt.遍及，弥漫; 渗透，充满;[其他]第三人称单数：pervades 现在分词：pervading 过去式：pervaded 过去分词：pervaded
+vt. 遍及；弥漫
 1
 1
 trivially
-adv.平凡地; 琐细地; 很一般的; 无能地;
+adv. 琐细地；平凡地；无能地
 1
 1
 compact
-vt.压紧，（使）坚实; 把…弄紧密，把…弄结实; 使（文体）简洁，简化; 变紧密，变结实;adj.紧凑的; 简洁的，（文体等）紧凑的; 小巧易携带的; （物质） 致密的，（体格）结实的;n.协议; 条约; 带镜小粉盒; 小汽车;[其他]第三人称单数：compacts 现在分词：compacting 过去式：compacted 过去分词：compacted
+n. 合同，契约；小粉盒adj. 紧凑的，紧密的；简洁的vt. 使简洁；使紧密结合
 1
 1
 succinctly
-adv.简洁地; 简洁地，简便地;
+adv. 简洁地；简便地
 1
 1
 locale
-n.（事件发生的） 场所或地点;[其他]复数：locales
+n. 场所，现场
 1
 1
 intervening
-adj.发生于其间的; 介于中间的;v.干涉; 介入(intervene的现在分词); 调停; 介于…之间;[其他]原型： intervene
+adj. 介于中间的v. 介入（intervene的ing形式）
 1
 1
 semaphore
-n.臂板信号系统，（铁道）臂板信号装置;vt.发出信号，打旗语;[其他]第三人称单数：semaphores 复数：semaphores 现在分词：semaphoring 过去式：semaphored 过去分词：semaphored
+vi. 打旗语；发信号n. 信号；旗语；臂板信号机vt. 用信号联络
 1
 1
 reproduce
-vt.复制，重现，再版; 生殖，繁殖;vt.再现; 使再次发生;[其他]第三人称单数：reproduces 现在分词：reproducing 过去式：reproduced 过去分词：reproduced
+vt. 复制；再生；生殖；使…在脑海中重现vi. 复制；繁殖
 1
 1
 homogeneous
-adj.均匀的; 同性质的，同类的; 由相同（或同类型）事物（或人）组成的; [数] 齐性的，齐次的;
+adj. 均匀的；[数] 齐次的；同种的；同类的，同质的
 3
 2
 beget
-vt.<文>为…之生父; 产生，引起;[其他]第三人称单数：begets 现在分词：begetting 过去式：begot 过去分词：begotten
+vt. 产生；招致；引起；当…的父亲
 1
 1
 peril
-n.危险; 冒险;vt.置…于危险中; 危及;[其他]第三人称单数：perils 复数：perils 现在分词：periling 过去式：periled 过去分词：periled
+n. 危险；冒险vt. 危及；置…于险境
 1
 1
 unduly
-adv.过分地; 过度地; 不适当地; 不相称地;
+adv. 过度地；不适当地；不正当地
 1
 1
 wary
-adj.谨慎的，小心翼翼的; 警戒的，警惕的;[其他]比较级：warier 最高级：wariest
+adj. 谨慎的；机警的；惟恐的；考虑周到的
 1
 1
 pathological
-adj.[医] 病理学的; 由疾病引起的; 病态的，疾病的;
+adj. 病理学的；病态的；由疾病引起的（等于pathologic）
 1
 1
 mitigate
-vt.使缓和，使减轻; 使平息;vi.减轻，缓和下来;[其他]第三人称单数：mitigates 现在分词：mitigating 过去式：mitigated 过去分词：mitigated
+vt. 使缓和，使减轻vi. 减轻，缓和下来
 1
 1
 summation
-n.总和; 总结; 概括; 加在一起;[其他]复数：summations
+n. 和；[生理] 总和；合计
 1
 1
 appendix
-n.附录; 阑尾; 附加物;[其他]复数：appendixes
+n. 附录；阑尾；附加物
 1
 1
 glossary
-n.（书尾的） 词汇表，难词汇编;[其他]复数：glossaries
+n. 术语（特殊用语）表；词汇表；专业词典
 1
 1
 concurrent
-adj.〈正式〉同时发生的; 同时完成的; 同时存在的;n.[数] 共点; 同时发生的事件;
+adj. adj. 并发的；一致的；同时发生的；并存的n. [数] 共点；同时发生的事件
 1
 1
 trail
-vt.跟踪，追踪; 拖曳：让…拖或飘扬在后面; 拖沓而行; 跟在…后面;vi.（在比赛等中） 输; （尤指跟在他人后面） 疲惫地走; （在比赛或其他竞赛中） 落后; 蔓生;n.小径; 足迹; 臭迹; 一缕;[其他]第三人称单数：trails 复数：trails 现在分词：trailing 过去式：trailed 过去分词：trailed
+vt. 追踪；拖；蔓延；落后于n. 小径；痕迹；尾部；踪迹；一串，一系列vi. 飘出；蔓生；垂下；拖曳n. (Trail)人名；(英)特雷尔
 1
 1
 buzzword
-n.（报刊等的） 时髦术语，流行行话;[其他]复数：buzzwords
+n. 流行词
 1
 1
 insulate
-vt.使隔离，使孤立; 使绝缘，使隔热;[其他]第三人称单数：insulates 现在分词：insulating 过去式：insulated 过去分词：insulated
+vt. 隔离，使孤立；使绝缘，使隔热
 1
 1
 span
-n.共轭（马、骡）; 跨度，墩距; 一段时间; [航] 跨绳;vt.缚住或扎牢; 跨越时间或空间; 以掌测量; 以手围绕测量类似测量;[其他]第三人称单数：spans 复数：spans 现在分词：spanning 过去式：spanned 过去分词：spanned
+n. 跨度，跨距；范围vt. 跨越；持续；以手指测量n. (Span)人名；(捷)斯潘
 1
 1
 metric
-adj.度量的; 米制的，公制的，十进制的; 距离的;n.度量标准; [数学] 度量; 诗体，韵文，诗韵;[其他]复数：metrics
+adj. 公制的；米制的；公尺的n. 度量标准
 1
 1
 refactor
-n.重构;
+n. 重构vt. 重构
 1
 1
 periodically
-adv.周期性地; 定期地，偶尔;
+adv. 定期地；周期性地；偶尔；间歇
 1
 1
 bold
-adj.明显的，醒目的; 勇敢的，无畏的; 莽撞的; 陡峭的;n.粗体字; 黑体字;[其他]比较级：bolder 最高级：boldest
+adj. 大胆的，英勇的；黑体的；厚颜无耻的；险峻的n. (Bold)人名；(英、德、罗、捷、瑞典)博尔德
+0
+0
+subsequently
+adv. 随后，其后；后来
+0
+0
+modifier
+n. [助剂] 改性剂；[语] 修饰语；修正的人
+0
+0
+cadence
+n. 节奏；韵律；抑扬顿挫n. (Cadence)人名；(法)卡当斯
 0
 0
