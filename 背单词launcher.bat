@@ -1,1 +1,1 @@
-python ±³µ¥´Ê.py %1%
+python -O -m py_compile ±³µ¥´Ê.py

@@ -1,8 +1,8 @@
 ﻿from importlib import import_module
 import ctypes
 
-class ProgressBar(object):
 
+class ProgressBar(object):
     def __init__(self, title,
                  count=0.0,
                  run_status=None,
@@ -62,7 +62,9 @@ except ModuleNotFoundError:
         chx = input().strip().lower()
     if chx == 'y':
         if is_admin():
-            subprocess.Popen("moduleInstaller.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+            p = subprocess.Popen("pip install selenium matplotlib requests", creationflags=subprocess.CREATE_NEW_CONSOLE)
+            p.communicate()
+            subprocess.Popen("python 背单词.py", creationflags=subprocess.CREATE_NEW_CONSOLE)
             sys.exit()
         # 将要运行的代码加到这里
         else:
@@ -96,6 +98,7 @@ try:
     from selenium.common.exceptions import NoSuchWindowException
     from selenium.common.exceptions import WebDriverException
     from decimal import Decimal
+    from requests.exceptions import ConnectionError
 except ModuleNotFoundError:
     print("模组安装不完全，是否自动下载安装？(y/n)")
     chx = input().strip().lower()
@@ -103,7 +106,9 @@ except ModuleNotFoundError:
         chx = input().strip().lower()
     if chx == 'y':
         if is_admin():
-            subprocess.Popen("moduleInstaller.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+            p = subprocess.Popen("pip install selenium matplotlib requests", creationflags=subprocess.CREATE_NEW_CONSOLE)
+            p.communicate()
+            subprocess.Popen("python 背单词.py", creationflags=subprocess.CREATE_NEW_CONSOLE)
             sys.exit()
         # 将要运行的代码加到这里
         else:
@@ -221,9 +226,9 @@ def write(filename, a):
 
 def show_menu():
     if is_admin():
-        print("背单词v1.5.4", " 管理员模式")
+        print("背单词v1.6.0", " 管理员模式")
     else:
-        print("背单词v1.5.4", " 用户模式")
+        print("背单词v1.6.0", " 用户模式")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -648,7 +653,7 @@ def new_word_auto_chrome(a, cur_date, b):
                         """
                         需要根据 response.status_code 的不同添加不同的异常处理
                         """
-                        print('content_size', content_size, response.status_code, )
+                        # print('content_size', content_size, response.status_code, )
                         progress = ProgressBar("chromedriver v"+chromedriver_lookup[ver_str]
                                                , total=content_size
                                                , unit="KB"
@@ -668,11 +673,16 @@ def new_word_auto_chrome(a, cur_date, b):
                         print("安装完成！")
                         subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
                         sys.exit()
+                except ConnectionError:
+                    print("下载失败，无法连接到服务器")
+                    return False
                 except KeyError:
                     if int(ver_num) < 29:
                         print("很抱歉，您的chrome版本低于", minimum_requirement, "，无法使用该功能")
+                        return False
                     elif int(ver_num) > 70:
                         print("很抱歉，您的chrome版本高于", maximum_support, "，无法使用该功能")
+                        return False
             else:
                 return False
         wait = WebDriverWait(browser0, 5)
@@ -706,49 +716,56 @@ def new_word_auto_chrome(a, cur_date, b):
                     word_cn_complete_youdao = word_cn.replace('\n', "").replace('\r', "")
                     print(word_cn_complete_youdao)
                 except TimeoutException:
-                    return False
+                    pass
+        found_at_least_one = False
         if len(word_cn_complete_baidu) is not 0:
             print("1、百度搜索：", word_cn_complete_baidu)
+            found_at_least_one = True
         else:
             print("百度搜索未找到匹配结果。")
         if len(word_cn_complete_baidufanyi) is not 0:
             print("2、百度翻译：", word_cn_complete_baidufanyi)
+            found_at_least_one = True
         else:
             print("百度翻译未找到匹配结果。")
         if len(word_cn_complete_youdao) is not 0:
             print("3、有道词典：", word_cn_complete_youdao)
+            found_at_least_one = True
         else:
             print("有道词典未找到匹配结果。")
-        print("选择要录入的结果序号：")
-        cfm = input().strip().lower()
-        while len(cfm) == 0:
+        if found_at_least_one:
+            print("选择要录入的结果序号：(输入0退出)")
             cfm = input().strip().lower()
-        if cfm == "1":
-            if len(word_cn_complete_baidu) is not 0:
-                a[word] = [word_cn_complete_baidu, 0, 0]
-                b[cur_date][0] += 1
-                return True
-            else :
-                print("已取消录入")
-                return False
-        elif cfm == "2":
-            if len(word_cn_complete_baidufanyi) is not 0:
-                a[word] = [word_cn_complete_baidufanyi, 0, 0]
-                b[cur_date][0] += 1
-                return True
-            else :
-                print("已取消录入")
-                return False
-        elif cfm == "3":
-            if len(word_cn_complete_youdao) is not 0:
-                a[word] = [word_cn_complete_youdao, 0, 0]
-                b[cur_date][0] += 1
-                return True
-            else :
+            while len(cfm) == 0:
+                cfm = input().strip().lower()
+            if cfm == "1":
+                if len(word_cn_complete_baidu) is not 0:
+                    a[word] = [word_cn_complete_baidu, 0, 0]
+                    b[cur_date][0] += 1
+                    return True
+                else :
+                    print("已取消录入")
+                    return False
+            elif cfm == "2":
+                if len(word_cn_complete_baidufanyi) is not 0:
+                    a[word] = [word_cn_complete_baidufanyi, 0, 0]
+                    b[cur_date][0] += 1
+                    return True
+                else :
+                    print("已取消录入")
+                    return False
+            elif cfm == "3":
+                if len(word_cn_complete_youdao) is not 0:
+                    a[word] = [word_cn_complete_youdao, 0, 0]
+                    b[cur_date][0] += 1
+                    return True
+                else :
+                    print("已取消录入")
+                    return False
+            else:
                 print("已取消录入")
                 return False
         else:
-            print("已取消录入")
             return False
     except NoSuchWindowException:
         print("窗口异常关闭，无法继续操作。")
