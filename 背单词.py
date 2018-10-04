@@ -1,38 +1,121 @@
-﻿try:
-    import re
+﻿from importlib import import_module
+import ctypes
+
+class ProgressBar(object):
+
+    def __init__(self, title,
+                 count=0.0,
+                 run_status=None,
+                 fin_status=None,
+                 total=100.0,
+                 unit='', sep='/',
+                 chunk_size=1.0,
+                 ):
+        super(ProgressBar, self).__init__()
+        self.info = "【%s】%s %.2f %s %s %.2f %s %.2f %s"
+        self.title = title
+        self.total = total
+        self.count = count
+        self.chunk_size = chunk_size
+        self.status = run_status or ""
+        self.fin_status = fin_status or " " * len(self.status)
+        self.unit = unit
+        self.sep = sep
+        self.percentage = count/total*100
+        self.percentmark = '%'
+
+    def __get_info(self):
+        # 【名称】状态 进度 单位 分割线 总数 单位
+        _info = self.info % (self.title, self.status,
+                             self.count / self.chunk_size, self.unit, self.sep, self.total / self.chunk_size, self.unit, self.percentage, self.percentmark)
+        return _info
+
+    def refresh(self, count=1, status=None):
+        self.count += count
+        # if status is not None:
+        self.percentage = self.count/self.total*100
+        self.status = status or self.status
+        end_str = "\r"
+        if self.count >= self.total:
+            end_str = '\n'
+            self.status = status or self.fin_status
+        print(self.__get_info(), end=end_str)
+
+
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+
+
+modules = ['re', 'random', 'sys','os', 'getopt', 'subprocess','contextlib', 'decimal', 'zipfile', 'datetime', 'copy', 'time', 'matplotlib', 'selenium', 'requests' ]
+import_progress = ProgressBar("加载模块...", total=len(modules), unit="", chunk_size=1, run_status="正在加载", fin_status="加载完成")
+try:
+    for module in modules:
+        locals()[module] = import_module(module)
+        import_progress.refresh(count=1)
+except ModuleNotFoundError:
+    print("\n模组安装不完全，是否自动下载安装？(y/n)")
+    chx = input().strip().lower()
+    while len(chx) == 0:
+        chx = input().strip().lower()
+    if chx == 'y':
+        if is_admin():
+            subprocess.Popen("moduleInstaller.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+            sys.exit()
+        # 将要运行的代码加到这里
+        else:
+            print("您未以管理员身份运行此脚本，安装可能出现错误，是否重新以管理员身份运行？(y/n)")
+            chx = input().strip().lower()
+            while len(chx) == 0:
+                chx = input().strip().lower()
+            if chx == 'y':
+                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+                sys.exit()
+            else:
+                sys.exit()
+    else:
+        sys.exit()
+except KeyboardInterrupt:
+    print("用户中断执行...")
+    sys.exit()
+
+try:
     from random import choice
-    import random
-    import sys
-    import os
-    import getopt
-    import subprocess
-    import requests
     from requests.exceptions import RequestException
-    import zipfile
     from datetime import date
     from copy import deepcopy
-    import time
-    print("loading ... 25%")
     import matplotlib.pyplot as plt
-    print("loading ... 50%")
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.wait import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
-    print("loading ... 75%")
+    from contextlib import closing
     from selenium.common.exceptions import TimeoutException
     from selenium.common.exceptions import NoSuchWindowException
     from selenium.common.exceptions import WebDriverException
     from decimal import Decimal
-    print("loading ... 100%")
 except ModuleNotFoundError:
     print("模组安装不完全，是否自动下载安装？(y/n)")
     chx = input().strip().lower()
     while len(chx) == 0:
         chx = input().strip().lower()
     if chx == 'y':
-        subprocess.Popen("moduleInstaller.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
-        sys.exit()
+        if is_admin():
+            subprocess.Popen("moduleInstaller.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+            sys.exit()
+        # 将要运行的代码加到这里
+        else:
+            print("您未以管理员身份运行此脚本，安装可能出现错误，是否重新以管理员身份运行？(y/n)")
+            chx = input().strip().lower()
+            while len(chx) == 0:
+                chx = input().strip().lower()
+            if chx == 'y':
+                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+                sys.exit()
+            else:
+                sys.exit()
     else:
         sys.exit()
 except KeyboardInterrupt:
@@ -137,7 +220,10 @@ def write(filename, a):
 
 
 def show_menu():
-    print("背单词v1.5.3")
+    if is_admin():
+        print("背单词v1.5.4", " 管理员模式")
+    else:
+        print("背单词v1.5.4", " 用户模式")
     print("1:显示所有单词")
     print("2:录入新单词")
     print("3:随机测试")
@@ -150,6 +236,8 @@ def show_menu():
     print("0:显示图表")
     print("X:统计数据")
     print("R:把所有单词替换成有道词典版本")
+    if not is_admin():
+        print("admin:以管理员模式重新启动")
 
 
 def on_progress():
@@ -554,18 +642,32 @@ def new_word_auto_chrome(a, cur_date, b):
                 try:
                     download_url = chromemirror_url + chromedriver_lookup[
                         ver_str] + chromedriver_name  # 记住字典里的key是字符串！所以不能用ver_num
-                    print(download_url)
-                    print("下载中...")
-                    r = requests.get(download_url)
-                    with open("chromedriver.zip", "wb") as code:
-                        code.write(r.content)
-                    z = zipfile.ZipFile('chromedriver.zip', 'r')
-                    print("解压中...")
-                    z.extractall(path=os.getcwd())
-                    z.close()
-                    print("安装完成！")
-                    subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
-                    sys.exit()
+                    with closing(requests.get(download_url, stream=True)) as response:
+                        chunk_size = 1024
+                        content_size = int(response.headers['content-length'])
+                        """
+                        需要根据 response.status_code 的不同添加不同的异常处理
+                        """
+                        print('content_size', content_size, response.status_code, )
+                        progress = ProgressBar("chromedriver v"+chromedriver_lookup[ver_str]
+                                               , total=content_size
+                                               , unit="KB"
+                                               , chunk_size=chunk_size
+                                               , run_status="正在下载"
+                                               , fin_status="下载完成")
+                        # chunk_size = chunk_size < content_size and chunk_size or content_size
+                        with open('chromedriver.zip', "wb") as file:
+                            for data in response.iter_content(chunk_size=chunk_size):
+                                file.write(data)
+                                progress.refresh(count=len(data))
+                        print('下载完成!')
+                        z = zipfile.ZipFile('chromedriver.zip', 'r')
+                        print("解压中...")
+                        z.extractall(path=os.getcwd())
+                        z.close()
+                        print("安装完成！")
+                        subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+                        sys.exit()
                 except KeyError:
                     if int(ver_num) < 29:
                         print("很抱歉，您的chrome版本低于", minimum_requirement, "，无法使用该功能")
@@ -652,7 +754,6 @@ def new_word_auto_chrome(a, cur_date, b):
         print("窗口异常关闭，无法继续操作。")
     except WebDriverException:
         print("引擎异常，无法继续操作。")
-
 
 
 def parse_one_page(document):
@@ -813,6 +914,12 @@ def main(argv):
         elif c == "r":
             a = replace_youdao(a)
             write(filename, a)
+        elif c == "admin":
+            if is_admin():
+                print("脚本已经在管理员模式下运行！")
+            else:
+                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+                sys.exit()
         else:
             on_progress()
 

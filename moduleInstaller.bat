@@ -1,2 +1,3 @@
 pip install selenium matplotlib
-python requests ±³µ¥´Ê.py %1%
+
+python ±³µ¥´Ê.py %1%
