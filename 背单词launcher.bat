@@ -1,1 +1,1 @@
-python -O -m py_compile ±³µ¥´Ê.py
+python Vertigo.cpython-36.pyc

@@ -18,4 +18,4 @@ if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
 pushd "%CD%"
 CD /D "%~dp0"
 :--------------------------------------
-python ±³µ¥´Ê.py
+python Vertigo.cpython-36.pyc
