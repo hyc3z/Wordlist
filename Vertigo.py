@@ -291,7 +291,7 @@ class Atom:
         return str(self.__testedCount)+" "+str(self.__searchCount)+" "+str(self.__inputCount)
 
     def show_info(self):
-        print(self.__date, "录入了", self.__inputCount, "个单词, 搜索了",self.__searchCount,"题, 做了",self.__testedCount,"题")
+        print(self.__date, "录入了", self.__inputCount, "个单词, 搜索了",self.__searchCount,"次, 做了",self.__testedCount,"题")
 
 
 class Fusion:
