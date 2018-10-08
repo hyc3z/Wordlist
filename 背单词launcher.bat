@@ -1,1 +1,1 @@
-python Vertigo.cpython-36.pyc
+python Vertigo.py
