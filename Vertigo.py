@@ -1,6 +1,7 @@
 ﻿from importlib import import_module
 import ctypes
 
+
 def get_path():
     path_file = __file__
     folder_path = re.search("(.*)/", path_file)
@@ -99,7 +100,7 @@ def open_console(num=0):
     if num != 0:
         subprocess.Popen("背单词launcher.bat "+ str(num), creationflags=subprocess.CREATE_NEW_CONSOLE)
     else:
-        subprocess.Popen("背单词launcher.bat " + str(num),  creationflags = subprocess.CREATE_NEW_CONSOLE)
+        subprocess.Popen("背单词launcher.bat",  creationflags = subprocess.CREATE_NEW_CONSOLE)
     sys.exit()
 
 
@@ -248,11 +249,12 @@ v1.5.0是这个小程序的latest version，希望大家喜欢！""",
     "v1.6.7": """保存文件换成utf-8格式
 用自己写的get_path()代替了os.getcwd()，让脚本也可以开机运行时找到路径""",
     "v1.6.8": "用面向对象重构了wordlist, 累死爹了",
-    "v1.7.0": "面向对象重构版本,beta版"
+    "v1.7.0": "全部面向对象重构版本,beta版",
+    "v1.7.1": "全部面向对象重构版本,RC版"
 }
 known_issue = [
 ]
-version_info = "v1.7.0"
+version_info = "v1.7.1"
 
 class Atom:
 
@@ -294,10 +296,50 @@ class Fusion:
 
     __Reactor = []
 
+    def read_date(self, filename=None):
+        if filename is None:
+            filename = self.__filename
+        try:
+            f = open(filename, "r", encoding="utf-8-sig")
+            strn = f.read()
+            fpt = {}
+            res = re.split('\n', strn)
+            for i in range(1, len(res), 2):
+                fpt[res[i - 1].replace("\s", "")] = []
+                numeric_data = res[i].split(' ')
+                for j in numeric_data:
+                    fpt[res[i - 1].replace("\s", "")].append(int(j))
+            f.close()
+        except FileNotFoundError:
+            f = open(filename, "w+", encoding="utf-8")
+            fpt = {}
+            f.close()
+        except UnicodeDecodeError:
+            f = open(filename, "r", encoding="utf-8")
+            strn = f.read()
+            fpt = {}
+            res = re.split('\n', strn)
+            for i in range(1, len(res), 2):
+                fpt[res[i - 1].replace("\s", "")] = []
+                numeric_data = res[i].split(' ')
+                for j in numeric_data:
+                    fpt[res[i - 1].replace("\s", "")].append(int(j))
+        return fpt
+
+    def write_date(self, filename=None):
+        if filename is None:
+            filename = self.__filename
+        f = open(filename, "w+", encoding="utf-8")
+        for i in self.__Reactor:
+            f.write(i.get_date() + "\n")
+            f.write(i.numeric_data() + '\n')
+        f.close()
+
     def __init__(self, filename=None):
         if filename is not None:
             self.__Reactor = []
-            wordstring = read_date(filename)
+            self.__filename = filename
+            wordstring = self.read_date(filename)
             for i in wordstring:
                 a_single_atom = Atom(i, int(wordstring[i][0]), int(wordstring[i][1]), int(wordstring[i][2]))
                 self.__Reactor.append(a_single_atom)
@@ -318,24 +360,36 @@ class Fusion:
                 return atom
         return None
 
-    def tested_most(self):
+    def tested_most(self, show=False):
         if len(self.__Reactor) is not 0:
             self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.tested_count(), reverse=True)
-            return self.__Reactor[0]
+            theatom = self.__Reactor[0]
+            if show:
+                print(theatom.get_date(), " 做题最多, 做了", theatom.tested_count(), "题")
+            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.get_date(), reverse=False)
+            return theatom
         else:
             return None
 
-    def searched_most(self):
+    def searched_most(self, show=False):
         if len(self.__Reactor) is not 0:
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.search_count(), reverse=True)
-            return self.__Reactor[0]
+            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.searched_count(), reverse=True)
+            theatom = self.__Reactor[0]
+            if show:
+                print(theatom.get_date(), " 搜词最多, 搜了", theatom.searched_count(), "题")
+            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.get_date(), reverse=False)
+            return theatom
         else:
             return None
 
-    def input_most(self):
+    def input_most(self, show=False):
         if len(self.__Reactor) is not 0:
             self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.input_count(), reverse=True)
-            return self.__Reactor[0]
+            theatom = self.__Reactor[0]
+            if show:
+                print(theatom.get_date(), " 录入最多, 录了", theatom.input_count(), "题")
+            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.get_date(), reverse=False)
+            return theatom
         else:
             return None
 
@@ -346,7 +400,7 @@ class Fusion:
 
 class Word:
 
-    def __init__(self, enword ,cnexplanation, testedcount=0,correctcount=0,searchtime=0):
+    def __init__(self, enword, cnexplanation, testedcount=0, correctcount=0, searchtime=0):
         self.__enWord = enword
         self.__cnExplanation = cnexplanation
         self.__testedCount = testedcount
@@ -415,6 +469,7 @@ class WordList:
     __wordList = []
     __engList = []
     __unvisitedList = []
+    __phraseList = []
 
     def init_visit_status(self):
         self.__unvisitedList = []
@@ -422,21 +477,67 @@ class WordList:
             if not word.visited():
                 self.__unvisitedList.append(word)
 
+    def read(self, filename=None):
+        if filename is None:
+            filename = self.__filename
+        try:
+            fpt = {}
+            f = open(filename, "r", encoding="utf-8-sig")  # qnmd \ufeff 我真的佛了
+            pre_f = f.read()
+            post_f = re.split('\n', pre_f)
+            for i in range(1, len(post_f), 3):
+                fpt[post_f[i - 1].replace("\s", "")] = [post_f[i].replace("\s", "")]
+                numeric_data = post_f[i + 1].split(' ')
+                for j in numeric_data:
+                    fpt[post_f[i - 1].replace("\s", "")].append(j)
+            f.close()
+        except FileNotFoundError:
+            f = open(filename, "w+", encoding="utf-8")
+            fpt = {}
+            f.close()
+        except UnicodeDecodeError:
+            fpt = {}
+            f = open(filename, "r")
+            pre_f = f.read()
+            post_f = re.split('\n', pre_f)
+            for i in range(1, len(post_f), 3):
+                fpt[post_f[i - 1]] = [post_f[i]]
+                numeric_data = post_f[i + 1].split(' ')
+                for j in numeric_data:
+                    fpt[post_f[i - 1]].append(j)
+            f.close()
+        return fpt
+
+    def write(self, filename=None):
+        if filename is None:
+            filename = self.__filename
+        f = open(filename, "w+", encoding="utf-8")
+        for i in self.__wordList:
+            f.write(i.it_self() + "\n")
+            f.write(i.explanation() + "\n")
+            f.write(i.numeric_data() + "\n")
+        f.close()
+
     def __init__(self, filename=None):
         if filename is not None:
             self.__wordList = []
             self.__engList = []
             self.__unvisitedList = []
-            wordstring = read(filename)
+            self.__phraseList = []
+            self.__filename = filename
+            wordstring = self.read(filename)
             for i in wordstring:
                 singleword = Word(i, wordstring[i][0], int(wordstring[i][1]), int(wordstring[i][2]), int(wordstring[i][3]))
                 self.__wordList.append(singleword)
                 self.__engList.append(singleword.it_self())
+                if singleword.is_phrase():
+                    self.__phraseList.append(singleword)
             self.init_visit_status()
         else:
             self.__wordList = []
             self.__engList = []
             self.__unvisitedList = []
+            self.__phraseList = []
 
     def __iter__(self):
         return iter(self.__wordList)
@@ -444,9 +545,13 @@ class WordList:
     def __len__(self):
         return len(self.__wordList)
 
-    def delete(self, wordname):
+    def delete_word(self, wordname):
         self.__engList.remove(wordname.it_self())
         self.__wordList.remove(wordname)
+        if wordname in self.__unvisitedList:
+            self.__unvisitedList.remove(wordname)
+        if wordname in self.__phraseList:
+            self.__phraseList.remove(wordname)
 
     def eng_list(self):
         return self.__engList
@@ -456,7 +561,13 @@ class WordList:
 
     def get_unvisited_list(self):
         return self.__unvisitedList
-    
+
+    def phrase_count(self):
+        return len(self.__phraseList)
+
+    def phrase_list(self):
+        return self.__phraseList
+
     def search(self, en_word):
         for word in self.__wordList:
             if word.it_self() == en_word:
@@ -468,11 +579,15 @@ class WordList:
         self.__wordList.append(newWord)
         self.__unvisitedList.append(newWord)
         self.__engList.append(newWord.it_self())
+        if newWord.is_phrase():
+            self.__phraseList.append(newWord)
 
     def add_Word(self,newWord):
         self.__wordList.append(newWord)
         self.__unvisitedList.append(newWord)
         self.__engList.append(newWord.it_self())
+        if newWord.is_phrase():
+            self.__phraseList.append(newWord)
 
     def visit(self,word):
         self.__unvisitedList.remove(word)
@@ -480,82 +595,6 @@ class WordList:
 
     def sort(self):
         self.__wordList = sorted(self.__wordList, key=lambda x: x.incorrect_rate())
-
-
-def read(filename):
-    try:
-        fpt = {}
-        f = open(filename, "r", encoding="utf-8-sig")#qnmd \ufeff 我真的佛了
-        pre_f = f.read()
-        post_f = re.split('\n', pre_f)
-        for i in range(1, len(post_f), 3):
-            fpt[post_f[i - 1].replace("\s", "")] = [post_f[i].replace("\s", "")]
-            numeric_data = post_f[i+1].split(' ')
-            for j in numeric_data:
-                fpt[post_f[i - 1].replace("\s", "")].append(j)
-        f.close()
-    except FileNotFoundError:
-        f = open(filename, "w+", encoding="utf-8")
-        fpt = {}
-        f.close()
-    except UnicodeDecodeError:
-        fpt = {}
-        f = open(filename, "r")
-        pre_f = f.read()
-        post_f = re.split('\n', pre_f)
-        for i in range(1, len(post_f), 3):
-            fpt[post_f[i - 1]] = [post_f[i]]
-            numeric_data = post_f[i+1].split(' ')
-            for j in numeric_data:
-                fpt[post_f[i - 1]].append(j)
-        f.close()
-    return fpt
-
-
-def read_date(filename):
-    try:
-        f = open(filename, "r", encoding="utf-8-sig")
-        strn = f.read()
-        fpt = {}
-        res = re.split('\n', strn)
-        for i in range(1, len(res), 2):
-            fpt[res[i - 1].replace("\s", "")] = []
-            numeric_data = res[i].split(' ')
-            for j in numeric_data:
-                fpt[res[i-1].replace("\s", "")].append(int(j))
-        f.close()
-    except FileNotFoundError:
-        f = open(filename, "w+", encoding="utf-8")
-        fpt = {}
-        f.close()
-    except UnicodeDecodeError:
-        f = open(filename, "r", encoding="utf-8")
-        strn = f.read()
-        fpt = {}
-        res = re.split('\n', strn)
-        for i in range(1, len(res), 2):
-            fpt[res[i - 1].replace("\s", "")] = []
-            numeric_data = res[i].split(' ')
-            for j in numeric_data:
-                fpt[res[i - 1].replace("\s", "")].append(int(j))
-    return fpt
-
-
-def write_date(filename, datelist):
-    f = open(filename, "w+", encoding="utf-8")
-    for i in datelist:
-        f.write(i.get_date() + "\n")
-        f.write(i.numeric_data() + '\n')
-    f.close()
-
-
-def write(filename, wordlist):
-    f = open(filename, "w+", encoding="utf-8")
-    for i in wordlist:
-        f.write(i.it_self()+"\n")
-        f.write(i.explanation() + "\n")
-        f.write(i.numeric_data() + "\n")
-    f.close()
 
 
 def show_menu():
@@ -595,11 +634,26 @@ def on_progress():
     print("该功能还在开发中！")
 
 
+def test_done(p, datelist, wordlist, correct=False):
+    if correct:
+        p.correct()
+    else:
+        p.incorrect()
+    datelist.today().tested()
+    datelist.write_date()
+    p.show_rate()
+    wordlist.write()
+
+
 def statistics(wordlist, datelist):
-    print("共有", len(wordlist), "个单词收录。")
+    print("共有", len(wordlist), "个单词及词组收录。")
     for i in datelist:
         i.show_info()
-    print("\n今天录入了")
+    print()
+    datelist.searched_most(show=True)
+    datelist.input_most(show=True)
+    datelist.tested_most(show=True)
+    print("\n今天：")
     datelist.today().show_info()
     os.system("pause")
 
@@ -635,11 +689,11 @@ def mistake_collection(wordlist, datelist):
     while len(chx) == 0:
         chx = input().strip().lower()
     if chx == 'y':
-        random_test_hint_always(soup, None, datelist, cur_date, datefile)
+        random_test_hint_always(soup, datelist)
     return soup
 
 
-def random_test(wordlist, filename, datelist, datefile):
+def random_test(wordlist, datelist):
     p = choice(wordlist.get_unvisited_list())
     p.visit()
     p2 = p
@@ -689,11 +743,7 @@ def random_test(wordlist, filename, datelist, datefile):
         if len(wordlist.get_unvisited_list()) == 0:
             if not egg:
                 print("你已经全部都答完啦！重新开始吗？(Y/N)")
-                p.correct()
-                datelist.today().tested()
-                write_date(datefile, datelist)
-                p.show_rate()
-                write(filename, wordlist)
+                test_done(p, datelist, wordlist, True)
                 chx = input().strip().lower()
                 while len(chx) == 0:
                     chx = input().strip().lower()
@@ -712,11 +762,7 @@ def random_test(wordlist, filename, datelist, datefile):
                 NameError: name 'hint' != defined''')
                 time.sleep(2)
                 print("提示:上面的报错是骗你的，输入(Y/N)进入下一题吧！")
-                p.correct()
-                datelist.today().tested()
-                write_date(datefile, datelist)
-                p.show_rate()
-                write(filename, wordlist)
+                test_done(p, datelist, wordlist, True)
                 chx = input().strip().lower()
                 while len(chx) == 0:
                     chx = input().strip().lower()
@@ -726,12 +772,8 @@ def random_test(wordlist, filename, datelist, datefile):
                     open_console()
         else:
             if not egg:
-                p.correct()
-                datelist.today().tested()
-                write_date(datefile, datelist)
-                p.show_rate()
-                write(filename, wordlist)
-                random_test(wordlist, filename, datelist, datefile)
+                test_done(p, datelist, wordlist, True)
+                random_test(wordlist, datelist)
             else:
                 print(r'''Traceback (most recent call last):
   File "C:/PycharmProjects/背单词/背单词.py", line 176, in <module>
@@ -743,26 +785,18 @@ def random_test(wordlist, filename, datelist, datefile):
 NameError: name 'hint' != defined''')
                 time.sleep(2)
                 print("提示：上面的报错是骗你的，输入(Y/N)进入下一题吧！")
-                p.correct()
-                datelist.today().tested()
-                write_date(datefile, datelist)
-                p.show_rate()
-                write(filename, wordlist)
+                test_done(p, datelist, wordlist, True)
                 chs = input().strip().lower()
                 while len(chs) == 0:
                     chs = input().strip().lower()
                 if chs == "Y" or chs == "y":
-                    random_test(wordlist, filename, datelist, datefile)
+                    random_test(wordlist, datelist)
                 else:
                     return False
     else:
         print("正确答案是:", p.it_self())
         print("还敢来吗?(Y/N)")
-        p.incorrect()
-        datelist.today().tested()
-        write_date(datefile, datelist)
-        p.show_rate()
-        write(filename, wordlist)
+        test_done(p, datelist, wordlist, False)
         chs = input().strip().lower()
         while len(chs) == 0:
             chs = input().strip().lower()
@@ -773,12 +807,12 @@ NameError: name 'hint' != defined''')
                 open_console()
         else:
             if chs == "Y" or chs == "y":
-                random_test(wordlist, filename, datelist, datefile)
+                random_test(wordlist, datelist)
             else:
                 return False
 
 
-def random_test_hint_always(wordlist, filename, datelist, datefile):
+def random_test_hint_always(wordlist, datelist):
     p = choice(wordlist.get_unvisited_list())
     wordlist.visit(p)
     p2 = p
@@ -820,12 +854,7 @@ def random_test_hint_always(wordlist, filename, datelist, datefile):
     if ans == p.it_self():
         if len(wordlist.get_unvisited_list()) == 0:
             print("你已经全部都答完啦！重新开始吗？(Y/N)")
-            p.correct()
-            datelist.today().tested()
-            write_date(datefile, datelist)
-            p.show_rate()
-            if filename is not None:
-                write(filename, wordlist)
+            test_done(p, datelist, wordlist, True)
             chx = input().strip().lower()
             while len(chx) == 0:
                 chx = input().strip().lower()
@@ -834,22 +863,12 @@ def random_test_hint_always(wordlist, filename, datelist, datefile):
             else:
                 open_console()
         else:
-            p.correct()
-            datelist.today().tested()
-            write_date(datefile, datelist)
-            p.show_rate()
-            if filename is not None:
-                write(filename, wordlist)
-            random_test_hint_always(wordlist, filename, datelist, datefile)
+            test_done(p, datelist, wordlist, True)
+            random_test_hint_always(wordlist, datelist)
     else:
         print("正确答案是:", p.it_self())
         print("还敢来吗?(Y/N)")
-        p.incorrect()
-        datelist.today().tested()
-        write_date(datefile, datelist)
-        p.show_rate()
-        if filename is not None:
-            write(filename, wordlist)
+        test_done(p, datelist, wordlist, False)
         chs = input().strip().lower()
         while len(chs) == 0:
             chs = input().strip().lower()
@@ -860,7 +879,7 @@ def random_test_hint_always(wordlist, filename, datelist, datefile):
                 open_console()
         else:
             if chs == "Y" or chs == "y":
-                random_test_hint_always(wordlist, filename, datelist, datefile)
+                random_test_hint_always(wordlist, datelist)
             else:
                 return False
 
@@ -897,7 +916,7 @@ def new_word(wordlist, datelist):
     while len(cfm) == 0:
         cfm = input().strip().lower()
     if cfm == "Y" or cfm == "y":
-        wordlist.add_new_word(word,word_cn)
+        wordlist.add_new_word(word, word_cn)
         datelist.today().grow()
         return True
     else:
@@ -988,7 +1007,7 @@ def new_word_auto_chrome(wordlist, datelist):
                         z.extractall(path=get_path())
                         z.close()
                         print("安装完成！")
-                        subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
+                        open_console()
                         sys.exit()
                 except ConnectionError:
                     print("下载失败，无法连接到服务器")
@@ -1168,7 +1187,7 @@ def new_word_auto_requests(wordlist, datelist):
         print("有道词典未找到", word, "！")
 
 
-def replace_youdao(filename, wordlist):
+def replace_youdao(wordlist):
     print("即将替换", len(wordlist), "个单词/词组,如果没有在有道找到相关解释会跳过。是否继续？(y/n)")
     count = 0
     cfm = input().strip().lower()
@@ -1195,13 +1214,13 @@ def replace_youdao(filename, wordlist):
                 count += 1
                 print("有道词典未找到", word.it_self(), "！")
                 continue
-        write(filename, wordlist)
+        wordlist.write()
     else:
         print("已取消操作")
         return False
 
 
-def fuzzy_finder(collection, filename, datelist):
+def fuzzy_finder(collection, datelist):
     suggestions = []
     print("输入您想查找的单词：")
     user_input = input().strip().lower()
@@ -1212,7 +1231,7 @@ def fuzzy_finder(collection, filename, datelist):
         print(result.it_self(), result.explanation())
         datelist.today().searched()
         result.searched()
-        write(filename,collection)
+        collection.write()
         return
     else:
         pattern = '.*'.join(user_input)  # Converts 'djm' to 'd.*j.*m'
@@ -1268,13 +1287,13 @@ def main(argv):
     wordlist = WordList(filename)
     datefilename = get_path()+"\\datefile.txt"
     datelist = Fusion(datefilename)
-    write_date(datefilename, datelist)
+    datelist.write_date()
     b_shown = False
     options, args = getopt.getopt(argv, "-3-4")
     if ('-3', '')in options or '3' in args:
-        random_test(wordlist, filename, datelist, datefilename)
+        random_test(wordlist, datelist)
     elif ('-4', '')in options or '4' in args:
-        random_test_hint_always(wordlist, filename, datelist, datefilename)
+        random_test_hint_always(wordlist, datelist)
     while True:
         show_menu()
         c = input().strip().lower()
@@ -1285,35 +1304,36 @@ def main(argv):
             b_shown = True
         elif c == "2":
             if new_word(wordlist, datelist):
-                write(filename, wordlist)
-                write_date(datefilename, datelist)
+                wordlist.write()
+                datelist.write_date()
                 print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
         elif c == "3":
             if b_shown:
                 open_console(3)
             else:
-                random_test(wordlist, filename, datelist, datefilename)
+                random_test(wordlist, datelist)
         elif c == "4":
             if b_shown:
                 open_console(4)
             else:
-                random_test_hint_always(wordlist, filename, datelist, datefilename)
+                random_test_hint_always(wordlist, datelist)
         elif c == "5":
-            fuzzy_finder(wordlist,filename, datelist)
+            fuzzy_finder(wordlist, datelist)
 
         elif c == "6":
-            write(filename, wordlist)
+            wordlist.write()
+            datelist.write_date()
         elif c == "7":
             mistake_collection(wordlist, datelist)
         elif c == "8":
             if new_word_auto_chrome(wordlist, datelist):
-                write(filename, wordlist)
-                write_date(datefilename, datelist)
+                wordlist.write()
+                datelist.write_date()
                 print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
         elif c == "9":
             if new_word_auto_requests(wordlist, datelist):
-                write(filename, wordlist)
-                write_date(datefilename, datelist)
+                wordlist.write()
+                datelist.write_date()
                 print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
         elif c == "0":
             while True:
@@ -1327,7 +1347,7 @@ def main(argv):
                 elif c == "2":
                     statistics(wordlist, datelist)
                 elif c == "3":
-                    replace_youdao(filename, wordlist)
+                    replace_youdao(wordlist)
                 elif c == "4":
                     display_cur_version()
                 elif c == "5":
