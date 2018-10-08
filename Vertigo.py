@@ -1221,6 +1221,7 @@ def impatient_search(word, wordlist, datelist):
                 print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
             else:
                 print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
+            datelist.today().searched()
             cfm = input().strip().lower()
             while len(cfm) == 0:
                 cfm = input().strip().lower()
@@ -1231,6 +1232,7 @@ def impatient_search(word, wordlist, datelist):
                 datelist.write_date_to_file()
                 return True
             else:
+                datelist.write_date_to_file()
                 return False
         except AttributeError:
             print("有道词典未找到", word, "！")
