@@ -57,7 +57,7 @@ def is_admin():
         return False
 
 
-modules = ['re', 'random','os', 'sys', 'getopt', 'subprocess','contextlib', 'decimal', 'zipfile', 'datetime', 'copy', 'time', 'matplotlib', 'selenium', 'requests' ]
+modules = ['re', 'random', 'os', 'sys', 'getopt', 'subprocess','contextlib', 'decimal', 'zipfile', 'datetime', 'copy', 'time', 'matplotlib', 'selenium', 'requests' ]
 import_progress = ProgressBar("加载模块...", total=len(modules), unit="", chunk_size=1, run_status="正在加载", fin_status="加载完成")
 
 try:
@@ -250,11 +250,13 @@ v1.5.0是这个小程序的latest version，希望大家喜欢！""",
 用自己写的get_path()代替了os.getcwd()，让脚本也可以开机运行时找到路径""",
     "v1.6.8": "用面向对象重构了wordlist, 累死爹了",
     "v1.7.0": "全部面向对象重构版本,beta版",
-    "v1.7.1": "全部面向对象重构版本,RC版"
+    "v1.7.1": "全部面向对象重构版本,RC版",
+    "v1.7.2": "终于有了，所有单词词组的字母排序！",
+    "v1.7.3": "加入直接在菜单搜索的功能"
 }
 known_issue = [
 ]
-version_info = "v1.7.1"
+version_info = "v1.7.3"
 
 class Atom:
 
@@ -296,7 +298,7 @@ class Fusion:
 
     __Reactor = []
 
-    def read_date(self, filename=None):
+    def read_date_from_file(self, filename=None):
         if filename is None:
             filename = self.__filename
         try:
@@ -324,9 +326,13 @@ class Fusion:
                 numeric_data = res[i].split(' ')
                 for j in numeric_data:
                     fpt[res[i - 1].replace("\s", "")].append(int(j))
-        return fpt
+        for i in fpt:
+            a_single_atom = Atom(i, int(fpt[i][0]), int(fpt[i][1]), int(fpt[i][2]))
+            self.__Reactor.append(a_single_atom)
+        if self.today() is None:
+            self.add_atom(date_today)
 
-    def write_date(self, filename=None):
+    def write_date_to_file(self, filename=None):
         if filename is None:
             filename = self.__filename
         f = open(filename, "w+", encoding="utf-8")
@@ -339,12 +345,7 @@ class Fusion:
         if filename is not None:
             self.__Reactor = []
             self.__filename = filename
-            wordstring = self.read_date(filename)
-            for i in wordstring:
-                a_single_atom = Atom(i, int(wordstring[i][0]), int(wordstring[i][1]), int(wordstring[i][2]))
-                self.__Reactor.append(a_single_atom)
-            if self.today() is None:
-                self.add_atom(date_today)
+            self.read_date_from_file(filename)
         else:
             self.__Reactor = []
 
@@ -477,7 +478,7 @@ class WordList:
             if not word.visited():
                 self.__unvisitedList.append(word)
 
-    def read(self, filename=None):
+    def read_wordlist_from_file(self, filename=None):
         if filename is None:
             filename = self.__filename
         try:
@@ -506,9 +507,14 @@ class WordList:
                 for j in numeric_data:
                     fpt[post_f[i - 1]].append(j)
             f.close()
-        return fpt
+        for i in fpt:
+            singleword = Word(i, fpt[i][0], int(fpt[i][1]), int(fpt[i][2]), int(fpt[i][3]))
+            self.__wordList.append(singleword)
+            self.__engList.append(singleword.it_self())
+            if singleword.is_phrase():
+                self.__phraseList.append(singleword)
 
-    def write(self, filename=None):
+    def write_wordlist_to_file(self, filename=None):
         if filename is None:
             filename = self.__filename
         f = open(filename, "w+", encoding="utf-8")
@@ -525,14 +531,9 @@ class WordList:
             self.__unvisitedList = []
             self.__phraseList = []
             self.__filename = filename
-            wordstring = self.read(filename)
-            for i in wordstring:
-                singleword = Word(i, wordstring[i][0], int(wordstring[i][1]), int(wordstring[i][2]), int(wordstring[i][3]))
-                self.__wordList.append(singleword)
-                self.__engList.append(singleword.it_self())
-                if singleword.is_phrase():
-                    self.__phraseList.append(singleword)
+            self.read_wordlist_from_file(filename)
             self.init_visit_status()
+            self.sort_by_alphabet()
         else:
             self.__wordList = []
             self.__engList = []
@@ -582,19 +583,22 @@ class WordList:
         if newWord.is_phrase():
             self.__phraseList.append(newWord)
 
-    def add_Word(self,newWord):
+    def add_Word(self, newWord):
         self.__wordList.append(newWord)
         self.__unvisitedList.append(newWord)
         self.__engList.append(newWord.it_self())
         if newWord.is_phrase():
             self.__phraseList.append(newWord)
 
-    def visit(self,word):
+    def visit(self, word):
         self.__unvisitedList.remove(word)
         word.visit()
 
-    def sort(self):
+    def sort_by_rate(self):
         self.__wordList = sorted(self.__wordList, key=lambda x: x.incorrect_rate())
+
+    def sort_by_alphabet(self):
+        self.__wordList = sorted(self.__wordList, key=lambda x: x.it_self())
 
 
 def show_menu():
@@ -603,10 +607,10 @@ def show_menu():
     else:
         print("背单词", version_info, " 用户模式", date_today)
     print("1:显示所有单词和词组")
-    print("2:录入")
+    print("2:人工录入")
     print("3:随机测试")
     print("4:随机测试hint always版")
-    print("5:本地查找单词")
+    print("5:本地模糊查找单词")
     print("6:手动保存")
     print("7:错题集")
     print("8:自动录入chrome版")
@@ -640,9 +644,9 @@ def test_done(p, datelist, wordlist, correct=False):
     else:
         p.incorrect()
     datelist.today().tested()
-    datelist.write_date()
+    datelist.write_date_to_file()
     p.show_rate()
-    wordlist.write()
+    wordlist.write_wordlist_to_file()
 
 
 def statistics(wordlist, datelist):
@@ -681,7 +685,7 @@ def mistake_collection(wordlist, datelist):
     for i in wordlist:
         if i.incorrect_count() > 0:
             soup.add_Word(i)
-    soup.sort()
+    soup.sort_by_rate()
     for i in soup:
         i.show_rate()
     print("准备好进行错题测试吗？（y/n)")
@@ -699,7 +703,7 @@ def random_test(wordlist, datelist):
     p2 = p
     p3 = p
     egg = False
-    print(p.explanation(), " 对应哪个单词？(输入hint得到提示，输入exit()退出)")
+    print(p.explanation(), " 对应哪个单词？(输入hint得到提示，输入Ctrl+C退出)")
     ans = input().strip().lower()
     while len(ans) == 0:
         ans = input().strip().lower()
@@ -817,7 +821,7 @@ def random_test_hint_always(wordlist, datelist):
     wordlist.visit(p)
     p2 = p
     p3 = p
-    print(p.explanation(), " 对应哪个单词？(输入exit()退出)")
+    print(p.explanation(), " 对应哪个单词？(输入Ctrl+C退出)")
     if len(wordlist.get_unvisited_list()) > 0:
         p2 = choice(wordlist.get_unvisited_list())
     if len(wordlist.get_unvisited_list()) > 1:
@@ -885,7 +889,7 @@ def random_test_hint_always(wordlist, datelist):
 
 
 def new_word(wordlist, datelist):
-    print("输入英文:(输入 'exit()' 取消录入)")
+    print("输入英文:(输入 Ctrl+C 取消录入)")
     word = input().strip().lower()
     while len(word) == 0:
         word = input().strip().lower()
@@ -900,7 +904,7 @@ def new_word(wordlist, datelist):
             print("已取消录入")
             return False
         result = wordlist.search(word)
-    print("输入中文：(输入 'exit()' 取消录入)")
+    print("输入中文：(输入 Ctrl+C 取消录入)")
     word_cn = input().strip().lower()
     while len(word_cn) == 0:
         word_cn = input().strip().lower()
@@ -944,13 +948,14 @@ def new_word_auto_chrome(wordlist, datelist):
         word_cn_complete_youdao = ""
         word_cn_complete_baidu = ""
         word_cn_complete_baidufanyi = ""
-        print("输入英文:(输入 'exit()' 取消录入)")
+        print("输入英文:(输入 Ctrl+C 取消录入)")
         word = input().strip().lower()
         while len(word) == 0:
             word = input().strip().lower()
         result = wordlist.search(word)
         while result is not None:
             print(result.it_self(), result.explanation())
+            datelist.today().searched()
             print(word, "已经存在，请重新输入")
             word = input().strip().lower()
             while len(word) == 0:
@@ -1070,6 +1075,7 @@ def new_word_auto_chrome(wordlist, datelist):
         else:
             print("有道词典未找到匹配结果。")
         if found_at_least_one:
+            datelist.today().searched()
             print("选择要录入的结果序号：(输入0退出)")
             cfm = input().strip().lower()
             while len(cfm) == 0:
@@ -1141,7 +1147,7 @@ def get_one_page(url):
 
 
 def new_word_auto_requests(wordlist, datelist):
-    print("输入英文:(输入 'exit()' 取消录入)")
+    print("输入英文:(输入 Ctrl+C 取消录入)")
     word = input().strip().lower()
     while len(word) == 0:
         word = input().strip().lower()
@@ -1149,6 +1155,7 @@ def new_word_auto_requests(wordlist, datelist):
     while result is not None:
         print(result.it_self(), result.explanation())
         print(word, "已经存在，请重新输入")
+        datelist.today().searched()
         word = input().strip().lower()
         while len(word) == 0:
             word = input().strip().lower()
@@ -1173,6 +1180,7 @@ def new_word_auto_requests(wordlist, datelist):
             print(word, word_cn_complete, "确认把这个单词加入列表吗?(Y/N)")
         else:
             print(word, word_cn_complete, "确认把这个词组加入列表吗?(Y/N)")
+        datelist.today().searched()
         cfm = input().strip().lower()
         while len(cfm) == 0:
             cfm = input().strip().lower()
@@ -1185,6 +1193,47 @@ def new_word_auto_requests(wordlist, datelist):
             return False
     except AttributeError:
         print("有道词典未找到", word, "！")
+
+
+def impatient_search(word, wordlist, datelist):
+    result = wordlist.search(word)
+    if result is not None:
+        print(word, result.explanation())
+        datelist.today().searched()
+        result.searched()
+        wordlist.write_wordlist_to_file()
+        datelist.write_date_to_file()
+        return False
+    else:
+        try:
+            page_src = get_one_page("http://dict.youdao.com/w/eng/"+word+"/#keyfrom=dict2.index")
+        except RequestException:
+            print("连接服务器异常...")
+            return False
+        try:
+            word_cn = ""
+            items = parse_one_page(page_src)
+            for i in items:
+                word_cn += i
+            word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+            word_cnt = word.split(' ')
+            if len(word_cnt) is 1:
+                print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
+            else:
+                print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
+            cfm = input().strip().lower()
+            while len(cfm) == 0:
+                cfm = input().strip().lower()
+            if cfm == "Y" or cfm == "y":
+                wordlist.add_new_word(word, word_cn_complete)
+                datelist.today().grow()
+                wordlist.write_wordlist_to_file()
+                datelist.write_date_to_file()
+                return True
+            else:
+                return False
+        except AttributeError:
+            print("有道词典未找到", word, "！")
 
 
 def replace_youdao(wordlist):
@@ -1214,30 +1263,30 @@ def replace_youdao(wordlist):
                 count += 1
                 print("有道词典未找到", word.it_self(), "！")
                 continue
-        wordlist.write()
+        wordlist.write_wordlist_to_file()
     else:
         print("已取消操作")
         return False
 
 
-def fuzzy_finder(collection, datelist):
+def fuzzy_finder(wordlist, datelist):
     suggestions = []
     print("输入您想查找的单词：")
     user_input = input().strip().lower()
     while len(user_input) == 0:
         user_input = input().strip().lower()
-    result = collection.search(user_input)
+    result = wordlist.search(user_input)
     if result is not None:
         print(result.it_self(), result.explanation())
         datelist.today().searched()
         result.searched()
-        collection.write()
+        wordlist.write_wordlist_to_file()
         return
     else:
         pattern = '.*'.join(user_input)  # Converts 'djm' to 'd.*j.*m'
         while True:
             regex = re.compile(pattern)  # Compiles wordlist regex.
-            for item in collection:
+            for item in wordlist:
                 match = regex.search(item.it_self())  # Checks if the current item matches the regex.
                 if match:
                     suggestions.append(item)
@@ -1287,7 +1336,7 @@ def main(argv):
     wordlist = WordList(filename)
     datefilename = get_path()+"\\datefile.txt"
     datelist = Fusion(datefilename)
-    datelist.write_date()
+    datelist.write_date_to_file()
     b_shown = False
     options, args = getopt.getopt(argv, "-3-4")
     if ('-3', '')in options or '3' in args:
@@ -1295,75 +1344,84 @@ def main(argv):
     elif ('-4', '')in options or '4' in args:
         random_test_hint_always(wordlist, datelist)
     while True:
-        show_menu()
-        c = input().strip().lower()
-        while len(c) == 0:
+        try:
+            show_menu()
             c = input().strip().lower()
-        if c == "1":
-            show_word(wordlist)
-            b_shown = True
-        elif c == "2":
-            if new_word(wordlist, datelist):
-                wordlist.write()
-                datelist.write_date()
-                print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
-        elif c == "3":
-            if b_shown:
-                open_console(3)
-            else:
-                random_test(wordlist, datelist)
-        elif c == "4":
-            if b_shown:
-                open_console(4)
-            else:
-                random_test_hint_always(wordlist, datelist)
-        elif c == "5":
-            fuzzy_finder(wordlist, datelist)
-
-        elif c == "6":
-            wordlist.write()
-            datelist.write_date()
-        elif c == "7":
-            mistake_collection(wordlist, datelist)
-        elif c == "8":
-            if new_word_auto_chrome(wordlist, datelist):
-                wordlist.write()
-                datelist.write_date()
-                print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
-        elif c == "9":
-            if new_word_auto_requests(wordlist, datelist):
-                wordlist.write()
-                datelist.write_date()
-                print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
-        elif c == "0":
-            while True:
-                show_sub_menu()
+            while len(c) == 0:
                 c = input().strip().lower()
-                while len(c) == 0:
-                    c = input().strip().lower()
-                if c == "1":
-                    print_graph(datelist)
-                    on_progress()
-                elif c == "2":
-                    statistics(wordlist, datelist)
-                elif c == "3":
-                    replace_youdao(wordlist)
-                elif c == "4":
-                    display_cur_version()
-                elif c == "5":
-                    get_all_versions()
-                elif c == "6":
-                    show_phrases(wordlist)
-                elif c == "admin":
-                    if is_admin():
-                        print("脚本已经在管理员模式下运行！")
-                    else:
-                        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-                        sys.exit()
-                elif c == "0":
-                    break
+            if c == "1":
+                show_word(wordlist)
+                b_shown = True
+            elif c == "2":
+                if new_word(wordlist, datelist):
+                    wordlist.write_wordlist_to_file()
+                    datelist.write_date_to_file()
+                    print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
+            elif c == "3":
+                if b_shown:
+                    open_console(3)
                 else:
-                    on_progress()
+                    random_test(wordlist, datelist)
+            elif c == "4":
+                if b_shown:
+                    open_console(4)
+                else:
+                    random_test_hint_always(wordlist, datelist)
+            elif c == "5":
+                fuzzy_finder(wordlist, datelist)
+
+            elif c == "6":
+                wordlist.write_wordlist_to_file()
+                datelist.write_date_to_file()
+            elif c == "7":
+                mistake_collection(wordlist, datelist)
+            elif c == "8":
+                if new_word_auto_chrome(wordlist, datelist):
+                    wordlist.write_wordlist_to_file()
+                    datelist.write_date_to_file()
+                    print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
+            elif c == "9":
+                if new_word_auto_requests(wordlist, datelist):
+                    wordlist.write_wordlist_to_file()
+                    datelist.write_date_to_file()
+                    print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
+            elif c == "0":
+                while True:
+                    show_sub_menu()
+                    c = input().strip().lower()
+                    while len(c) == 0:
+                        c = input().strip().lower()
+                    if c == "1":
+                        print_graph(datelist)
+                        on_progress()
+                    elif c == "2":
+                        statistics(wordlist, datelist)
+                    elif c == "3":
+                        replace_youdao(wordlist)
+                    elif c == "4":
+                        display_cur_version()
+                    elif c == "5":
+                        get_all_versions()
+                    elif c == "6":
+                        show_phrases(wordlist)
+                    elif c == "admin":
+                        if is_admin():
+                            print("脚本已经在管理员模式下运行！")
+                        else:
+                            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+                            sys.exit()
+                    elif c == "0":
+                        break
+                    else:
+                        impatient_search(c, wordlist, datelist)
+            else:
+                impatient_search(c, wordlist, datelist)
+        except EOFError:
+            print("无效输入，已经取消操作")
+            continue
+        except KeyboardInterrupt:
+            print("取消操作")
+            continue
 
 
 if __name__ == '__main__':
