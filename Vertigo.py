@@ -193,7 +193,7 @@ chromedriver_lookup = {
     "68": "2.42",
     "69": "2.42",
     "70": "2.42",
-    "71": "70.0.3538.16"
+    "71": "70.0.3538.16",
 }
 minimum_requirement = 29
 maximum_support = 71
@@ -252,15 +252,19 @@ v1.5.0是这个小程序的latest version，希望大家喜欢！""",
     "v1.7.0": "全部面向对象重构版本,beta版",
     "v1.7.1": "全部面向对象重构版本,RC版",
     "v1.7.2": "终于有了，所有单词词组的字母排序！",
-    "v1.7.3": "加入直接在菜单搜索的功能"
+    "v1.7.3": "加入直接在菜单搜索的功能",
+    "v1.7.4": "修复了直接菜单搜索无法处理空格的问题, 修复了几处拼写错误",
+    "v1.7.5": "增加每个单词的录入日期和按日期顺序显示",
+    "v1.7.6": "修复了一些稳定性问题",
 }
 known_issue = [
 ]
-version_info = "v1.7.3"
+version_info = "v1.7.6"
+version_update_date = "2018-10-09"
+
 
 class Atom:
-
-    def __init__(self,date = str(date.today()), testedcount=0, searchcount=0, inputcount=0):
+    def __init__(self, date=str(date.today()), testedcount=0, searchcount=0, inputcount=0):
         self.__date = date
         self.__testedCount = testedcount
         self.__searchCount = searchcount
@@ -401,13 +405,15 @@ class Fusion:
 
 class Word:
 
-    def __init__(self, enword, cnexplanation, testedcount=0, correctcount=0, searchtime=0):
+    def __init__(self, enword, cnexplanation, testedcount=0, correctcount=0, searchtime=0, recordedtime=str(datetime.datetime.now())):
         self.__enWord = enword
         self.__cnExplanation = cnexplanation
         self.__testedCount = testedcount
         self.__correctCount = correctcount
         self.__searchTime = searchtime
         self.__Visited = False
+        self.__recordedTime = recordedtime
+        self.__recordedDate = recordedtime[0:10]
 
     def it_self(self):
         return self.__enWord
@@ -420,6 +426,12 @@ class Word:
 
     def correct_count(self):
         return self.__correctCount
+
+    def recorded_date(self):
+        return self.__recordedDate
+
+    def recorded_time(self):
+        return self.__recordedTime #我是傻比吗？为什么会在这里写searchedTime？？？？
 
     def incorrect_count(self):
         return self.__testedCount-self.__correctCount
@@ -486,11 +498,12 @@ class WordList:
             f = open(filename, "r", encoding="utf-8-sig")  # qnmd \ufeff 我真的佛了
             pre_f = f.read()
             post_f = re.split('\n', pre_f)
-            for i in range(1, len(post_f), 3):
+            for i in range(1, len(post_f), 4):
                 fpt[post_f[i - 1].replace("\s", "")] = [post_f[i].replace("\s", "")]
                 numeric_data = post_f[i + 1].split(' ')
                 for j in numeric_data:
                     fpt[post_f[i - 1].replace("\s", "")].append(j)
+                fpt[post_f[i - 1].replace("\s", "")].append(post_f[i+2].strip())
             f.close()
         except FileNotFoundError:
             f = open(filename, "w+", encoding="utf-8")
@@ -508,7 +521,7 @@ class WordList:
                     fpt[post_f[i - 1]].append(j)
             f.close()
         for i in fpt:
-            singleword = Word(i, fpt[i][0], int(fpt[i][1]), int(fpt[i][2]), int(fpt[i][3]))
+            singleword = Word(i, fpt[i][0], int(fpt[i][1]), int(fpt[i][2]), int(fpt[i][3]), str(fpt[i][4]))
             self.__wordList.append(singleword)
             self.__engList.append(singleword.it_self())
             if singleword.is_phrase():
@@ -518,10 +531,12 @@ class WordList:
         if filename is None:
             filename = self.__filename
         f = open(filename, "w+", encoding="utf-8")
+        self.sort_by_alphabet() # v1.7.6 加入
         for i in self.__wordList:
             f.write(i.it_self() + "\n")
             f.write(i.explanation() + "\n")
             f.write(i.numeric_data() + "\n")
+            f.write(str(i.recorded_time())+'\n')
         f.close()
 
     def __init__(self, filename=None):
@@ -557,7 +572,7 @@ class WordList:
     def eng_list(self):
         return self.__engList
 
-    def comlete_list(self):
+    def complete_list(self):
         return self.__wordList
 
     def get_unvisited_list(self):
@@ -600,6 +615,26 @@ class WordList:
     def sort_by_alphabet(self):
         self.__wordList = sorted(self.__wordList, key=lambda x: x.it_self())
 
+    def sort_by_date(self):
+        self.__wordList = sorted(self.__wordList, key=lambda x: x.recorded_date())
+
+    def sort_by_time(self):
+        self.__wordList = sorted(self.__wordList,key=lambda x: x.recorded_time())
+
+    def get_list_today(self):
+        __wordListToday = []
+        for word in self.__wordList:
+            if word.recorded_date() == date_today:
+                __wordListToday.append(word)
+        return __wordListToday
+
+    def show_everything(self):
+        # def __init__(self, enword, cnexplanation, testedcount=0, correctcount=0, searchtime=0, recordedtime=str(datetime.datetime.now())):
+        for word in self.__wordList:
+            print(word.it_self(), word.explanation())
+            print("录入时间：", word.recorded_time())
+            print("做了:", word.tested_count(), "次", "对了:", word.correct_count(), "次", "搜过", word.searched_count(),"次")
+
 
 def show_menu():
     if is_admin():
@@ -629,6 +664,9 @@ def show_sub_menu():
     print("4:显示当前版本信息")
     print("5:显示所有历史版本信息")
     print("6:显示所有词组")
+    print("7:显示今日录入")
+    print("8:所有单词按录入日期排序")
+    print("9:显示所有单词所有信息")
     if not is_admin():
         print("admin:以管理员模式重新启动")
     print("0:返回主菜单")
@@ -1196,6 +1234,7 @@ def new_word_auto_requests(wordlist, datelist):
 
 
 def impatient_search(word, wordlist, datelist):
+    word = word.strip().lower()#in version v 1.7.4
     result = wordlist.search(word)
     if result is not None:
         print(word, result.explanation())
@@ -1306,9 +1345,17 @@ def fuzzy_finder(wordlist, datelist):
                     return
 
 
-def show_word(wordlist):
-    for i in wordlist:
-        print(i.it_self(), i.explanation())
+def show_word(wordlist, show_date_delimeter=False):
+    if not show_date_delimeter:
+        for i in wordlist:
+            print(i.it_self(), i.explanation())
+    else:
+        date_str = ""
+        for i in wordlist:
+            if date_str != i.recorded_date():
+                date_str = i.recorded_date()
+                print(date_str)
+            print(i.it_self(), i.explanation())
 
 
 def show_phrases(wordlist):
@@ -1406,6 +1453,13 @@ def main(argv):
                         get_all_versions()
                     elif c == "6":
                         show_phrases(wordlist)
+                    elif c == "7":
+                        show_word(wordlist.get_list_today())
+                    elif c == "8":
+                        wordlist.sort_by_date()
+                        show_word(wordlist, True)
+                    elif c == "9":
+                        wordlist.show_everything()
                     elif c == "admin":
                         if is_admin():
                             print("脚本已经在管理员模式下运行！")
