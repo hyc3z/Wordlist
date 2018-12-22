@@ -1,6 +1,5 @@
 ﻿from importlib import import_module
 import ctypes
-import win32gui
 
 def get_path():
     path_file = __file__
@@ -1513,7 +1512,7 @@ def display_cur_version():
     os.system("pause")
 
 
-def main(argv):
+def main():
     if is_admin():
         create_files()
     else:
@@ -1703,7 +1702,7 @@ def random_test_chn(wordlist, datelist, recent=False):
 
 if __name__ == '__main__':
     try:
-        main(sys.argv[1:])
+        main()
     except KeyboardInterrupt:
         print("用户中断执行...")
         exit()
