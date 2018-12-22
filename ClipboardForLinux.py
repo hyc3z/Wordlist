@@ -325,27 +325,27 @@ class WordList:
     #     total_count = len(self.__wordList)
     #     migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
     #                                   fin_status="同步完成")
-        for word in self.__wordList:
-            sql_insert = """INSERT INTO """+table_name+"""(ENGLISH,
-                 CHINESE, TESTED_COUNT, CORRECT_COUNT, SEARCHED_TIMES, RECORDED_TIME, VISITED)
-                 VALUES (""" + word.it_self(mysql_format=True) + "," + word.explanation(mysql_format=True) + "," + \
-                         word.tested_count(mysql_format=True) + "," + word.correct_count(mysql_format=True) + "," + \
-                         word.searched_count(mysql_format=True) + "," + word.recorded_time(mysql_format=True) + "," + \
-                         word.visited(mysql_format=True) + ")"
-            try:
-                cursor.execute(sql_insert)
-                # 提交到数据库执行
-                db.commit()
-                finished_count += 1
-                migrate_progress.refresh(count=1)
-            except:
-                # 如果发生错误则回滚
-                db.rollback()
-                print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
-                print(word)
-        # 关闭数据库连接
-        print(finished_count, "/", total_count, "完成")
-        db.close()
+    #     for word in self.__wordList:
+    #         sql_insert = """INSERT INTO """+table_name+"""(ENGLISH,
+    #              CHINESE, TESTED_COUNT, CORRECT_COUNT, SEARCHED_TIMES, RECORDED_TIME, VISITED)
+    #              VALUES (""" + word.it_self(mysql_format=True) + "," + word.explanation(mysql_format=True) + "," + \
+    #                      word.tested_count(mysql_format=True) + "," + word.correct_count(mysql_format=True) + "," + \
+    #                      word.searched_count(mysql_format=True) + "," + word.recorded_time(mysql_format=True) + "," + \
+    #                      word.visited(mysql_format=True) + ")"
+    #         try:
+    #             cursor.execute(sql_insert)
+    #             # 提交到数据库执行
+    #             db.commit()
+    #             finished_count += 1
+    #             migrate_progress.refresh(count=1)
+    #         except:
+    #             # 如果发生错误则回滚
+    #             db.rollback()
+    #             print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
+    #             print(word)
+    #     # 关闭数据库连接
+    #     print(finished_count, "/", total_count, "完成")
+    #     db.close()
 
     def read_wordlist_from_file(self, filename=None):
         if filename is None:
