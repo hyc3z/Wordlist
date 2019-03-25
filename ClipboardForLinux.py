@@ -554,16 +554,21 @@ def impatient_search(word, wordlist, datelist):
             else:
                 print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
             datelist.today().searched()
-            cfm = input()
-            if cfm == "Y" or cfm == "y":
-                wordlist.add_new_word(word, word_cn_complete)
-                datelist.today().grow()
-                wordlist.write_wordlist_to_file()
-                datelist.write_date_to_file()
-                return True
-            else:
-                datelist.write_date_to_file()
-                return False
+            while True:
+                cfm = input()
+                if cfm == "Y" or cfm == "y":
+                    wordlist.add_new_word(word, word_cn_complete)
+                    datelist.today().grow()
+                    wordlist.write_wordlist_to_file()
+                    datelist.write_date_to_file()
+                    return True
+                elif cfm == "N" or cfm == "n":
+                    print("已取消录入")
+                    datelist.write_date_to_file()
+                    return False
+                else:
+                    print("请输入正确选项！")
+                    continue
         except AttributeError:
             print("有道词典未找到", word, "！")
 

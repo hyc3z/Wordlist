@@ -4,6 +4,8 @@
     <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClipboardForLinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/ClipboardForLinux.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datefile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datefile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordlist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wordlist.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,17 +16,15 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/projectVertigo$Vertigo.coverage" NAME="Vertigo Coverage Results" MODIFIED="1545445646183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/projectVertigo$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1545446865916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1553430704418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vertigo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
+            <state relative-caret-position="13650">
               <caret line="911" column="13" selection-start-line="911" selection-start-column="13" selection-end-line="911" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -32,8 +32,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ClipboardForLinux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="347" column="20" lean-forward="true" selection-start-line="327" selection-start-column="9" selection-end-line="347" selection-end-column="20" />
+            <state relative-caret-position="745">
+              <caret line="565" column="32" selection-start-line="565" selection-start-column="32" selection-end-line="565" selection-end-column="32" />
+              <folding>
+                <element signature="e#1#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wordlist.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -48,6 +60,7 @@
       <list>
         <option value="$PROJECT_DIR$/Clipboard.py" />
         <option value="$PROJECT_DIR$/Vertigo.py" />
+        <option value="$PROJECT_DIR$/wordlist.txt" />
         <option value="$PROJECT_DIR$/ClipboardForLinux.py" />
       </list>
     </option>
@@ -66,18 +79,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="projectVertigo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="projectVertigo" type="462c0819:PsiDirectoryNode" />
+              <item name="iFindWord" type="b2602c69:ProjectViewProjectNode" />
+              <item name="iFindWord" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -168,6 +181,8 @@
       <workItem from="1545445501647" duration="805000" />
       <workItem from="1545446311861" duration="1380000" />
       <workItem from="1545447953985" duration="14000" />
+      <workItem from="1553430585050" duration="591000" />
+      <workItem from="1553481336548" duration="278000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -187,18 +202,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2199000" />
+    <option name="totallyTimeSpent" value="3068000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1920" height="1053" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25773746" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2630458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32938644" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286638" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -234,18 +249,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Vertigo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
+        <state relative-caret-position="13650">
           <caret line="911" column="13" selection-start-line="911" selection-start-column="13" selection-end-line="911" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wordlist.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ClipboardForLinux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="347" column="20" lean-forward="true" selection-start-line="327" selection-start-column="9" selection-end-line="347" selection-end-column="20" />
+        <state relative-caret-position="745">
+          <caret line="565" column="32" selection-start-line="565" selection-start-column="32" selection-end-line="565" selection-end-column="32" />
+          <folding>
+            <element signature="e#1#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
