@@ -574,18 +574,23 @@ def impatient_search(word, wordlist, datelist):
 
 
 def monitor_clipboard(last_data, wordlist, datelist):
+    clip_data = ""
     while True:
         try:
+            last_data = clip_data
             time.sleep(0.2)
-            clip_data = pyperclip.paste()
-            #
+            if len(pyperclip.paste())!=0:
+                clip_data = pyperclip.paste()
+            else:
+                if len(clip_data) == 0:
+                    continue
             if clip_data != last_data:
                 pattern = re.compile("([^a-zA-Z0-9 \'\-]+)", re.S)
                 filtered_word = re.findall(pattern, clip_data)
                 if len(filtered_word) is 0 and len(clip_data) > 1:
                     impatient_search(clip_data, wordlist, datelist)
                 else:
-                    print("跳过无效信息")
+                    print("跳过无效信息:",clip_data,len(clip_data),filtered_word)
                     # print(filtered_word)
                 last_data = clip_data
                 continue
