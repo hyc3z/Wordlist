@@ -1039,7 +1039,9 @@ def impatient_search(word, wordlist, datelist):
             else:
                 print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
             datelist.today().searched()
-            cfm = readInput('', 'N', 10)
+            cfm = input().strip().lower()
+            while len(cfm) == 0:
+                cfm = input().strip().lower()
             if cfm == "Y" or cfm == "y":
                 wordlist.add_new_word(word, word_cn_complete)
                 datelist.today().grow()
@@ -1147,31 +1149,6 @@ def show_phrases(wordlist):
     print("共", count, "个词组")
 
 
-def readInput(caption, default, timeout=4):
-    start_time = time.time()
-    sys.stdout.write('%s(%d秒自动跳过):' % (caption,timeout))
-    sys.stdout.flush()
-    input = ''
-    while True:
-        ini=msvcrt.kbhit()
-        try:
-            if ini:
-                chr = msvcrt.getche()
-                if ord(chr) == 13:  # enter_key
-                    break
-                elif ord(chr) >= 32:
-                    input += chr.decode()
-        except Exception as e:
-            pass
-        if len(input) == 0 and time.time() - start_time > timeout:
-            break
-    print ('')  # needed to move to next line
-    if len(input) > 0:
-        return input+''
-    else:
-        return default
-
-
 def monitor_clipboard(last_data, wordlist, datelist):
     while True:
         try:
@@ -1266,8 +1243,6 @@ def main():
                         statistics(wordlist, datelist)
                     elif c == "3":
                         replace_youdao(wordlist)
-                    elif c == "4":
-                        display_cur_version()
                     elif c == "5":
                         wordlist.save_to_mysqldb()
                     elif c == "6":
