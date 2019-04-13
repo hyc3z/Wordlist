@@ -3,9 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClipboardForLinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/ClipboardForLinux.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datefile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datefile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wordlist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wordlist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClipboardForLinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/ClipboardForLinux.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vertigo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/Vertigo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vertigo.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/clipboard.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/clipboard.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clipboard_launcher.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/clipboard_launcher.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compile.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datefile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/datefile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_pwrd.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFindWord_Linux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/iFindWord_Linux.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/installer.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/versions_log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordlist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/wordlist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wtfareyoudoing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/小测验.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/小测验.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/背单词.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/背单词.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/背单词_admin.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/背单词_admin.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/背单词launcher.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/背单词launcher.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/背单词launcher_admin.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Windows/背单词launcher_admin.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +37,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vertigo.py">
+        <entry file="file://$PROJECT_DIR$/Windows/Vertigo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4305">
               <caret line="288" column="25" selection-start-line="288" selection-start-column="25" selection-end-line="288" selection-end-column="25" />
@@ -30,10 +46,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iFindWord_Linux.py">
+        <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15630">
-              <caret line="1058" column="24" selection-start-line="1058" selection-start-column="24" selection-end-line="1058" selection-end-column="24" />
+            <state relative-caret-position="470">
+              <caret line="1330" lean-forward="true" selection-start-line="1330" selection-end-line="1330" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -42,10 +58,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ClipboardForLinux.py">
+        <entry file="file://$PROJECT_DIR$/Linux/ClipboardForLinux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="529" column="42" selection-start-line="529" selection-start-column="42" selection-end-line="529" selection-end-column="42" />
+            <state relative-caret-position="425">
+              <caret line="678" column="14" lean-forward="true" selection-start-line="678" selection-start-column="14" selection-end-line="678" selection-end-column="14" />
               <folding>
                 <element signature="e#1#10#0" expanded="true" />
               </folding>
@@ -54,15 +70,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/clipboard_launcher.bat">
+        <entry file="file://$PROJECT_DIR$/Windows/clipboard_launcher.bat">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wordlist.txt">
+        <entry file="file://$PROJECT_DIR$/Linux/wordlist.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2340">
-              <caret line="156" column="7" selection-start-line="156" selection-start-column="7" selection-end-line="156" selection-end-column="7" />
+            <state relative-caret-position="2400">
+              <caret line="160" column="7" selection-start-line="160" selection-start-column="7" selection-end-line="160" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -88,14 +104,15 @@
         <option value="$PROJECT_DIR$/iFindWord_Linux.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/ClipboardForLinux.py" />
+        <option value="$PROJECT_DIR$/Linux/ClipboardForLinux.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="66" />
-    <option name="y" value="27" />
-    <option name="width" value="927" />
-    <option name="height" value="1053" />
+    <option name="x" value="483" />
+    <option name="y" value="232" />
+    <option name="width" value="917" />
+    <option name="height" value="789" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -111,6 +128,11 @@
             <path>
               <item name="iFindWord" type="b2602c69:ProjectViewProjectNode" />
               <item name="iFindWord" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="iFindWord" type="b2602c69:ProjectViewProjectNode" />
+              <item name="iFindWord" type="462c0819:PsiDirectoryNode" />
+              <item name="Linux" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -128,6 +150,10 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Windows" />
+      <recent name="$PROJECT_DIR$/Linux" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -158,7 +184,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ClipboardForLinux.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/ClipboardForLinux.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -180,7 +206,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Vertigo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Windows/Vertigo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -202,7 +228,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/iFindWord_Linux.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/iFindWord_Linux.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -245,7 +271,7 @@
       <workItem from="1555117824202" duration="248000" />
       <workItem from="1555119023154" duration="1261000" />
       <workItem from="1555120318795" duration="3345000" />
-      <workItem from="1555123767958" duration="339000" />
+      <workItem from="1555123767958" duration="1402000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -317,11 +343,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555123580092</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="enhanced phonetic support v2.0">
+      <created>1555124151116</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1555124151116</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14271000" />
+    <option name="totallyTimeSpent" value="15334000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="66" y="27" width="1854" height="1053" extended-state="6" />
@@ -364,10 +397,11 @@
     <MESSAGE value="add pronounce phonetic support" />
     <MESSAGE value="enhanced pronounce phonetic support" />
     <MESSAGE value="update README" />
-    <option name="LAST_COMMIT_MESSAGE" value="update README" />
+    <MESSAGE value="enhanced phonetic support v2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="enhanced phonetic support v2.0" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1555124107745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1555130143749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord_Linux.coverage" NAME="iFindWord_Linux Coverage Results" MODIFIED="1555121078848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
@@ -383,37 +417,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vertigo.py">
+    <entry file="file://$PROJECT_DIR$/Windows/Vertigo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4305">
           <caret line="288" column="25" selection-start-line="288" selection-start-column="25" selection-end-line="288" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iFindWord_Linux.py">
+    <entry file="file://$PROJECT_DIR$/Windows/clipboard_launcher.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/wordlist.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15630">
-          <caret line="1058" column="24" selection-start-line="1058" selection-start-column="24" selection-end-line="1058" selection-end-column="24" />
+        <state relative-caret-position="2400">
+          <caret line="160" column="7" selection-start-line="160" selection-start-column="7" selection-end-line="160" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="1330" lean-forward="true" selection-start-line="1330" selection-end-line="1330" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clipboard_launcher.bat">
+    <entry file="file://$PROJECT_DIR$/wtfareyoudoing.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/wordlist.txt">
+    <entry file="file://$PROJECT_DIR$/installer.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_pwrd.dll">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compile.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backup.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
-          <caret line="156" column="7" selection-start-line="156" selection-start-column="7" selection-end-line="156" selection-end-column="7" />
+        <state relative-caret-position="30">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ClipboardForLinux.py">
+    <entry file="file://$PROJECT_DIR$/Linux/ClipboardForLinux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="529" column="42" selection-start-line="529" selection-start-column="42" selection-end-line="529" selection-end-column="42" />
+        <state relative-caret-position="425">
+          <caret line="678" column="14" lean-forward="true" selection-start-line="678" selection-start-column="14" selection-end-line="678" selection-end-column="14" />
           <folding>
             <element signature="e#1#10#0" expanded="true" />
           </folding>
