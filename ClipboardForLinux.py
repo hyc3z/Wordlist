@@ -512,11 +512,24 @@ def parse_one_page(document):
     return items
 
 
+def get_phonetic(document):
+    pattern_US = re.compile('''美\s*?<span class="phonetic">(.*?)</span>''', re.S)
+    pattern_UK = re.compile('''英\s*?<span class="phonetic">(.*?)</span>''', re.S)
+    item_US = re.findall(pattern_US, document)
+    item_UK = re.findall(pattern_UK, document)
+    items = {}
+    items['us'] = item_US[0]
+    items['uk'] = item_UK[0]
+    return items
+
+
 def get_one_page(url):
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36'}
-        response = requests.get(url, headers=headers)
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36'
+        }
+        session = requests.session()
+        response = session.get(url, headers=headers)
         response.encoding = 'utf-8'
         if response.status_code == 200:
             return response.text
@@ -546,6 +559,17 @@ def impatient_search(word, wordlist, datelist):
                 word_cn += i
             word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
             word_cnt = word.split(' ')
+            phonetic_dict = get_phonetic(page_src)
+            if phonetic_dict['uk'] is None and phonetic_dict['us'] is None:
+                print('未找到读音信息')
+            else:
+                if phonetic_dict['uk'] is not None and phonetic_dict['us'] is not None:
+                    print('英:', phonetic_dict['uk'], ' 美:', phonetic_dict['us'])
+                else:
+                    if phonetic_dict['uk'] is not None:
+                        print('英:', phonetic_dict['uk'])
+                    else:
+                        print('美:', phonetic_dict['us'])
             if len(word_cnt) is 1:
                 print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
             else:
@@ -631,7 +655,6 @@ def get_path():
 
 
 def main():
-
     filename = get_path()+"wordlist.txt"
     wordlist = WordList(filename=filename)
     datefilename = get_path()+"datefile.txt"
