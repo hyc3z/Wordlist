@@ -6,6 +6,7 @@ from requests import RequestException
 import time
 from datetime import date
 import datetime
+import string
 date_today = str(date.today())
 
 class ProgressBar(object):
@@ -581,6 +582,7 @@ def monitor_clipboard(last_data, wordlist, datelist):
             time.sleep(0.2)
             if len(pyperclip.paste())!=0:
                 clip_data = pyperclip.paste()
+                clip_data = clip_data.strip(string.punctuation)
             else:
                 if len(clip_data) == 0:
                     continue
