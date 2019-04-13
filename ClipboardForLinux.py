@@ -520,6 +520,16 @@ def get_phonetic(document):
     items = {}
     items['us'] = item_US[0]
     items['uk'] = item_UK[0]
+    if items['uk'] is None and items['us'] is None:
+        print('未找到读音信息')
+    else:
+        if items['uk'] is not None and items['us'] is not None:
+            print('英:', items['uk'], ' 美:', items['us'])
+        else:
+            if items['uk'] is not None:
+                print('英:', items['uk'])
+            else:
+                print('美:', items['us'])
     return items
 
 
@@ -544,6 +554,8 @@ def impatient_search(word, wordlist, datelist):
     word = word.strip().lower()#in version v 1.7.4
     result = wordlist.search(word)
     if result is not None:
+        page_src = get_one_page("http://dict.youdao.com/w/"+word+"/#keyfrom=dict2.index")
+        get_phonetic(page_src)
         print(word, result.explanation(), " 已经录入本地词库")
         datelist.today().searched()
         result.searched()
@@ -559,17 +571,7 @@ def impatient_search(word, wordlist, datelist):
                 word_cn += i
             word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
             word_cnt = word.split(' ')
-            phonetic_dict = get_phonetic(page_src)
-            if phonetic_dict['uk'] is None and phonetic_dict['us'] is None:
-                print('未找到读音信息')
-            else:
-                if phonetic_dict['uk'] is not None and phonetic_dict['us'] is not None:
-                    print('英:', phonetic_dict['uk'], ' 美:', phonetic_dict['us'])
-                else:
-                    if phonetic_dict['uk'] is not None:
-                        print('英:', phonetic_dict['uk'])
-                    else:
-                        print('美:', phonetic_dict['us'])
+            get_phonetic(page_src)
             if len(word_cnt) is 1:
                 print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
             else:
@@ -634,7 +636,8 @@ def monitor_clipboard(last_data, wordlist, datelist):
                     except RequestException:
                         repeat = True
                 else:
-                    print("跳过无效信息:",clip_data,len(clip_data),filtered_word)
+                    # print("跳过无效信息:",clip_data,len(clip_data),filtered_word)
+                    print("跳过无效信息")
                     # print(filtered_word)
                 continue
         except TypeError:
