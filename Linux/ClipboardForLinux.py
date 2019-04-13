@@ -511,7 +511,6 @@ def parse_one_page(document):
     items = re.findall(pattern2, items1.group())
     return items
 
-
 def get_phonetic(document):
     pattern_US = re.compile('''美\s*?<span class="phonetic">(.*?)</span>''', re.S)
     pattern_UK = re.compile('''英\s*?<span class="phonetic">(.*?)</span>''', re.S)
@@ -620,7 +619,7 @@ def monitor_clipboard(last_data, wordlist, datelist):
                     continue
             if clip_data != last_data or repeat:
                 if repeat:
-                    fail_count+=1
+                    fail_count += 1
                     if fail_count == fail_epoch:
                         print('Retrying... ',fail_count)
                         fail_epoch *= 2
@@ -630,7 +629,7 @@ def monitor_clipboard(last_data, wordlist, datelist):
                         fail_epoch=2
                         repeat=False
                         continue
-                pattern = re.compile("([^a-zA-Z0-9 \'\-]+)", re.S)
+                pattern = re.compile("([^a-zA-Z0-9 \-']+)", re.S)
                 filtered_word = re.findall(pattern, clip_data)
                 if len(filtered_word) is 0 and len(clip_data) > 1:
                     try:
