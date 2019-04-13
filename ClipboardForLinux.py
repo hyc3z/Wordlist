@@ -538,11 +538,7 @@ def impatient_search(word, wordlist, datelist):
         datelist.write_date_to_file()
         return False
     else:
-        try:
-            page_src = get_one_page("http://dict.youdao.com/w/"+word+"/#keyfrom=dict2.index")
-        except RequestException:
-            print("连接服务器异常...")
-            return False
+        page_src = get_one_page("http://dict.youdao.com/w/"+word+"/#keyfrom=dict2.index")
         try:
             word_cn = ""
             items = parse_one_page(page_src)
@@ -576,6 +572,10 @@ def impatient_search(word, wordlist, datelist):
 
 def monitor_clipboard(last_data, wordlist, datelist):
     clip_data = ""
+    repeat = False
+    fail_count=0
+    fail_epoch=2
+    fail_limit=64
     while True:
         try:
             last_data = clip_data
@@ -586,15 +586,32 @@ def monitor_clipboard(last_data, wordlist, datelist):
             else:
                 if len(clip_data) == 0:
                     continue
-            if clip_data != last_data:
+            if clip_data != last_data or repeat:
+                if repeat:
+                    fail_count+=1
+                    if fail_count == fail_epoch:
+                        print('Retrying... ',fail_count)
+                        fail_epoch *= 2
+                    if fail_epoch/2 == fail_limit:
+                        print('Reached maximum fail count', fail_limit,', aborted.')
+                        fail_count=0
+                        fail_epoch=2
+                        repeat=False
+                        continue
                 pattern = re.compile("([^a-zA-Z0-9 \'\-]+)", re.S)
                 filtered_word = re.findall(pattern, clip_data)
                 if len(filtered_word) is 0 and len(clip_data) > 1:
-                    impatient_search(clip_data, wordlist, datelist)
+                    try:
+                        impatient_search(clip_data, wordlist, datelist)
+                        repeat = False
+                        fail_count = 0
+                        fail_epoch = 2
+                        pass
+                    except RequestException:
+                        repeat = True
                 else:
                     print("跳过无效信息:",clip_data,len(clip_data),filtered_word)
                     # print(filtered_word)
-                last_data = clip_data
                 continue
         except TypeError:
             continue
