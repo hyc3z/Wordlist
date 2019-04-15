@@ -67,6 +67,7 @@
 <p> Linux 完整版（开发中） 日志</p>
 
     "v0.0.1": "增加Linux支持"
+    "v0.0.2": "增加复习时显示音标功能 修复一些bug"
     
 <p> Clipboard For Linux 日志</p>
     
