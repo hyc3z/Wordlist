@@ -675,7 +675,7 @@ def main():
 
 if __name__ == '__main__':
     try:
-        print('ClipboardForLinux build 20190413')
+        print('ClipboardForLinux build v0.0.3')
         main()
     except KeyboardInterrupt:
         print("用户中断执行...")
