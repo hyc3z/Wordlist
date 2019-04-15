@@ -614,6 +614,7 @@ def monitor_clipboard(last_data, wordlist, datelist):
             if len(pyperclip.paste())!=0:
                 clip_data = pyperclip.paste()
                 clip_data = clip_data.strip(string.punctuation)
+                clip_data = clip_data.replace('-\n', '')
             else:
                 if len(clip_data) == 0:
                     continue
