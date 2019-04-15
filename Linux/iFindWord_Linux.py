@@ -603,7 +603,6 @@ def save_to_orclpdb(wordlist):
 
 def show_menu():
     print("1:显示所有单词和词组")
-    print("2:监控剪贴板")
     print("3:按时间顺序测试")
     print("4:随机测试hint always版")
     print("5:本地模糊查找单词")
@@ -615,11 +614,8 @@ def show_menu():
 
 
 def show_sub_menu():
-    print("1:显示图表")
     print("2:统计数据")
     print("3:把所有单词及词组替换成有道词典版本")
-    print("4:显示当前版本信息")
-    print("5:保存到mysql")
     print("6:显示所有词组")
     print("7:显示今日录入")
     print("8:所有单词按录入日期排序")
@@ -644,16 +640,14 @@ def test_done(p, datelist, wordlist, correct=False ,savefile = True):
 
 
 def statistics(wordlist, datelist):
-    print("共有", len(wordlist), "个单词及词组收录。")
     for i in datelist:
         i.show_info()
-    print()
+    print("共有", len(wordlist), "个单词及词组收录。")
     datelist.searched_most(show=True)
     datelist.input_most(show=True)
     datelist.tested_most(show=True)
     print("\n今天：")
     datelist.today().show_info()
-    os.system("pause")
 
 
 def print_graph(datelist):
@@ -746,15 +740,29 @@ def random_test_hint_always(wordlist, datelist, recent=False, savefile=True):
     if ans == p.it_self() or ans == str(genuine_pos+1):
         if len(wordlist.get_unvisited_list()) == 0:
             print("你已经全部都答完啦！")
+            try:
+                page_src = get_one_page("http://dict.youdao.com/w/" + p.it_self() + "/#keyfrom=dict2.index")
+                get_phonetic(page_src)
+            except:
+                pass
             test_done(p, datelist, wordlist, True, savefile)
             return
         else:
+            try:
+                page_src = get_one_page("http://dict.youdao.com/w/" + p.it_self() + "/#keyfrom=dict2.index")
+                get_phonetic(page_src)
+            except:
+                pass
             test_done(p, datelist, wordlist, True, savefile)
             random_test_hint_always(wordlist, datelist, recent, savefile)
     else:
         print("正确答案是:", p.it_self())
+        try:
+            page_src = get_one_page("http://dict.youdao.com/w/" + p.it_self() + "/#keyfrom=dict2.index")
+            get_phonetic(page_src)
+        except:
+            pass
         test_done(p, datelist, wordlist, False)
-        chs = input().strip().lower()
         random_test_hint_always(wordlist, datelist, recent, savefile)
 
 
@@ -950,8 +958,10 @@ def parse_one_page(document):
 def get_one_page(url):
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36'}
-        response = requests.get(url, headers=headers)
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36'
+        }
+        session = requests.session()
+        response = session.get(url, headers=headers)
         response.encoding = 'utf-8'
         if response.status_code == 200:
             return response.text
@@ -1170,6 +1180,34 @@ def monitor_clipboard(last_data, wordlist, datelist):
         except KeyboardInterrupt:
             exit()
 
+
+def get_phonetic(document):
+    pattern_US = re.compile('''美\s*?<span class="phonetic">(.*?)</span>''', re.S)
+    pattern_UK = re.compile('''英\s*?<span class="phonetic">(.*?)</span>''', re.S)
+    pattern_common = re.compile('''\s*?<span class="phonetic">(.*?)</span>''', re.S)
+    item_US = re.findall(pattern_US, document)
+    item_UK = re.findall(pattern_UK, document)
+    item_common = re.findall(pattern_common, document)
+    items = {}
+    items['us'] = item_US
+    items['uk'] = item_UK
+    items['common'] = item_common
+    if len(items['uk']) == 0 and len(items['us']) == 0:
+        if(len(item_common) == 0):
+            print('未找到读音信息')
+        else:
+            print('音标:', items['common'][0])
+    else:
+        if len(items['uk']) != 0 and len(items['us']) != 0:
+            print('英:', items['uk'][0], ' 美:', items['us'][0])
+        else:
+            if len(items['uk']) != 0:
+                print('英:', items['uk'][0])
+            else:
+                print('美:', items['us'][0])
+    return items
+
+
 def main():
     last_data = None
     filename = get_path()+"wordlist.txt"
@@ -1198,12 +1236,6 @@ def main():
             if c == "1":
                 show_word(wordlist)
                 b_shown = True
-            elif c == "2":
-                if ('-2', '2') in options or '2' in args:
-                    monitor_clipboard(last_data, wordlist, datelist)
-                else:
-                    subprocess.Popen(get_path() + "clipboard_launcher.bat ", creationflags=subprocess.CREATE_NEW_CONSOLE)
-                    exit()
             elif c == "3":
                 if b_shown:
                     random_test_hint_always(wordlist, datelist, recent=True, savefile=True)
@@ -1243,8 +1275,6 @@ def main():
                         statistics(wordlist, datelist)
                     elif c == "3":
                         replace_youdao(wordlist)
-                    elif c == "5":
-                        wordlist.save_to_mysqldb()
                     elif c == "6":
                         show_phrases(wordlist)
                     elif c == "7":
@@ -1274,6 +1304,11 @@ def random_test_chn(wordlist, datelist, recent=False):
     p2 = p
     p3 = p
     print(p.it_self()),
+    try:
+        page_src = get_one_page("http://dict.youdao.com/w/" + p.it_self() + "/#keyfrom=dict2.index")
+        get_phonetic(page_src)
+    except:
+        pass
     print("对应哪个中文？(输入Ctrl+C退出)")
     if len(wordlist.get_unvisited_list()) > 0:
         p2 = choice(wordlist.get_unvisited_list())
@@ -1319,7 +1354,6 @@ def random_test_chn(wordlist, datelist, recent=False):
         print("正确答案是:", p.explanation())
         test_done(p, datelist, wordlist, False)
         random_test_chn(wordlist, datelist, recent)
-
 
 
 if __name__ == '__main__':
