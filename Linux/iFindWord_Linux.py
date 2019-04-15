@@ -693,6 +693,7 @@ def random_test_hint_always(wordlist, datelist, recent=False, savefile=True):
     wordlist.visit(p)
     p2 = p
     p3 = p
+    print('-'*20)
     print(p.explanation()),
     print("对应哪个单词？(输入Ctrl+C退出)")
     if len(wordlist.get_unvisited_list()) > 0:
