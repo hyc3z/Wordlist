@@ -1,4 +1,4 @@
-﻿
+﻿import os
 import re
 import requests
 import pyperclip
@@ -604,12 +604,11 @@ def impatient_search(word, wordlist, datelist):
 def monitor_clipboard(last_data, wordlist, datelist):
     clip_data = ""
     repeat = False
-    fail_count=0
-    fail_epoch=2
-    fail_limit=64
+    fail_limit=3
     while True:
         try:
             last_data = clip_data
+            fail_count = 0
             time.sleep(0.2)
             if len(pyperclip.paste())!=0:
                 clip_data = pyperclip.paste()
@@ -621,14 +620,26 @@ def monitor_clipboard(last_data, wordlist, datelist):
             if clip_data != last_data or repeat:
                 if repeat:
                     fail_count += 1
-                    if fail_count == fail_epoch:
-                        print('Retrying... ',fail_count)
-                        fail_epoch *= 2
-                    if fail_epoch/2 == fail_limit:
+                    os.system('wifi off')
+                    time.sleep(2)
+                    os.system('wifi on')
+                    flag = 0
+                    while(flag<5):
+                        try:
+                            time.sleep(1)
+                            ip = 'www.baidu.com'
+                            backinfo = os.system('ping -c 1 -w 1 %s' % ip)  # 实现pingIP地址的功能，-c1指发送报文一次，-w1指等待1秒
+                            if backinfo:
+                                flag += 1
+                                continue
+                            else:
+                                repeat = False
+                                break
+                        except:
+                            flag += 1
+                            continue
+                    if fail_count == fail_limit:
                         print('Reached maximum fail count', fail_limit,', aborted.')
-                        fail_count=0
-                        fail_epoch=2
-                        repeat=False
                         continue
                 pattern = re.compile("([^a-zA-Z0-9 \-']+)", re.S)
                 filtered_word = re.findall(pattern, clip_data)
@@ -636,15 +647,11 @@ def monitor_clipboard(last_data, wordlist, datelist):
                     try:
                         impatient_search(clip_data, wordlist, datelist)
                         repeat = False
-                        fail_count = 0
-                        fail_epoch = 2
                         pass
                     except RequestException:
                         repeat = True
                 else:
-                    # print("跳过无效信息:",clip_data,len(clip_data),filtered_word)
                     print("跳过无效信息")
-                    # print(filtered_word)
                 continue
         except TypeError:
             continue
