@@ -32,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="1362" column="29" selection-start-line="1362" selection-start-column="29" selection-end-line="1362" selection-end-column="29" />
+            <state relative-caret-position="19230">
+              <caret line="1298" column="48" selection-start-line="1298" selection-start-column="48" selection-end-line="1298" selection-end-column="48" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -56,11 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Linux/ClipboardForLinux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="617" selection-start-line="617" selection-end-line="617" />
-              <folding>
-                <element signature="e#1#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="304">
+              <caret line="550" column="18" selection-start-line="550" selection-start-column="18" selection-end-line="550" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -77,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Linux/wordlist.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26910">
-              <caret line="1806" column="5" selection-start-line="1806" selection-start-column="5" selection-end-line="1806" selection-end-column="5" />
+            <state relative-caret-position="23355">
+              <caret line="1557" column="10" lean-forward="true" selection-start-line="1557" selection-start-column="10" selection-end-line="1557" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -98,6 +95,7 @@
       <find>nota</find>
       <find>notation</find>
       <find>get_one</find>
+      <find>silhouette</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,11 +115,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="569" />
-    <option name="y" value="252" />
-    <option name="width" value="907" />
-    <option name="height" value="796" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="796" />
+    <option name="y" value="259" />
+    <option name="width" value="897" />
+    <option name="height" value="803" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -288,7 +286,8 @@
       <workItem from="1555120318795" duration="3345000" />
       <workItem from="1555123767958" duration="4697000" />
       <workItem from="1555311733264" duration="2615000" />
-      <workItem from="1555315078428" duration="131000" />
+      <workItem from="1555315078428" duration="2999000" />
+      <workItem from="1555503754243" duration="635000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -409,17 +408,38 @@
       <option name="project" value="LOCAL" />
       <updated>1555313745422</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="add multi-line word support">
+      <created>1555315234249</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1555315234250</updated>
+    </task>
+    <task id="LOCAL-00019" summary="add multi-line word support">
+      <created>1555315265720</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1555315265720</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add wifi reset support">
+      <created>1555324138892</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1555324138892</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21375000" />
+    <option name="totallyTimeSpent" value="24878000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="66" y="27" width="1854" height="1053" extended-state="6" />
+    <frame x="796" y="259" width="897" height="803" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10354374" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22261484" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -462,7 +482,9 @@
     <MESSAGE value="add phonetic review support" />
     <MESSAGE value="update readme" />
     <MESSAGE value="add delimeter" />
-    <option name="LAST_COMMIT_MESSAGE" value="add delimeter" />
+    <MESSAGE value="add multi-line word support" />
+    <MESSAGE value="add wifi reset support" />
+    <option name="LAST_COMMIT_MESSAGE" value="add wifi reset support" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1555153271721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -490,6 +512,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19230">
+          <caret line="1298" column="48" selection-start-line="1298" selection-start-column="48" selection-end-line="1298" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -509,31 +541,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Linux/wordlist.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26910">
-          <caret line="1806" column="5" selection-start-line="1806" selection-start-column="5" selection-end-line="1806" selection-end-column="5" />
+        <state relative-caret-position="23355">
+          <caret line="1557" column="10" lean-forward="true" selection-start-line="1557" selection-start-column="10" selection-end-line="1557" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Windows/clipboard_launcher.bat">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
+    <entry file="file:///usr/lib/python3/dist-packages/requests/sessions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="1362" column="29" selection-start-line="1362" selection-start-column="29" selection-end-line="1362" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="213">
+          <caret line="536" column="8" selection-start-line="536" selection-start-column="8" selection-end-line="536" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Linux/ClipboardForLinux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="617" selection-start-line="617" selection-end-line="617" />
-          <folding>
-            <element signature="e#1#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="304">
+          <caret line="550" column="18" selection-start-line="550" selection-start-column="18" selection-end-line="550" selection-end-column="18" />
         </state>
       </provider>
     </entry>

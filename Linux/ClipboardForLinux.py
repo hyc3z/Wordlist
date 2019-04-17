@@ -538,13 +538,23 @@ def get_phonetic(document):
     return items
 
 
-def get_one_page(url):
+def get_one_page(url, max_retry=3):
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36'
         }
         session = requests.session()
-        response = session.get(url, headers=headers)
+        retry_count = 1
+        response = None
+        while retry_count < max_retry+1:
+            try:
+                response = session.get(url, headers=headers, timeout=(3, 3))
+                break
+            except RequestException:
+                print("连接词库超时... 重试中", retry_count)
+                retry_count += 1
+        if response is None:
+            raise RequestException
         response.encoding = 'utf-8'
         if response.status_code == 200:
             return response.text
