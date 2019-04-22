@@ -7,6 +7,9 @@ import time
 from datetime import date
 import datetime
 import string
+import sqlite3
+import sys
+
 date_today = str(date.today())
 
 class ProgressBar(object):
@@ -47,145 +50,6 @@ class ProgressBar(object):
             end_str = '\n'
             self.status = status or self.fin_status
         print(self.__get_info(), end=end_str)
-
-class Atom:
-    def __init__(self, date=str(date.today()), testedcount=0, searchcount=0, inputcount=0):
-        self.__date = date
-        self.__testedCount = testedcount
-        self.__searchCount = searchcount
-        self.__inputCount = inputcount
-
-    def tested_count(self):
-        return self.__testedCount
-
-    def searched_count(self):
-        return self.__searchCount
-
-    def input_count(self):
-        return self.__inputCount
-
-    def get_date(self):
-        return self.__date
-
-    def tested(self):
-        self.__testedCount += 1
-
-    def searched(self):
-        self.__searchCount += 1
-
-    def grow(self):
-        self.__inputCount += 1
-
-    def numeric_data(self):
-        return str(self.__testedCount)+" "+str(self.__searchCount)+" "+str(self.__inputCount)
-
-    def show_info(self):
-        print(self.__date, "录入了", self.__inputCount, "个单词, 搜索了",self.__searchCount,"次, 做了",self.__testedCount,"题")
-
-
-class Fusion:
-
-    __Reactor = []
-
-    def read_date_from_file(self, filename=None):
-        if filename is None:
-            filename = self.__filename
-        try:
-            f = open(filename, "r", encoding="utf-8-sig")
-            strn = f.read()
-            fpt = {}
-            res = re.split('\n', strn)
-            for i in range(1, len(res), 2):
-                fpt[res[i - 1].replace("\s", "")] = []
-                numeric_data = res[i].split(' ')
-                for j in numeric_data:
-                    fpt[res[i - 1].replace("\s", "")].append(int(j))
-            f.close()
-        except FileNotFoundError:
-            f = open(filename, "w+", encoding="utf-8")
-            fpt = {}
-            f.close()
-        except UnicodeDecodeError:
-            f = open(filename, "r", encoding="utf-8")
-            strn = f.read()
-            fpt = {}
-            res = re.split('\n', strn)
-            for i in range(1, len(res), 2):
-                fpt[res[i - 1].replace("\s", "")] = []
-                numeric_data = res[i].split(' ')
-                for j in numeric_data:
-                    fpt[res[i - 1].replace("\s", "")].append(int(j))
-        for i in fpt:
-            a_single_atom = Atom(i, int(fpt[i][0]), int(fpt[i][1]), int(fpt[i][2]))
-            self.__Reactor.append(a_single_atom)
-        if self.today() is None:
-            self.add_atom(date_today)
-
-    def write_date_to_file(self, filename=None):
-        if filename is None:
-            filename = self.__filename
-        f = open(filename, "w+", encoding="utf-8")
-        for i in self.__Reactor:
-            f.write(i.get_date() + "\n")
-            f.write(i.numeric_data() + '\n')
-        f.close()
-
-    def __init__(self, filename=None):
-        if filename is not None:
-            self.__Reactor = []
-            self.__filename = filename
-            self.read_date_from_file(filename)
-        else:
-            self.__Reactor = []
-
-    def __len__(self):
-        return len(self.__Reactor)
-
-    def __iter__(self):
-        return iter(self.__Reactor)
-
-    def today(self):
-        for atom in self.__Reactor:
-            if atom.get_date() == str(date.today()):
-                return atom
-        return None
-
-    def tested_most(self, show=False):
-        if len(self.__Reactor) is not 0:
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.tested_count(), reverse=True)
-            theatom = self.__Reactor[0]
-            if show:
-                print(theatom.get_date(), " 做题最多, 做了", theatom.tested_count(), "题")
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.get_date(), reverse=False)
-            return theatom
-        else:
-            return None
-
-    def searched_most(self, show=False):
-        if len(self.__Reactor) is not 0:
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.searched_count(), reverse=True)
-            theatom = self.__Reactor[0]
-            if show:
-                print(theatom.get_date(), " 搜词最多, 搜了", theatom.searched_count(), "题")
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.get_date(), reverse=False)
-            return theatom
-        else:
-            return None
-
-    def input_most(self, show=False):
-        if len(self.__Reactor) is not 0:
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.input_count(), reverse=True)
-            theatom = self.__Reactor[0]
-            if show:
-                print(theatom.get_date(), " 录入最多, 录了", theatom.input_count(), "题")
-            self.__Reactor = sorted(self.__Reactor, key=lambda atom: atom.get_date(), reverse=False)
-            return theatom
-        else:
-            return None
-
-    def add_atom(self, datestr):
-        new_atom = Atom(datestr)
-        self.__Reactor.append(new_atom)
 
 
 class Word:
@@ -297,56 +161,79 @@ class WordList:
     __phraseList = []
     __recentList = []
 
+    def method(self):
+        return self.__method
+
     def init_visit_status(self):
         self.__unvisitedList = []
         for word in self.__wordList:
             if not word.visited():
                 self.__unvisitedList.append(word)
 
-    # def save_to_mysqldb(self, db_name="dj", table_name = "wordlist"):
-    #     host = input("host:")
-    #     username = input("username:")
-    #     password = getpass.getpass("password:")  # console usage
-    #     # password = input("password:") # ide usage
-    #     db = pymysql.connect(host, username, password)
-    #     cursor = db.cursor()
-    #     cursor.execute("CREATE DATABASE IF NOT EXISTS "+db_name)
-    #     cursor.execute("USE " + db_name)
-    #     cursor.execute("DROP TABLE IF EXISTS WORDLIST")
-    #     sql = """CREATE TABLE WORDLIST (
-    #              ENGLISH  VARCHAR(100) NOT NULL,
-    #              CHINESE  VARCHAR(300) NOT NULL,
-    #              TESTED_COUNT INT,
-    #              CORRECT_COUNT INT,
-    #              SEARCHED_TIMES INT,
-    #              RECORDED_TIME CHAR(30) NOT NULL,
-    #              VISITED BOOLEAN)"""
-    #     cursor.execute(sql)
-    #     finished_count = 0
-    #     total_count = len(self.__wordList)
-    #     migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
-    #                                   fin_status="同步完成")
-    #     for word in self.__wordList:
-    #         sql_insert = """INSERT INTO """+table_name+"""(ENGLISH,
-    #              CHINESE, TESTED_COUNT, CORRECT_COUNT, SEARCHED_TIMES, RECORDED_TIME, VISITED)
-    #              VALUES (""" + word.it_self(mysql_format=True) + "," + word.explanation(mysql_format=True) + "," + \
-    #                      word.tested_count(mysql_format=True) + "," + word.correct_count(mysql_format=True) + "," + \
-    #                      word.searched_count(mysql_format=True) + "," + word.recorded_time(mysql_format=True) + "," + \
-    #                      word.visited(mysql_format=True) + ")"
-    #         try:
-    #             cursor.execute(sql_insert)
-    #             # 提交到数据库执行
-    #             db.commit()
-    #             finished_count += 1
-    #             migrate_progress.refresh(count=1)
-    #         except:
-    #             # 如果发生错误则回滚
-    #             db.rollback()
-    #             print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
-    #             print(word)
-    #     # 关闭数据库连接
-    #     print(finished_count, "/", total_count, "完成")
-    #     db.close()
+    def create_sqlite(self, db_name, table_name="wordlist"):
+        db = sqlite3.connect(db_name)
+        cursor = db.cursor()
+        sql = """CREATE TABLE IF NOT EXISTS """+ table_name +""" (
+                         ENGLISH  VARCHAR(100) NOT NULL,
+                         CHINESE  VARCHAR(300) NOT NULL,
+                         TESTED_COUNT INT,
+                         CORRECT_COUNT INT,
+                         SEARCHED_TIMES INT,
+                         RECORDED_TIME CHAR(30) NOT NULL,
+                         VISITED BOOLEAN)"""
+        cursor.execute(sql)
+        self.save_to_sqlite(wordlist=self.__wordList, db_name=db_name)
+        db.close()
+
+
+    def read_from_sqlite(self, db_name, table_name="wordlist"):
+        db = sqlite3.connect(db_name)
+        cursor = db.cursor()
+        finished_count = 0
+        sql_read = """SELECT t.* FROM """ + table_name + " t"
+        q = cursor.execute(sql_read)
+        query = q.fetchall()
+        total_count = len(query)
+        migrate_progress = ProgressBar("从数据库读取数据...", total=total_count, unit="", chunk_size=1, run_status="正在同步",fin_status="同步完成")
+        for i in query:
+            self.add_Word(Word(enword=i[0],cnexplanation=i[1],testedcount=i[2],correctcount=i[3],searchtime=i[4],recordedtime=i[5]))
+            finished_count += 1
+            migrate_progress.refresh(count=1)
+        # 关闭数据库连接
+        db.close()
+
+    def save_to_sqlite(self, wordlist, db_name, table_name="wordlist"):
+        # password = input("password:") # ide usage
+        if db_name is None:
+            db = sqlite3.connect(self.db_name)
+        else:
+            db = sqlite3.connect(db_name)
+        cursor = db.cursor()
+        finished_count = 0
+        total_count = len(wordlist)
+        migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
+                                      fin_status="同步完成")
+        for word in wordlist:
+            sql_insert = """INSERT INTO """+table_name+"""(ENGLISH,
+                 CHINESE, TESTED_COUNT, CORRECT_COUNT, SEARCHED_TIMES, RECORDED_TIME, VISITED)
+                 VALUES (""" + word.it_self(mysql_format=True) + "," + word.explanation(mysql_format=True) + "," + \
+                         word.tested_count(mysql_format=True) + "," + word.correct_count(mysql_format=True) + "," + \
+                         word.searched_count(mysql_format=True) + "," + word.recorded_time(mysql_format=True) + "," + \
+                         word.visited(mysql_format=True) + ")"
+            try:
+                cursor.execute(sql_insert)
+                # 提交到数据库执行
+                db.commit()
+                finished_count += 1
+                migrate_progress.refresh(count=1)
+            except:
+                # 如果发生错误则回滚
+                db.rollback()
+                print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
+                print(word)
+        # 关闭数据库连接
+        print(finished_count, "/", total_count, "完成")
+        db.close()
 
     def read_wordlist_from_file(self, filename=None):
         if filename is None:
@@ -378,12 +265,10 @@ class WordList:
                 for j in numeric_data:
                     fpt[post_f[i - 1]].append(j)
             f.close()
+
         for i in fpt:
             singleword = Word(i, fpt[i][0], int(fpt[i][1]), int(fpt[i][2]), int(fpt[i][3]), str(fpt[i][4]))
-            self.__wordList.append(singleword)
-            self.__engList.append(singleword.it_self())
-            if singleword.is_phrase():
-                self.__phraseList.append(singleword)
+            self.add_Word(singleword)
 
     def write_wordlist_to_file(self, filename=None):
         if filename is None:
@@ -397,7 +282,7 @@ class WordList:
             f.write(str(i.recorded_time())+'\n')
         f.close()
 
-    def __init__(self, source="file", filename=None, mysql_dbname = None):
+    def __init__(self, source="file", filename=None, sqlite_dbname = None):
             if source == "file":
                 if filename is not None:
                     self.__wordList = []
@@ -408,11 +293,15 @@ class WordList:
                     self.read_wordlist_from_file(filename)
                     self.init_visit_status()
                     self.sort_by_alphabet()
+                    self.__method = "file"
                 else:
                     self.__wordList = []
                     self.__engList = []
                     self.__unvisitedList = []
                     self.__phraseList = []
+                    self.read_from_sqlite(db_name=sqlite_dbname)
+                    self.db_name=sqlite_dbname
+                    self.__method = "db"
 
 
     def __iter__(self):
@@ -446,19 +335,46 @@ class WordList:
     def phrase_list(self):
         return self.__phraseList
 
+    def update_db(self, method, word):
+        db = sqlite3.connect(self.db_name)
+        cursor = db.cursor()
+        finished_count = 0
+        total_count=1
+        migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
+                                      fin_status="同步完成")
+        if method == "searched":
+            sql = """UPDATE "wordlist" SET "SEARCHED_TIMES" = "SEARCHED_TIMES"+1 WHERE "ENGLISH" = '"""+word.it_self()+"'"
+        try:
+            cursor.execute(sql)
+            # 提交到数据库执行
+            db.commit()
+            finished_count += 1
+            migrate_progress.refresh(count=1)
+        except:
+            # 如果发生错误则回滚
+            db.rollback()
+            print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
+            print(word)
+        # 关闭数据库连接
+        print(finished_count, "/", total_count, "完成")
+        db.close()
+        return "python?"
+
     def search(self, en_word):
         for word in self.__wordList:
             if word.it_self() == en_word:
                 return word
         return None
 
-    def add_new_word(self, en_word, cn_word):
+    def add_new_word(self, en_word, cn_word, save_to_sqlite=True, table_name='wordlist'):
         newWord = Word(en_word, cn_word, recordedtime=str(datetime.datetime.now()))
         self.__wordList.append(newWord)
         self.__unvisitedList.append(newWord)
         self.__engList.append(newWord.it_self())
         if newWord.is_phrase():
             self.__phraseList.append(newWord)
+        if save_to_sqlite:
+            self.save_to_sqlite(wordlist=[newWord], db_name=self.db_name)
         print(newWord.it_self(), newWord.explanation())
         print("录入时间：", newWord.recorded_time())
 
@@ -508,7 +424,10 @@ def parse_one_page(document):
     pattern = re.compile('''<div class="trans-container">\s*?<ul>\s*(.*?)\s*?</ul>''', re.S)
     items1 = re.search(pattern, document)
     pattern2 = re.compile("<li>(.*?)</li>", re.S)
-    items = re.findall(pattern2, items1.group())
+    if items1 is not None:
+        items = re.findall(pattern2, items1.group())
+    else:
+        items = None
     return items
 
 def get_phonetic(document):
@@ -565,53 +484,54 @@ def get_one_page(url, max_retry=3):
         raise RequestException
 
 
-def impatient_search(word, wordlist, datelist):
+def impatient_search(word, wordlist):
+    method = wordlist.method()
     word = word.strip().lower()#in version v 1.7.4
     result = wordlist.search(word)
     if result is not None:
         page_src = get_one_page("http://dict.youdao.com/w/"+word+"/#keyfrom=dict2.index")
         get_phonetic(page_src)
         print(word, result.explanation(), " 已经录入本地词库")
-        datelist.today().searched()
         result.searched()
-        wordlist.write_wordlist_to_file()
-        datelist.write_date_to_file()
+        if method == "db":
+            wordlist.update_db(method="searched", word=result)
+        else:
+            wordlist.write_wordlist_to_file()
         return False
     else:
         page_src = get_one_page("http://dict.youdao.com/w/"+word+"/#keyfrom=dict2.index")
-        try:
-            word_cn = ""
-            items = parse_one_page(page_src)
-            for i in items:
-                word_cn += i
-            word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
-            word_cnt = word.split(' ')
-            get_phonetic(page_src)
-            if len(word_cnt) is 1:
-                print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
-            else:
-                print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
-            datelist.today().searched()
-            while True:
-                cfm = input()
-                if cfm == "Y" or cfm == "y":
-                    wordlist.add_new_word(word, word_cn_complete)
-                    datelist.today().grow()
-                    wordlist.write_wordlist_to_file()
-                    datelist.write_date_to_file()
-                    return True
-                elif cfm == "N" or cfm == "n":
-                    print("已取消录入")
-                    datelist.write_date_to_file()
-                    return False
+        word_cn = ""
+        items = parse_one_page(page_src)
+        if items is None:
+            print("有道词典未找到", word)
+            return
+        for i in items:
+            word_cn += i
+        word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
+        word_cnt = word.split(' ')
+        get_phonetic(page_src)
+        if len(word_cnt) is 1:
+            print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
+        else:
+            print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
+        while True:
+            cfm = input()
+            if cfm == "Y" or cfm == "y":
+                wordlist.add_new_word(word, word_cn_complete, save_to_sqlite=(method == "db"))
+                if method == "db":
+                    wordlist.update_db(method="searched", word=result)
                 else:
-                    print("请输入正确选项！")
-                    continue
-        except AttributeError:
-            print("有道词典未找到", word, "！")
+                    wordlist.write_wordlist_to_file()
+                return True
+            elif cfm == "N" or cfm == "n":
+                print("已取消录入")
+                return False
+            else:
+                print("请输入正确选项！")
+                continue
 
 
-def monitor_clipboard(last_data, wordlist, datelist):
+def monitor_clipboard(last_data, wordlist):
     clip_data = ""
     repeat = False
     fail_limit=3
@@ -655,7 +575,7 @@ def monitor_clipboard(last_data, wordlist, datelist):
                 filtered_word = re.findall(pattern, clip_data)
                 if len(filtered_word) is 0 and len(clip_data) > 1:
                     try:
-                        impatient_search(clip_data, wordlist, datelist)
+                        impatient_search(clip_data, wordlist)
                         repeat = False
                         pass
                     except RequestException:
@@ -669,25 +589,10 @@ def monitor_clipboard(last_data, wordlist, datelist):
             exit()
 
 
-def get_path():
-    path_file = __file__
-    folder_path = re.search("(.*)/", path_file)
-    if folder_path is None:#
-        folder_path = re.search(r"(.*)\\", path_file)#为什么要这么写呢，因为ctmd在cmd里的路径是用的反斜杠，在ide里用的是正斜杠
-    try:
-        return folder_path.group()
-    except:
-        return ""
-
-
 def main():
-    filename = get_path()+"wordlist.txt"
-    wordlist = WordList(filename=filename)
-    datefilename = get_path()+"datefile.txt"
-    datelist = Fusion(datefilename)
-    datelist.write_date_to_file()
+    wordlist = WordList(sqlite_dbname=os.path.join(sys.path[0], 'wordlist.db'))
     last_data = None
-    monitor_clipboard(last_data, wordlist, datelist)
+    monitor_clipboard(last_data, wordlist)
 
 
 if __name__ == '__main__':
