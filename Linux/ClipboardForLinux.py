@@ -535,7 +535,7 @@ def monitor_clipboard(last_data, wordlist):
         try:
             last_data = clip_data
             fail_count = 0
-            time.sleep(0.2)
+            time.sleep(0.5)
             if len(pyperclip.paste())!=0:
                 clip_data = pyperclip.paste()
                 clip_data = clip_data.strip(string.punctuation)
