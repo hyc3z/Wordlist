@@ -518,10 +518,6 @@ def impatient_search(word, wordlist):
             cfm = input()
             if cfm == "Y" or cfm == "y":
                 wordlist.add_new_word(word, word_cn_complete, save_to_sqlite=(method == "db"))
-                if method == "db":
-                    wordlist.update_db(method="searched", word=result)
-                else:
-                    wordlist.write_wordlist_to_file()
                 return True
             elif cfm == "N" or cfm == "n":
                 print("已取消录入")
