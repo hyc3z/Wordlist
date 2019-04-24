@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
+    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="change sleep to 0.5">
+      <change afterPath="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linux/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linux/_word.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linux/_wordlist.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linux/clipboard_version.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linux/ifind_parse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linux/progressbar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/ClipboardForLinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/ClipboardForLinux.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Linux/ClipboardForLinux.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Linux/iFindWord_Linux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/iFindWord_linux.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Linux/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/wordlist.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,7 +37,23 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileEditorManager">
@@ -36,17 +61,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Windows/Vertigo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11925">
+            <state relative-caret-position="422">
               <caret line="796" column="4" selection-start-line="796" selection-start-column="4" selection-end-line="796" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Linux/ClipboardForLinux.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Linux/Clipboard_manylinux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="537" column="24" selection-start-line="537" selection-start-column="24" selection-end-line="537" selection-end-column="24" />
+            <state relative-caret-position="15">
+              <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -55,18 +80,100 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
+        <entry file="file://$PROJECT_DIR$/Linux/ifind_parse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20235">
-              <caret line="1365" selection-start-line="1365" selection-end-line="1365" />
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Linux/_wordlist.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="262" column="76" selection-start-line="262" selection-start-column="76" selection-end-line="262" selection-end-column="76" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://38b2a42b-d2dc-4354-9fd3-276ba1cac088/schema/main/table/wordlist">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true">
+                <filter text="" />
+              </filtering>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Linux/progressbar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Linux/_word.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Linux/iFindWord_linux.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="633" lean-forward="true" selection-start-line="633" selection-end-line="633" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#2746#3527#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Linux/clipboard_version.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Linux/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -78,6 +185,8 @@
       <find>get_one</find>
       <find>silhouette</find>
       <find>&quot;wordlist.db&quot;</find>
+      <find>datelist</find>
+      <find>write</find>
     </findStrings>
     <replaceStrings>
       <replace>self.db_name</replace>
@@ -95,16 +204,27 @@
         <option value="$PROJECT_DIR$/iFindWord_Linux.py" />
         <option value="$PROJECT_DIR$/ClipboardForLinux.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/Linux/iFindWord_Linux.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/Windows/Vertigo.py" />
+        <option value="$PROJECT_DIR$/Linux/datefile.txt" />
+        <option value="$PROJECT_DIR$/Linux/Progressbar.py" />
+        <option value="$PROJECT_DIR$/Linux/Word.py" />
+        <option value="$PROJECT_DIR$/Linux/__init__.py" />
+        <option value="$PROJECT_DIR$/Linux/parse.py" />
         <option value="$PROJECT_DIR$/Linux/ClipboardForLinux.py" />
+        <option value="$PROJECT_DIR$/Linux/Wordlist.py" />
+        <option value="$PROJECT_DIR$/Linux/iFindWord_Linux.py" />
+        <option value="$PROJECT_DIR$/Linux/clipboard_version.py" />
+        <option value="$PROJECT_DIR$/Linux/ifind_parse.py" />
+        <option value="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" />
+        <option value="$PROJECT_DIR$/Linux/_wordlist.py" />
+        <option value="$PROJECT_DIR$/Linux/iFindWord_linux.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="756" />
-    <option name="y" value="186" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="392" />
+    <option name="y" value="197" />
     <option name="width" value="887" />
     <option name="height" value="810" />
   </component>
@@ -172,7 +292,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Clipboard">
+  <component name="RunManager" selected="Python.iFindWord_Linux">
     <configuration name="Clipboard" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -186,7 +306,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/ClipboardForLinux.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -217,6 +337,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Wordlist" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Vertigo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Linux" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/_wordlist.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="iFindWord_Linux" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -230,7 +372,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/iFindWord_Linux.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/iFindWord_linux.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -241,8 +383,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Clipboard" />
         <item itemvalue="Python.iFindWord_Linux" />
+        <item itemvalue="Python.Clipboard" />
+        <item itemvalue="Python.Wordlist" />
         <item itemvalue="Python.Vertigo" />
       </list>
     </recent_temporary>
@@ -281,7 +424,8 @@
       <workItem from="1555917041027" duration="2108000" />
       <workItem from="1555919181670" duration="5863000" />
       <workItem from="1555930411033" duration="1328000" />
-      <workItem from="1555935565047" duration="16000" />
+      <workItem from="1555935565047" duration="651000" />
+      <workItem from="1556102446398" duration="4408000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -451,11 +595,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555930522657</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="change sleep to 0.5">
+      <created>1555935610784</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1555935610784</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34940000" />
+    <option name="totallyTimeSpent" value="39983000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,15 +618,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="756" y="186" width="887" height="810" extended-state="0" />
+    <frame x="70" y="27" width="1850" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2634088" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12597114" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.45022288" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.44978166" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -491,8 +642,32 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.33253872" />
+      <window_info anchor="right" id="Database" order="4" weight="0.15482797" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12597114" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.44978166" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32969433" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32969433" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.23908296" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.15482797" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -519,11 +694,13 @@
     <MESSAGE value="add timeout support" />
     <MESSAGE value="sqlite database support" />
     <MESSAGE value="Fix Nonetype Error" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Nonetype Error" />
+    <MESSAGE value="change sleep to 0.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="change sleep to 0.5" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1555930460146" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/iFindWord$iFindWord_Linux.coverage" NAME="iFindWord_Linux Coverage Results" MODIFIED="1555312788690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1556104648319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$iFindWord_Linux.coverage" NAME="iFindWord_Linux Coverage Results" MODIFIED="1556106717088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$Wordlist.coverage" NAME="Wordlist Coverage Results" MODIFIED="1556102609415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linux" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file:///usr/lib64/python3.7/datetime.py" />
@@ -591,6 +768,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/wordlist.txt" />
+    <entry file="das://fbad28aa-ade0-4fe4-a044-1efc837befb7/schema/main/table/wordlist" />
+    <entry file="file://$PROJECT_DIR$/Windows/datefile.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/datefile.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="das://2a68d375-c6ad-4570-b6b3-2058efbcdd4f/schema/main/table/WORDLIST">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -600,34 +785,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Linux/wordlist.txt" />
-    <entry file="das://fbad28aa-ade0-4fe4-a044-1efc837befb7/schema/main/table/wordlist" />
-    <entry file="file://$PROJECT_DIR$/Windows/datefile.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Windows/Vertigo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11925">
+        <state relative-caret-position="422">
           <caret line="796" column="4" selection-start-line="796" selection-start-column="4" selection-end-line="796" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Linux/iFindWord_Linux.py">
+    <entry file="file://$PROJECT_DIR$/Linux/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20235">
-          <caret line="1365" selection-start-line="1365" selection-end-line="1365" />
+        <state relative-caret-position="30">
+          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Linux/ClipboardForLinux.py">
+    <entry file="file://$PROJECT_DIR$/Linux/Clipboard_manylinux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="537" column="24" selection-start-line="537" selection-start-column="24" selection-end-line="537" selection-end-column="24" />
+        <state relative-caret-position="15">
+          <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/ifind_parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/clipboard_version.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://38b2a42b-d2dc-4354-9fd3-276ba1cac088/schema/main/table/wordlist">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/progressbar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/_word.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/_wordlist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="262" column="76" selection-start-line="262" selection-start-column="76" selection-end-line="262" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Linux/iFindWord_linux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="633" lean-forward="true" selection-start-line="633" selection-end-line="633" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#2746#3527#0" />
           </folding>
         </state>
       </provider>
