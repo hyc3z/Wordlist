@@ -1,12 +1,48 @@
 ﻿# iFindWord
 背单词py软件
 
-<p>1、安装python3.6
-从python.org下载最新的python，并配置好环境变量(安装时点add python3.6 to PATH)</p>
+1、安装python3，并配置好环境变量
 
-<p>2、运行<b>背单词launcher.bat</b>(初次运行可能需要安装文件，建议<b>背单词launcher_admin.bat</b>)</p>
+2、安装需求
 
-<p> 基于Windows平台开发，Linux用户可使用精简版ClipboardForLinux.</p>
+<i>`windows`</i>
+`pip3 install pyperclip sqlite3`
+
+<i>`linux`</i>
+`$ sudo pip3 install pyperclip sqlite3`
+
+
+3、运行软件：
+
+剪贴板Clipboard：
+    
+windows
+
+    运行 clipboard.bat
+    
+linux
+
+    $ python3 Clipboard_manylinux.py
+    
+剪贴板的作用：在看文档时，遇到不会的单词，选中他，按下Ctrl+C（复制），剪贴板中会自动出现中文解释和英美音标。
+目前由于未找到合适本地词库，采用了爬取在线词库方式获取信息。
+
+---
+    
+背单词iFindWord：
+    
+windows
+
+    运行 背单词.bat
+    
+linux
+
+    $ python3 iFindWord_linux.py
+    
+根据菜单选择相应功能。
+
+
+
 
 <p> 初步加入Linux完整版支持
 

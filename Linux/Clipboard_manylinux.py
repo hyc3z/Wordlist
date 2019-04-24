@@ -1,13 +1,10 @@
 ﻿import os
 import re
-import requests
 import pyperclip
 from requests import RequestException
 import time
 from datetime import date
-import datetime
 import string
-import sqlite3
 import sys
 from _wordlist import WordList
 from ifind_parse import get_one_page,parse_one_page,get_phonetic,impatient_search

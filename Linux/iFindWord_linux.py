@@ -1,96 +1,15 @@
-﻿import ctypes
-import re
-import pandas
-import smtplib
+﻿import re
 import random
 import os
-import getpass
 import sys
 import getopt
-import subprocess
-import contextlib
-import decimal
-import zipfile
-import datetime
-import copy
-import time
-import pyperclip
-try:
-    import matplotlib.pyplot as plt
-except:
-    pass
-import selenium
-import requests
-import pymysql
 from random import choice
-from requests.exceptions import RequestException
 from datetime import date
-from copy import deepcopy
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from contextlib import closing
-from selenium.common.exceptions import WebDriverException
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoSuchWindowException
-from selenium.common.exceptions import TimeoutException
-from decimal import Decimal
-from requests.exceptions import ConnectionError
-from _word import Word
 from _wordlist import WordList
-from progressbar import ProgressBar
 from ifind_parse import get_one_page,parse_one_page,get_phonetic,impatient_search
 from clipboard_version import get_version
 
 date_today = str(date.today())
-chromedriver_lookup = {
-    "29": "2.4",
-    "30": "2.7",
-    "31": "2.9",
-    "32": "2.9",
-    "33": "2.10",
-    "34": "2.10",
-    "35": "2.10",
-    "36": "2.12",
-    "37": "2.12",
-    "38": "2.13",
-    "39": "2.14",
-    "40": "2.15",
-    "41": "2.15",
-    "42": "2.17",
-    "43": "2.20",
-    "44": "2.20",
-    "45": "2.20",
-    "46": "2.21",
-    "47": "2.21",
-    "48": "2.21",
-    "49": "2.22",
-    "50": "2.22",
-    "51": "2.23",
-    "52": "2.24",
-    "53": "2.26",
-    "54": "2.27",
-    "55": "2.28",
-    "56": "2.29",
-    "57": "2.29",
-    "58": "2.31",
-    "59": "2.32",
-    "60": "2.33",
-    "61": "2.34",
-    "62": "2.35",
-    "63": "2.36",
-    "64": "2.37",
-    "65": "2.38",
-    "66": "2.40",
-    "67": "2.41",
-    "68": "2.42",
-    "69": "2.42",
-    "70": "2.42",
-    "71": "70.0.3538.16",
-}
-minimum_requirement = 29
-maximum_support = 71
 known_issue = [
     "无",
 ]
@@ -105,7 +24,6 @@ def show_menu():
     print("5:本地模糊查找单词")
     print("6:按时间顺序显示")
     print("7:错题集")
-    print("8:自动录入chrome版")
     print("9:随机测试英译中")
     print("0:其他功能")
 
@@ -234,181 +152,6 @@ def random_test_hint_always(wordlist, recent=False, savefile=True):
         random_test_hint_always(wordlist, recent, savefile)
 
 
-def new_word_auto_chrome(wordlist):
-    try:
-        word_cn = ""
-        word_cn_complete_youdao = ""
-        word_cn_complete_baidu = ""
-        word_cn_complete_baidufanyi = ""
-        print("输入英文:(输入 Ctrl+C 取消录入)")
-        word = input().strip().lower()
-        while len(word) == 0:
-            word = input().strip().lower()
-        result = wordlist.search(word)
-        while result is not None:
-            print(result.it_self(), result.explanation())
-            print(word, "已经存在，请重新输入")
-            word = input().strip().lower()
-            while len(word) == 0:
-                word = input().strip().lower()
-            if word == "exit()":
-                print("已取消录入")
-                return False
-            result = wordlist.search(word)
-        try:
-            browser0 = webdriver.Chrome()
-        except WebDriverException:
-            print("Chrome无法正常打开，可能是未安装chromedriver，是否下载安装？(y/n)")
-            chk = input().strip().lower()
-            while len(chk) == 0:
-                chk = input().strip().lower()
-            if chk == 'y':
-                print('请打开chrome浏览器，右上角，下拉菜单选择"帮助"，"关于Google Chrome"，复制版本数字并粘贴在此处')
-                chromemirror_url = r"http://npm.taobao.org/mirrors/chromedriver/"
-                chromedriver_name = r"/chromedriver_win32.zip"
-                while True:
-                    ver_str = input().strip()
-                    if len(ver_str) < 2:
-                        print("请输入正确的版本号！")
-                    else:
-                        try:
-                            ver_num = int(ver_str[0:2])
-                            break
-                        except ValueError:
-                            print("请输入正确的版本号！")
-                try:
-                    download_url = chromemirror_url + chromedriver_lookup[
-                        ver_str] + chromedriver_name  # 记住字典里的key是字符串！所以不能用ver_num
-                    with closing(requests.get(download_url, stream=True)) as response:
-                        chunk_size = 1024
-                        content_size = int(response.headers['content-length'])
-                        """
-                        需要根据 response.status_code 的不同添加不同的异常处理
-                        """
-                        # print('content_size', content_size, response.status_code, )
-                        progress = ProgressBar("chromedriver v"+chromedriver_lookup[ver_str]
-                                               , total=content_size
-                                               , unit="KB"
-                                               , chunk_size=chunk_size
-                                               , run_status="正在下载"
-                                               , fin_status="下载完成")
-                        # chunk_size = chunk_size < content_size and chunk_size or content_size
-                        with open('chromedriver.zip', "wb") as file:
-                            for data in response.iter_content(chunk_size=chunk_size):
-                                file.write(data)
-                                progress.refresh(count=len(data))
-                        print('下载完成!')
-                        z = zipfile.ZipFile('chromedriver.zip', 'r')
-                        print("解压中...")
-                        z.extractall(path=get_path())
-                        z.close()
-                        print("安装完成！")
-                        
-                        sys.exit()
-                except ConnectionError:
-                    print("下载失败，无法连接到服务器")
-                    return False
-                except KeyError:
-                    if int(ver_num) < minimum_requirement:
-                        print("很抱歉，您的chrome版本低于", minimum_requirement, "，无法使用该功能")
-                        return False
-                    elif int(ver_num) > maximum_support:
-                        print("很抱歉，您的chrome版本高于", maximum_support, "，无法使用该功能")
-                        return False
-            else:
-                return False
-        wait = WebDriverWait(browser0, 5)
-        browser0.get("https://www.baidu.com/")
-        browser0.find_element_by_id("kw").send_keys(word)
-        browser0.find_element_by_id("su").click()
-        try:
-            wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'pc')))
-            word_result = browser0.find_elements_by_class_name("op_dict3_english_result_table")
-            if len(word_result) != 0:
-                for i in word_result:
-                    word_cn += i.text
-                word_cn_complete_baidu = word_cn.replace('\n', "").replace('\r', "")
-            raise TimeoutException
-        except TimeoutException:
-            browser0.get("https://fanyi.baidu.com/?aldtype=85#en/zh/" + word)
-            try:
-                wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'dictionary-comment')))
-                word_result = browser0.find_elements_by_class_name('dictionary-comment')
-                for i in word_result:
-                    word_cn += i.text
-                word_cn_complete_baidufanyi = word_cn.replace('\n', "").replace('\r', "")
-                raise TimeoutException
-            except TimeoutException:
-                browser0.get("http://dict.youdao.com/w/eng/" + word + "/#keyfrom=dict2.index")
-                try:
-                    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'trans-container')))
-                    word_result = browser0.find_elements_by_css_selector('#phrsListTab > div.trans-container > ul > li')
-                    for i in word_result:
-                        word_cn += i.text
-                    word_cn_complete_youdao = word_cn.replace('\n', "").replace('\r', "")
-                    print(word_cn_complete_youdao)
-                except TimeoutException:
-                    pass
-        found_at_least_one = False
-        if len(word_cn_complete_baidu) != 0:
-            print("1、百度搜索：", word_cn_complete_baidu)
-            found_at_least_one = True
-        else:
-            print("百度搜索未找到匹配结果。")
-        if len(word_cn_complete_baidufanyi) != 0:
-            print("2、百度翻译：", word_cn_complete_baidufanyi)
-            found_at_least_one = True
-        else:
-            print("百度翻译未找到匹配结果。")
-        if len(word_cn_complete_youdao) != 0:
-            print("3、有道词典：", word_cn_complete_youdao)
-            found_at_least_one = True
-        else:
-            print("有道词典未找到匹配结果。")
-        if found_at_least_one:
-            print("选择要录入的结果序号：(输入0退出)")
-            cfm = input().strip().lower()
-            while len(cfm) == 0:
-                cfm = input().strip().lower()
-            if cfm == "1":
-                if len(word_cn_complete_baidu) != 0:
-                    wordlist.add_new_word(word, word_cn_complete_baidu)
-                    return True
-                else :
-                    print("已取消录入")
-                    return False
-            elif cfm == "2":
-                if len(word_cn_complete_baidufanyi) != 0:
-                    wordlist.add_new_word(word, word_cn_complete_baidufanyi)
-                    return True
-                else :
-                    print("已取消录入")
-                    return False
-            elif cfm == "3":
-                if len(word_cn_complete_youdao) != 0:
-                    wordlist.add_new_word(word, word_cn_complete_youdao)
-                    return True
-                else:
-                    print("已取消录入")
-                    return False
-            else:
-                print("已取消录入")
-                return False
-        else:
-            return False
-    except NoSuchWindowException:
-        print("窗口异常关闭，无法继续操作。")
-        os.system("pause")
-        return False
-    except NoSuchElementException:
-        print("网页无法正常加载。请检查网络连接？")
-        os.system("pause")
-        return False
-    except WebDriverException:
-        print("引擎异常，无法继续操作。")
-        os.system("pause")
-        return False
-
 def fuzzy_finder(wordlist, ):
     suggestions = []
     print("输入您想查找的单词：")
@@ -467,32 +210,6 @@ def show_phrases(wordlist):
             count += 1
     print("共", count, "个词组")
 
-def get_phonetic(document):
-    pattern_US = re.compile('''美\s*?<span class="phonetic">(.*?)</span>''', re.S)
-    pattern_UK = re.compile('''英\s*?<span class="phonetic">(.*?)</span>''', re.S)
-    pattern_common = re.compile('''\s*?<span class="phonetic">(.*?)</span>''', re.S)
-    item_US = re.findall(pattern_US, document)
-    item_UK = re.findall(pattern_UK, document)
-    item_common = re.findall(pattern_common, document)
-    items = {}
-    items['us'] = item_US
-    items['uk'] = item_UK
-    items['common'] = item_common
-    if len(items['uk']) == 0 and len(items['us']) == 0:
-        if(len(item_common) == 0):
-            print('未找到读音信息')
-        else:
-            print('音标:', items['common'][0])
-    else:
-        if len(items['uk']) != 0 and len(items['us']) != 0:
-            print('英:', items['uk'][0], ' 美:', items['us'][0])
-        else:
-            if len(items['uk']) != 0:
-                print('英:', items['uk'][0])
-            else:
-                print('美:', items['us'][0])
-    return items
-
 
 def main():
     last_data = None
@@ -531,9 +248,6 @@ def main():
                 show_word(wordlist, show_date_delimeter=True)
             elif c == "7":
                 mistake_collection(wordlist, )
-            elif c == "8":
-                if new_word_auto_chrome(wordlist, ):
-                    wordlist.write_wordlist_to_file()
             elif c == "9":
                 random_test_chn(wordlist, )
             elif c == "0":
