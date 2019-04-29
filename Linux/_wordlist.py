@@ -1,6 +1,7 @@
 import sqlite3
 import re
 import datetime
+import time
 from datetime import date
 from _word import Word
 import os
@@ -41,7 +42,7 @@ class WordList:
         db.close()
 
 
-    def read_from_sqlite(self, db_name, table_name="wordlist"):
+    def read_from_sqlite(self, db_name, table_name="wordlist", display_status=False):
         db = sqlite3.connect(db_name)
         cursor = db.cursor()
         finished_count = 0
@@ -49,11 +50,16 @@ class WordList:
         q = cursor.execute(sql_read)
         query = q.fetchall()
         total_count = len(query)
-        migrate_progress = ProgressBar("从数据库读取数据...", total=total_count, unit="", chunk_size=1, run_status="正在同步",fin_status="同步完成")
+        if display_status:
+            migrate_progress = ProgressBar("从数据库读取数据...", total=total_count, unit="", chunk_size=1, run_status="正在同步",fin_status="同步完成")
+        # start = time.time()
         for i in query:
             self.add_Word(Word(enword=i[0],cnexplanation=i[1],testedcount=i[2],correctcount=i[3],searchtime=i[4],recordedtime=i[5]))
             finished_count += 1
-            migrate_progress.refresh(count=1)
+            if display_status:
+                migrate_progress.refresh(count=1)
+            # print(time.time() - start)
+        # print(time.time()-start)
         # 关闭数据库连接
         db.close()
 
@@ -87,7 +93,6 @@ class WordList:
                 print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
                 print(word)
         # 关闭数据库连接
-        print(finished_count, "/", total_count, "完成")
         db.close()
 
     def read_wordlist_from_file(self, filename=None):
@@ -196,7 +201,7 @@ class WordList:
     def phrase_list(self):
         return self.__phraseList
 
-    def update_db(self, method, word):
+    def update_db(self, method, word, display_status=False):
         try:
             db = sqlite3.connect(self.db_name)
         except AttributeError:
@@ -204,7 +209,8 @@ class WordList:
         cursor = db.cursor()
         finished_count = 0
         total_count=1
-        migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
+        if display_status:
+            migrate_progress = ProgressBar("同步数据至数据库...", total=total_count, unit="", chunk_size=1, run_status="正在同步",
                                       fin_status="同步完成")
         if method == "searched":
             sql = """UPDATE "wordlist" SET "SEARCHED_TIMES" = "SEARCHED_TIMES"+1 WHERE "ENGLISH" = '"""+word.it_self()+"'"
@@ -215,20 +221,22 @@ class WordList:
         else:
             sql = ""
         try:
+            # start = time.time()
             cursor.execute(sql)
             # 提交到数据库执行
             db.commit()
+            # end = time.time()-start
             finished_count += 1
-            migrate_progress.refresh(count=1)
+            if display_status:
+                migrate_progress.refresh(count=1)
+            # print(end)
         except:
             # 如果发生错误则回滚
             db.rollback()
             print("执行第", finished_count+1, "个时发生错误。数据库已回滚")
             print(word)
         # 关闭数据库连接
-        print(finished_count, "/", total_count, "完成")
         db.close()
-        return "python?"
 
     def search(self, en_word):
         for word in self.__wordList:
