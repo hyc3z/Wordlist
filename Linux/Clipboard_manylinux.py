@@ -1,6 +1,7 @@
 ﻿import os
 import re
 import pyperclip
+import signal
 from requests import RequestException
 import time
 from datetime import date
@@ -9,6 +10,18 @@ import sys
 from _wordlist import WordList
 from ifind_parse import get_one_page,parse_one_page,get_phonetic,impatient_search
 from clipboard_version import get_version
+import signal
+
+def shutdownFunction0(signalnum, frame):
+    os.system('rm -f '+os.path.join(sys.path[0], '~clipboard.lock'))
+    exit()
+    return
+
+def shutdownFunction1(signalnum, frame):
+    exit()
+    return
+
+
 date_today = str(date.today())
 
 def monitor_clipboard(wordlist):
@@ -72,6 +85,7 @@ def monitor_clipboard(wordlist):
             exit()
 
 
+
 def main():
     wordlist = WordList(sqlite_dbname=os.path.join(sys.path[0], 'wordlist.db'))
     monitor_clipboard(wordlist)
@@ -79,8 +93,21 @@ def main():
 
 if __name__ == '__main__':
     try:
+        try:
+            for sig in [signal.SIGINT, signal.SIGHUP, signal.SIGTERM]:
+                signal.signal(sig, shutdownFunction1)
+
+            while os.path.exists(os.path.join(sys.path[0], '~clipboard.lock')):
+                time.sleep(1)
+                print('Unable to unlock ', os.path.join(sys.path[0], '~clipboard.lock'),'with PID=')
+                os.system('cat '+os.path.join(sys.path[0], '~clipboard.lock'))
+        except:
+            exit()
+        for sig in [signal.SIGINT, signal.SIGHUP, signal.SIGTERM]:
+            signal.signal(sig, shutdownFunction0)
         print(get_version())
+        os.system('echo '+str(os.getpid())+' > '+os.path.join(sys.path[0], '~clipboard.lock'))
         main()
     except KeyboardInterrupt:
-        print("用户中断执行...")
+        os.system('rm -f '+os.path.join(sys.path[0], '~clipboard.lock'))
         exit()
