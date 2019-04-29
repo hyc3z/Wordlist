@@ -24,6 +24,9 @@ def monitor_clipboard(wordlist):
                 clip_data = pyperclip.paste()
                 clip_data = clip_data.strip(string.punctuation)
                 clip_data = clip_data.replace('-\n', '')
+                clip_data = clip_data.replace('-\r', '')
+                clip_data = clip_data.replace('- ', '')
+                # print(clip_data)
             else:
                 if len(clip_data) == 0:
                     continue
