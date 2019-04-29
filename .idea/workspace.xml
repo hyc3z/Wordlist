@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="fix multiline word display error">
+    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/_wordlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Linux/clipboard_version.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/clipboard_version.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/wordlist.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,8 +52,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Linux/Clipboard_manylinux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+            <state relative-caret-position="188">
+              <caret line="103" column="47" selection-start-line="103" selection-start-column="47" selection-end-line="103" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,7 +139,7 @@
         <entry file="file://$PROJECT_DIR$/Linux/clipboard_version.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+              <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -204,15 +206,15 @@
         <option value="$PROJECT_DIR$/Linux/ifind_parse.py" />
         <option value="$PROJECT_DIR$/Linux/iFindWord_linux.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" />
         <option value="$PROJECT_DIR$/Linux/_wordlist.py" />
+        <option value="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" />
         <option value="$PROJECT_DIR$/Linux/clipboard_version.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="413" />
-    <option name="y" value="114" />
+    <option name="x" value="533" />
+    <option name="y" value="149" />
     <option name="width" value="1044" />
     <option name="height" value="817" />
   </component>
@@ -280,7 +282,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.iFindWord_Linux">
+  <component name="RunManager" selected="Python.Clipboard">
     <configuration name="Clipboard" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -371,8 +373,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.iFindWord_Linux" />
         <item itemvalue="Python.Clipboard" />
+        <item itemvalue="Python.iFindWord_Linux" />
         <item itemvalue="Python.Wordlist" />
         <item itemvalue="Python.Vertigo" />
       </list>
@@ -419,7 +421,7 @@
       <workItem from="1556111597959" duration="39000" />
       <workItem from="1556111649495" duration="1093000" />
       <workItem from="1556501724173" duration="858000" />
-      <workItem from="1556515748301" duration="1406000" />
+      <workItem from="1556515748301" duration="3780000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -617,11 +619,25 @@
       <option name="project" value="LOCAL" />
       <updated>1556501975253</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="set display_status to False to improve performance">
+      <created>1556528822355</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1556528822355</updated>
+    </task>
+    <task id="LOCAL-00030" summary="enable lock">
+      <created>1556531012461</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1556531012461</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44069000" />
+    <option name="totallyTimeSpent" value="46443000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,7 +649,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="413" y="114" width="1044" height="817" extended-state="0" />
+    <frame x="533" y="149" width="1044" height="817" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24698795" />
@@ -641,7 +657,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.44978166" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.44852942" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -688,8 +704,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Clipboard For Linux" />
-    <MESSAGE value="Unstable v1.9.4 beta" />
     <MESSAGE value="v1.9.5" />
     <MESSAGE value="add Linux support" />
     <MESSAGE value="fix impatient_search and remove msvcrt" />
@@ -713,10 +727,12 @@
     <MESSAGE value="distributed modular design" />
     <MESSAGE value="cut redundant import, update README" />
     <MESSAGE value="fix multiline word display error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix multiline word display error" />
+    <MESSAGE value="set display_status to False to improve performance" />
+    <MESSAGE value="enable lock" />
+    <option name="LAST_COMMIT_MESSAGE" value="enable lock" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1556104648319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1556531057203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord_Linux.coverage" NAME="iFindWord_Linux Coverage Results" MODIFIED="1556106717088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$Wordlist.coverage" NAME="Wordlist Coverage Results" MODIFIED="1556102609415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linux" />
   </component>
@@ -887,15 +903,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Linux/Clipboard_manylinux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+        <state relative-caret-position="188">
+          <caret line="103" column="47" selection-start-line="103" selection-start-column="47" selection-end-line="103" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Linux/clipboard_version.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
         </state>
       </provider>
     </entry>

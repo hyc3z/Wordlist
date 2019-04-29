@@ -93,18 +93,17 @@ def main():
 
 if __name__ == '__main__':
     try:
-        try:
-            for sig in [signal.SIGINT, signal.SIGHUP, signal.SIGTERM]:
-                signal.signal(sig, shutdownFunction1)
+        for sig in [signal.SIGINT, signal.SIGHUP, signal.SIGTERM]:
+            signal.signal(sig, shutdownFunction1)
 
-            while os.path.exists(os.path.join(sys.path[0], '~clipboard.lock')):
-                time.sleep(1)
-                print('Unable to unlock ', os.path.join(sys.path[0], '~clipboard.lock'),'with PID=')
-                os.system('cat '+os.path.join(sys.path[0], '~clipboard.lock'))
-        except:
-            exit()
+        while os.path.exists(os.path.join(sys.path[0], '~clipboard.lock')):
+            time.sleep(1)
+            print('Unable to unlock ', os.path.join(sys.path[0], '~clipboard.lock'),'with PID=')
+            os.system('cat '+os.path.join(sys.path[0], '~clipboard.lock'))
+
         for sig in [signal.SIGINT, signal.SIGHUP, signal.SIGTERM]:
             signal.signal(sig, shutdownFunction0)
+
         print(get_version())
         os.system('echo '+str(os.getpid())+' > '+os.path.join(sys.path[0], '~clipboard.lock'))
         main()
