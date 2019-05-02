@@ -5,10 +5,11 @@
 
 2、安装需求
 
-<i>`windows`</i>
+<i>windows</i>
+
 `pip3 install pyperclip`
 
-<i>`linux`</i>
+<i>linux</i>
 
 `$ sudo apt-get install xsel xclip`
 `$ sudo pip3 install pyperclip`
