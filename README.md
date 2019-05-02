@@ -12,6 +12,7 @@
 <i>linux</i>
 
 `$ sudo apt-get install xsel xclip`
+
 `$ sudo pip3 install pyperclip`
 
 
