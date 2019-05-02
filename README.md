@@ -6,10 +6,12 @@
 2、安装需求
 
 <i>`windows`</i>
-`pip3 install pyperclip sqlite3`
+`pip3 install pyperclip`
 
 <i>`linux`</i>
-`$ sudo pip3 install pyperclip sqlite3`
+
+`$ sudo apt-get install xsel xclip`
+`$ sudo pip3 install pyperclip`
 
 
 3、运行软件：
