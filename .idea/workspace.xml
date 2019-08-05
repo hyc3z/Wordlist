@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="initial version based on pyqt5">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/Clipboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/_word.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/_wordlist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/clipboard_version.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/clipboard_version.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/iFindWord_linux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/iFindWord.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/ifind_parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/ifind_parse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/progressbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console/progressbar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/Console/wordlist.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/_word.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/_wordlist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/first2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/first2.spec" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/ifind_parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/ifind_parse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/progressbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/progressbar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/wordlist.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/Vertigo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/clipboard.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/clipboard_launcher.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/datefile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/wordlist.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/小测验.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/背单词.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/背单词_admin.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/背单词launcher.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Windows/背单词launcher_admin.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/_wordlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/gui.spec" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/ifind_parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/ifind_parse.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +108,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.iFindWord">
+  <component name="RunManager" selected="Python.gui">
     <configuration name="Clipboard" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -245,8 +221,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.iFindWord" />
         <item itemvalue="Python.gui" />
+        <item itemvalue="Python.iFindWord" />
         <item itemvalue="Python._wordlist" />
         <item itemvalue="Python.first2" />
         <item itemvalue="Python.Clipboard" />
@@ -296,7 +272,7 @@
       <workItem from="1556501724173" duration="858000" />
       <workItem from="1556515748301" duration="3780000" />
       <workItem from="1564920917740" duration="1349000" />
-      <workItem from="1564961137573" duration="354000" />
+      <workItem from="1564961137573" duration="2280000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -515,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564921151062</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="add features on gui">
+      <created>1564961526551</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1564961526551</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -545,7 +528,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add Linux support" />
     <MESSAGE value="fix impatient_search and remove msvcrt" />
     <MESSAGE value="strings end with punctuation are accepted" />
     <MESSAGE value="enable connection retrying" />
@@ -570,10 +552,11 @@
     <MESSAGE value="set display_status to False to improve performance" />
     <MESSAGE value="enable lock" />
     <MESSAGE value="initial version based on pyqt5" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial version based on pyqt5" />
+    <MESSAGE value="add features on gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="add features on gui" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1564961291891" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
+    <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1564965134430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord.coverage" NAME="iFindWord Coverage Results" MODIFIED="1564961399838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LinuxConsole" />
     <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1556531057203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$Wordlist.coverage" NAME="Wordlist Coverage Results" MODIFIED="1556102609415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linux" />

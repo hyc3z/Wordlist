@@ -244,6 +244,22 @@ class WordList:
                 return word
         return None
 
+    def search_sqlite(self, en_word):
+        try:
+            db = sqlite3.connect(self.db_name)
+        except AttributeError:
+            db = sqlite3.connect(os.path.join(sys.path[0], 'wordlist.db'))
+        cursor = db.cursor()
+        sql = """select * from "wordlist" where "ENGLISH"  = '"""+en_word+"'"
+        q = cursor.execute(sql)
+        query = q.fetchall()
+        # print(query)
+        if len(query):
+            return [query[0][1],query[0][5]]
+        else:
+            return []
+
+
     def add_new_word(self, en_word, cn_word, save_to_sqlite=True, table_name='wordlist'):
         newWord = Word(en_word, cn_word, recordedtime=str(datetime.datetime.now()))
         self.__wordList.append(newWord)
@@ -252,9 +268,13 @@ class WordList:
         if newWord.is_phrase():
             self.__phraseList.append(newWord)
         if save_to_sqlite:
-            self.save_to_sqlite(wordlist=[newWord], db_name=self.db_name)
+            try:
+                self.save_to_sqlite(wordlist=[newWord], db_name=self.db_name)
+            except:
+                return ['录入失败']
         print(newWord.it_self(), newWord.explanation())
         print("录入时间：", newWord.recorded_time())
+        return [newWord.it_self(), newWord.explanation(), newWord.recorded_time()]
 
     def add_Word(self, newWord):
         self.__wordList.append(newWord)

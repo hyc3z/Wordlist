@@ -29,9 +29,9 @@ class Ui_Dialog(object):
                 self.textBrowser.append('网络异常')
                 return
             self.items = ifind_parse.parse_one_page(page_src)
-            self.phonetics = ifind_parse.get_phonetic(page_src)
+            self.phonetics = ifind_parse.get_phonetic(page_src, print_status=False)
             self.last_search = word
-            print(self.phonetics)
+            # print(self.phonetics)
             if self.items is not None and len(self.items):
                 for i in self.items:
                     self.textBrowser.append(i)
@@ -39,13 +39,13 @@ class Ui_Dialog(object):
             else:
                 self.textBrowser.append('未找到词典信息')
             if len(self.phonetics['us']):
-                print(self.phonetics['us'][0])
+                # print(self.phonetics['us'][0])
                 self.textBrowser.append('美式音标:'+self.phonetics['us'][0])
             if len(self.phonetics['uk']):
-                print(self.phonetics['us'][0])
+                # print(self.phonetics['us'][0])
                 self.textBrowser.append('英式音标:'+self.phonetics['us'][0])
             if not len(self.phonetics['us']) and not len(self.phonetics['uk']) and len(self.phonetics['common']):
-                print(self.phonetics['common'][0])
+                # print(self.phonetics['common'][0])
                 self.textBrowser.append('音标:' + self.phonetics['common'][0])
             if not len(self.phonetics['us']) and not len(self.phonetics['uk']) and not len(self.phonetics['common']):
                 self.textBrowser.append('未找到音标信息')
@@ -169,7 +169,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.0.1"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.1.1"))
         self.pushButton.setText(_translate("Dialog", "搜索"))
         self.pushButton_2.setText(_translate("Dialog", "添加到词库"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "搜索"))

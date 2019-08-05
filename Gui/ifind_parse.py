@@ -11,7 +11,7 @@ def parse_one_page(document):
         items = None
     return items
 
-def get_phonetic(document):
+def get_phonetic(document,print_status=True):
     pattern_US = re.compile('''美\s*?<span class="phonetic">(.*?)</span>''', re.S)
     pattern_UK = re.compile('''英\s*?<span class="phonetic">(.*?)</span>''', re.S)
     pattern_common = re.compile('''\s*?<span class="phonetic">(.*?)</span>''', re.S)
@@ -22,19 +22,20 @@ def get_phonetic(document):
     items['us'] = item_US
     items['uk'] = item_UK
     items['common'] = item_common
-    if len(items['uk']) == 0 and len(items['us']) == 0:
-        if(len(item_common) == 0):
-            print('未找到读音信息')
-        else:
-            print('音标:', items['common'][0])
-    else:
-        if len(items['uk']) != 0 and len(items['us']) != 0:
-            print('英:', items['uk'][0], ' 美:', items['us'][0])
-        else:
-            if len(items['uk']) != 0:
-                print('英:', items['uk'][0])
+    if print_status:
+        if len(items['uk']) == 0 and len(items['us']) == 0:
+            if(len(item_common) == 0):
+                print('未找到读音信息')
             else:
-                print('美:', items['us'][0])
+                print('音标:', items['common'][0])
+        else:
+            if len(items['uk']) != 0 and len(items['us']) != 0:
+                print('英:', items['uk'][0], ' 美:', items['us'][0])
+            else:
+                if len(items['uk']) != 0:
+                    print('英:', items['uk'][0])
+                else:
+                    print('美:', items['us'][0])
     return items
 
 

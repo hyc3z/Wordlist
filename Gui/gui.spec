@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['first2.py'],
-             pathex=['/home/arc/PycharmProjects/qt5'],
+a = Analysis(['gui.py'],
+             pathex=['/home/arc/PycharmProjects/iFindWord/Gui'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -19,19 +19,15 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
+          a.binaries,
+          a.zipfiles,
+          a.datas,
           [],
-          exclude_binaries=True,
-          name='first2',
+          name='gui',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
-coll = COLLECT(exe,
-               a.binaries,
-               a.zipfiles,
-               a.datas,
-               strip=False,
-               upx=True,
-               upx_exclude=[],
-               name='first2')
+          upx_exclude=[],
+          runtime_tmpdir=None,
+          console=False )
