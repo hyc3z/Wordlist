@@ -169,14 +169,16 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.1.1"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.2.0"))
         self.pushButton.setText(_translate("Dialog", "搜索"))
         self.pushButton_2.setText(_translate("Dialog", "添加到词库"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "搜索"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "词库"))
         self.pushButton_3.setText(_translate("Dialog", "刷新"))
-        self.label.setText(_translate("Dialog", "tubao9hao@126.com"))
-        self.label_2.setText(_translate("Dialog", "HycDog"))
+        self.label.setText(_translate("Dialog", "软件地址：<a href=\"https://github.com/Hycdog/iFindWord/\">https://github.com/Hycdog/iFindWord</a>"))
+        self.label.setOpenExternalLinks(True)
+        self.label_2.setText(_translate("Dialog", "made by <a href=\"https://github.com/Hycdog/\">HycDog</a><p> Email: tubao9hao@126.com</p>"))
+        self.label_2.setOpenExternalLinks(True)
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Dialog", "关于"))
 
 
@@ -186,10 +188,5 @@ if __name__ == "__main__":
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
-    # hbox = QtWidgets.QHBoxLayout()
-    # 设置伸缩量为1
-    # hbox.addStretch(1)
-    # hbox.addWidget(ui.tabWidget)
-    # Dialog.setLayout(hbox)
     Dialog.show()
     sys.exit(app.exec_())
