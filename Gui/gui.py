@@ -133,8 +133,9 @@ class Ui_Dialog(object):
     def filter(self):
         self.pushButton_3.setEnabled(False)
         query = self.wordlist.fuzzsearch_sqlite(self.lineEdit_2.text())
-        self.setTable(query,type='query')
-        self.label_4.setText('筛选完成.共'+str(len(query))+'个结果')
+        query2 = sorted(query, key=lambda x: x[0])
+        self.setTable(query2, type='query')
+        self.label_4.setText('筛选完成.共'+str(len(query2))+'个结果')
         # if not len(query):
         #     self.pushButton_4.setEnabled(True)
 
@@ -215,7 +216,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.0"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "词库"))
         self.pushButton_3.setText(_translate("Dialog", "添加"))
         self.label_4.setText(_translate("Dialog", "就绪"))
