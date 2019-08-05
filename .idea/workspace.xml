@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
+    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="add href">
+      <change afterPath="$PROJECT_DIR$/Gui/first.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gui/first.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/_wordlist.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gui/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/wordlist.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +38,29 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="wordlist" type="feb32156:DbDataSourceImpl" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="wordlist: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="wordlist" type="feb32156:DbDataSourceImpl" />
+        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
     </expand>
     <select />
   </component>
@@ -41,23 +70,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>is_admin</find>
-      <find>open_console()</find>
-      <find>class=&quot;pronounce</find>
-      <find>nota</find>
-      <find>notation</find>
-      <find>get_one</find>
-      <find>silhouette</find>
-      <find>&quot;wordlist.db&quot;</find>
-      <find>datelist</find>
-      <find>write</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>self.db_name</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -81,6 +93,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -106,28 +119,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.gui">
-    <configuration name="Clipboard" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Vertigo" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linux/Clipboard_manylinux.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="_wordlist" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -142,6 +133,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Gui/_wordlist.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="first" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Vertigo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Gui" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Gui/first.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -219,12 +232,37 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.gui" />
+        <item itemvalue="Python.first" />
         <item itemvalue="Python.iFindWord" />
         <item itemvalue="Python._wordlist" />
         <item itemvalue="Python.first2" />
-        <item itemvalue="Python.Clipboard" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@3559325f" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@3559325f" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@2843a9fb" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@3559325f" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@1ba313fa" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -269,7 +307,7 @@
       <workItem from="1556501724173" duration="858000" />
       <workItem from="1556515748301" duration="3780000" />
       <workItem from="1564920917740" duration="1349000" />
-      <workItem from="1564961137573" duration="3241000" />
+      <workItem from="1564961137573" duration="10975000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -502,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564965216309</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="add href">
+      <created>1564966098249</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1564966098249</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TodoView">
@@ -532,7 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="strings end with punctuation are accepted" />
     <MESSAGE value="enable connection retrying" />
     <MESSAGE value="add pronounce phonetic support" />
     <MESSAGE value="enhanced pronounce phonetic support" />
@@ -557,13 +601,15 @@
     <MESSAGE value="initial version based on pyqt5" />
     <MESSAGE value="add features on gui" />
     <MESSAGE value="bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
+    <MESSAGE value="add href" />
+    <option name="LAST_COMMIT_MESSAGE" value="add href" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1564966050474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
+    <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1564975161631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord.coverage" NAME="iFindWord Coverage Results" MODIFIED="1564961399838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LinuxConsole" />
     <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1556531057203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$Wordlist.coverage" NAME="Wordlist Coverage Results" MODIFIED="1556102609415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linux" />
+    <SUITE FILE_PATH="coverage/iFindWord$first.coverage" NAME="first Coverage Results" MODIFIED="1564969865838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord_Linux.coverage" NAME="iFindWord_Linux Coverage Results" MODIFIED="1556106717088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$_wordlist.coverage" NAME="_wordlist Coverage Results" MODIFIED="1564961268537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
     <SUITE FILE_PATH="coverage/iFindWord$first2.coverage" NAME="first2 Coverage Results" MODIFIED="1564957646827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PyQt5" />

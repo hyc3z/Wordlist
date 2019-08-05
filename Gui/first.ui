@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>433</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>iFindWord v1.0.1</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>400</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>1</width>
+       <height>1</height>
+      </size>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>搜索</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>添加到词库</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="lineEdit"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>搜索</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QTextBrowser" name="textBrowser"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>词库</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="3" column="0">
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="maximumSize">
+          <size>
+           <width>3000</width>
+           <height>2000</height>
+          </size>
+         </property>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>New Column</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>New Column</string>
+          </property>
+         </column>
+         <item row="0" column="0">
+          <property name="flags">
+           <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>刷新</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
+         <item>
+          <widget class="QTextEdit" name="textEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>3000</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>关于</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>tubao9hao@126.com</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>HycDog</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

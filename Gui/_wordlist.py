@@ -259,6 +259,20 @@ class WordList:
         else:
             return []
 
+    def fuzzsearch_sqlite(self, en_word):
+        try:
+            db = sqlite3.connect(self.db_name)
+        except AttributeError:
+            db = sqlite3.connect(os.path.join(sys.path[0], 'wordlist.db'))
+        cursor = db.cursor()
+        sql = """select ENGLISH, CHINESE from wordlist where ENGLISH like '%"""+en_word+"""%' --case-insensitive"""
+        q = cursor.execute(sql)
+        query = q.fetchall()
+        # print(query)
+        if len(query):
+            return query
+        else:
+            return []
 
     def add_new_word(self, en_word, cn_word, save_to_sqlite=True, table_name='wordlist'):
         newWord = Word(en_word, cn_word, recordedtime=str(datetime.datetime.now()))
@@ -274,7 +288,7 @@ class WordList:
                 return ['录入失败']
         print(newWord.it_self(), newWord.explanation())
         print("录入时间：", newWord.recorded_time())
-        return [newWord.it_self(), newWord.explanation(), newWord.recorded_time()]
+        return newWord.recorded_time()
 
     def add_Word(self, newWord):
         self.__wordList.append(newWord)
