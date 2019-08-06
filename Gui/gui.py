@@ -15,7 +15,7 @@ import requests
 class Ui_Dialog(object):
 
     def search(self):
-        word = self.lineEdit_2.text()
+        word = self.lineEdit.text()
         self.getWordlist()
         search_result = {
             'en':word,
@@ -36,7 +36,7 @@ class Ui_Dialog(object):
         if self.items is not None and len(self.items):
             for i in self.items:
                 search_result['cn'] += i
-            self.pushButton_3.setEnabled(True)
+            self.addWordButton.setEnabled(True)
         else:
             search_result['cn'] = '未找到词典信息'
             return search_result
@@ -52,14 +52,14 @@ class Ui_Dialog(object):
         return search_result
 
     def searchClicked(self):
-        self.label_4.setText('查找...')
+        self.infoLabel_tab1.setText('查找...')
         result = self.search()
         self.setTable(result, type='search_result')
-        self.label_4.setText('展示搜索结果.')
+        self.infoLabel_tab1.setText('展示搜索结果.')
 
     def addClicked(self):
-        self.label_4.setText('同步数据至数据库...')
-        self.pushButton_3.setEnabled(False)
+        self.infoLabel_tab1.setText('同步数据至数据库...')
+        self.addWordButton.setEnabled(False)
         str = ''
         for i in self.items:
             str += i
@@ -69,10 +69,10 @@ class Ui_Dialog(object):
             retmsg = '已录入，无需重复录入.'
         self.getWordlist()
         self.initTable()
-        self.label_4.setText(retmsg)
+        self.infoLabel_tab1.setText(retmsg)
 
     def getWordlist(self):
-        self.wordlist = _wordlist.WordList(sqlite_dbname=os.path.join(sys.path[0], 'wordlist.db'))
+        self.wordlist = _wordlist.WordList(sqlite_dbname=os.path.join(os.getcwd(), 'wordlist.db'))
         self.wordlist.sort_by_alphabet()
 
     def setTable(self,wordlist,type='wordlist'):
@@ -126,26 +126,28 @@ class Ui_Dialog(object):
         self.setTable(self.wordlist,'wordlist')
 
     def refreshClicked(self):
-        self.pushButton_3.setEnabled(False)
+        self.addWordButton.setEnabled(False)
         self.initTable()
-        self.pushButton_3.setEnabled(True)
+        self.addWordButton.setEnabled(True)
 
     def filter(self):
-        self.pushButton_3.setEnabled(False)
-        query = self.wordlist.fuzzsearch_sqlite(self.lineEdit_2.text())
+        self.addWordButton.setEnabled(False)
+        query = self.wordlist.fuzzsearch_sqlite(self.lineEdit.text())
         query2 = sorted(query, key=lambda x: x[0])
         self.setTable(query2, type='query')
-        self.label_4.setText('筛选完成.共'+str(len(query2))+'个结果')
+        self.infoLabel_tab1.setText('筛选完成.共'+str(len(query2))+'个结果')
         # if not len(query):
-        #     self.pushButton_4.setEnabled(True)
+        #     self.searchOnlineButton.setEnabled(True)
 
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(318, 371)
+        Dialog.resize(640, 320)
         self.getWordlist()
+        # gridLayout that sets the tab to the center of the window 
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
+        # General tab widget
         self.tabWidget = QtWidgets.QTabWidget(Dialog)
         self.tabWidget.setGeometry(QtCore.QRect(10, 10, 281, 331))
         self.tabWidget.setObjectName("tabWidget")
@@ -154,78 +156,114 @@ class Ui_Dialog(object):
         self.tabWidget.setSizePolicy(sizePolicy)
         self.tabWidget.setMinimumSize(QtCore.QSize(400, 400))
         self.tabWidget.setSizeIncrement(QtCore.QSize(1, 1))
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_2)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.table = QtWidgets.QTableWidget(self.tab_2)
-        self.table.setMaximumSize(QtCore.QSize(3000, 2000))
-        self.table.setObjectName("table")
-        self.initTable()
-        self.gridLayout_2.addWidget(self.table, 3, 0, 1, 1)
-        self.pushButton_3 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_3.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout_2.addWidget(self.pushButton_3, 4, 0, 1, 1)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_2)
+        # First tab that contains searching result and table filled with data read from db.
+        self.tab_1 = QtWidgets.QWidget()
+        self.tab_1.setObjectName("tab_1")
+        # Grid layout for tab #1
+        self.gridLayout_tab_1 = QtWidgets.QGridLayout(self.tab_1)
+        self.gridLayout_tab_1.setObjectName("gridLayout_tab_1")
+        # Top line that enables users to search
+        # Along with search button that follows the lineEdit
+        self.horizontalLayout_1_tab1 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_1_tab1.setObjectName("horizontalLayout_1_tab1")
+        self.lineEdit = QtWidgets.QLineEdit(self.tab_1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_2.sizePolicy().hasHeightForWidth())
-        self.lineEdit_2.setSizePolicy(sizePolicy)
-        self.lineEdit_2.setMaximumSize(QtCore.QSize(3000, 30))
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.horizontalLayout_2.addWidget(self.lineEdit_2)
-        self.pushButton_4 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_4.setMaximumSize(QtCore.QSize(200, 30))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout_2.addWidget(self.pushButton_4)
-        self.gridLayout_2.addLayout(self.horizontalLayout_2, 2, 0, 1, 1)
-        self.tabWidget.addTab(self.tab_2, "")
-        self.label_4 = QtWidgets.QLabel(self.tab_2)
-        self.label_4.setObjectName("label_4")
-        self.gridLayout_2.addWidget(self.label_4, 5, 0, 1, 1)
-        self.tab_3 = QtWidgets.QWidget()
-        self.tab_3.setObjectName("tab_3")
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.tab_3)
-        self.gridLayout_4.setObjectName("gridLayout_4")
+        sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
+        self.lineEdit.setSizePolicy(sizePolicy)
+        self.lineEdit.setMaximumSize(QtCore.QSize(3000, 30))
+        self.lineEdit.setObjectName("lineEdit")
+        self.horizontalLayout_1_tab1.addWidget(self.lineEdit)
+        self.searchOnlineButton = QtWidgets.QPushButton(self.tab_1)
+        self.searchOnlineButton.setMaximumSize(QtCore.QSize(200, 30))
+        self.searchOnlineButton.setObjectName("searchOnlineButton")
+        self.horizontalLayout_1_tab1.addWidget(self.searchOnlineButton)
+        self.gridLayout_tab_1.addLayout(self.horizontalLayout_1_tab1, 2, 0, 1, 1)
+        # Table that contains words and explanations directly read from sqlite db
+        # Initialized in initTable()
+        self.table = QtWidgets.QTableWidget(self.tab_1)
+        self.table.setMaximumSize(QtCore.QSize(3000, 2000))
+        self.table.setObjectName("table")
+        self.initTable()
+        self.gridLayout_tab_1.addWidget(self.table, 3, 0, 1, 1)
+        # Button that adds word 
+        self.addWordButton = QtWidgets.QPushButton(self.tab_1)
+        self.addWordButton.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.addWordButton.setObjectName("addWordButton")
+        self.gridLayout_tab_1.addWidget(self.addWordButton, 4, 0, 1, 1)
+        # A Line that contains search button, isn't that satisfying.
+        # Only temporary solution.
+        self.horizontalLayout_2_tab1 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2_tab1.setObjectName("horizontalLayout_2_tab1")
+        self.addWordButton = QtWidgets.QPushButton(self.tab_1)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.addWordButton.sizePolicy().hasHeightForWidth())
+        self.addWordButton.setSizePolicy(sizePolicy)
+        self.addWordButton.setMinimumSize(QtCore.QSize(88, 30))
+        self.addWordButton.setMaximumSize(QtCore.QSize(88888, 30))
+        self.addWordButton.setObjectName("addWordButton")
+        self.horizontalLayout_2_tab1.addWidget(self.addWordButton)
+        self.checkBox = QtWidgets.QCheckBox(self.tab_1)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.checkBox.sizePolicy().hasHeightForWidth())
+        self.checkBox.setSizePolicy(sizePolicy)
+        self.checkBox.setMaximumSize(QtCore.QSize(88888, 88888))
+        self.checkBox.setObjectName("checkBox")
+        # self.horizontalLayout_2_tab1.addWidget(self.checkBox)
+        self.gridLayout_tab_1.addLayout(self.horizontalLayout_2_tab1, 4, 0, 1, 1)
+        self.tabWidget.addTab(self.tab_1, "")
+        # infoLabel is on the bottom of tab1, showing current status of the software.
+        self.infoLabel_tab1 = QtWidgets.QLabel(self.tab_1)
+        self.infoLabel_tab1.setObjectName("infoLabel_tab1")
+        self.gridLayout_tab_1.addWidget(self.infoLabel_tab1, 5, 0, 1, 1)
+        # tab_2  contains information about the contributors to this software,
+        # as well as the github repo URL.
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.gridLayout_tab_2 = QtWidgets.QGridLayout(self.tab_2)
+        self.gridLayout_tab_2.setObjectName("gridLayout_tab_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(self.tab_3)
+        self.label = QtWidgets.QLabel(self.tab_2)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
-        self.label_2 = QtWidgets.QLabel(self.tab_3)
+        self.label_2 = QtWidgets.QLabel(self.tab_2)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
-        self.gridLayout_4.addLayout(self.verticalLayout, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.tab_3, "")
+        self.gridLayout_tab_2.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.tabWidget.addTab(self.tab_2, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
-
+        # More comments needed
         self.retranslateUi(Dialog)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-        self.pushButton_4.clicked.connect(self.searchClicked)
-        self.pushButton_3.clicked.connect(self.addClicked)
-        self.lineEdit_2.textChanged.connect(self.filter)
-        self.pushButton_4.setEnabled(True)
-        self.pushButton_3.setEnabled(False)
+        self.searchOnlineButton.clicked.connect(self.searchClicked)
+        self.addWordButton.clicked.connect(self.addClicked)
+        self.lineEdit.textChanged.connect(self.filter)
+        self.searchOnlineButton.setEnabled(True)
+        self.addWordButton.setEnabled(False)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.1"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "词库"))
-        self.pushButton_3.setText(_translate("Dialog", "添加"))
-        self.label_4.setText(_translate("Dialog", "就绪"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Dialog", "词库"))
+        self.addWordButton.setText(_translate("Dialog", "添加"))
+        self.infoLabel_tab1.setText(_translate("Dialog", "就绪"))
+        # self.checkBox.setText(_translate("Dialog", "监控剪贴板"))
         self.label.setText(_translate("Dialog", "软件地址：<a href=\"https://github.com/Hycdog/iFindWord/\">https://github.com/Hycdog/iFindWord</a>"))
         self.label.setOpenExternalLinks(True)
         self.label_2.setText(_translate("Dialog", "made by <a href=\"https://github.com/Hycdog/\">HycDog</a><p> Email: tubao9hao@126.com</p>"))
         self.label_2.setOpenExternalLinks(True)
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Dialog", "关于"))
-        self.pushButton_4.setText(_translate("Dialog", "在线搜索"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "关于"))
+        self.searchOnlineButton.setText(_translate("Dialog", "在线搜索"))
 
 
 
