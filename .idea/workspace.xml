@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="Add sorting">
+    <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/first.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/first.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/first.ui" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/first.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/wordlist.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -306,7 +303,7 @@
       <workItem from="1564920917740" duration="1349000" />
       <workItem from="1564961137573" duration="12313000" />
       <workItem from="1565007197627" duration="1482000" />
-      <workItem from="1565089037549" duration="1941000" />
+      <workItem from="1565089037549" duration="2173000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -560,7 +557,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565007242067</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Change sys.path[0] to os.getcwd to enable standalone .exe file to run&#10;Add multiple lines of commentary to help guide through the gui part.">
+      <created>1565091063971</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1565091063971</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView">
@@ -590,7 +594,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="enhanced pronounce phonetic support" />
     <MESSAGE value="update README" />
     <MESSAGE value="enhanced phonetic support v2.0" />
     <MESSAGE value="restructure project file" />
@@ -615,7 +618,8 @@
     <MESSAGE value="add href" />
     <MESSAGE value="重改界面" />
     <MESSAGE value="Add sorting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add sorting" />
+    <MESSAGE value="Change sys.path[0] to os.getcwd to enable standalone .exe file to run&#10;Add multiple lines of commentary to help guide through the gui part." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change sys.path[0] to os.getcwd to enable standalone .exe file to run&#10;Add multiple lines of commentary to help guide through the gui part." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1565090923520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />

@@ -7,7 +7,7 @@
 
 <i>gui版</i>
 
-`pip3 install pyqt5`
+`pip3 install pyqt5 requests`
 
 <i>控制台剪贴板</i>
 
