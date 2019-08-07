@@ -12,6 +12,7 @@ import ifind_parse
 import _wordlist
 import time
 import requests
+import bitarray
 class Ui_Dialog(object):
 
     def search(self):
@@ -78,6 +79,8 @@ class Ui_Dialog(object):
     def setTable(self,wordlist,type='wordlist'):
         t1 = time.time()
         self.table.horizontalHeader().setStretchLastSection(True)
+        self.laststate = bitarray.bitarray(len(wordlist))
+        self.laststate.setall(False)
         if type != 'search_result':
             self.table.setColumnCount(2)
             self.table.setHorizontalHeaderLabels(['英文', '中文'])
@@ -110,6 +113,10 @@ class Ui_Dialog(object):
                 item1.setFlags(
                     QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
                 self.table.setItem(rowcount, 1, item1)
+                # check = QtWidgets.QTableWidgetItem()
+                # check.setCheckState(QtCore.Qt.Unchecked)
+                # self.table.setItem(rowcount,1,check)
+
                 rowcount += 1
         elif type == 'search_result':
             col_count = 0
@@ -140,11 +147,25 @@ class Ui_Dialog(object):
         #     self.searchOnlineButton.setEnabled(True)
 
 
+    def showPos(self):
+        length = self.table.rowCount()
+        curstate = bitarray.bitarray(length)
+        curstate.setall(False)
+        for i in range(self.table.rowCount()):
+            if self.table.item(i,1).checkState():
+                curstate[i] = 1
+        if bitarray.bitdiff(curstate, self.laststate):
+            self.laststate = curstate
+            # print(curstate)
+            # insert funcion here
+
+
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(640, 320)
         self.getWordlist()
-        # gridLayout that sets the tab to the center of the window 
+        # gridLayout that sets the tab to the center of the window
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         # General tab widget
@@ -207,14 +228,14 @@ class Ui_Dialog(object):
         self.addWordButton.setMaximumSize(QtCore.QSize(88888, 30))
         self.addWordButton.setObjectName("addWordButton")
         self.horizontalLayout_2_tab1.addWidget(self.addWordButton)
-        self.checkBox = QtWidgets.QCheckBox(self.tab_1)
+        # self.checkBox = QtWidgets.QCheckBox(self.tab_1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.checkBox.sizePolicy().hasHeightForWidth())
-        self.checkBox.setSizePolicy(sizePolicy)
-        self.checkBox.setMaximumSize(QtCore.QSize(88888, 88888))
-        self.checkBox.setObjectName("checkBox")
+        # sizePolicy.setHeightForWidth(self.checkBox.sizePolicy().hasHeightForWidth())
+        # self.checkBox.setSizePolicy(sizePolicy)
+        # self.checkBox.setMaximumSize(QtCore.QSize(88888, 88888))
+        # self.checkBox.setObjectName("checkBox")
         # self.horizontalLayout_2_tab1.addWidget(self.checkBox)
         self.gridLayout_tab_1.addLayout(self.horizontalLayout_2_tab1, 4, 0, 1, 1)
         self.tabWidget.addTab(self.tab_1, "")
@@ -250,10 +271,11 @@ class Ui_Dialog(object):
         self.lineEdit.textChanged.connect(self.filter)
         self.searchOnlineButton.setEnabled(True)
         self.addWordButton.setEnabled(False)
+        # self.table.clicked.connect(self.showPos)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.2"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.3"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Dialog", "词库"))
         self.addWordButton.setText(_translate("Dialog", "添加"))
         self.infoLabel_tab1.setText(_translate("Dialog", "就绪"))
