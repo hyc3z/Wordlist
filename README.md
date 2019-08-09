@@ -30,4 +30,7 @@ gui版本
 目前由于未找到合适本地词库，采用了爬取在线词库方式获取信息。
 
 ---
-   
+![Screenshot not yet loaded](https://github.com/Hycdog/img_folder/blob/master/Screenshot%20from%202019-08-10%2001-43-49.png)
+![Screenshot not yet loaded](https://github.com/Hycdog/img_folder/blob/master/Screenshot%20from%202019-08-10%2001-44-04.png)
+![Screenshot not yet loaded](https://github.com/Hycdog/img_folder/blob/master/Screenshot%20from%202019-08-10%2001-44-22.png)
+![Screenshot not yet loaded](https://github.com/Hycdog/img_folder/blob/master/Screenshot%20from%202019-08-10%2001-44-28.png)
