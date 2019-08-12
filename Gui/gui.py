@@ -275,7 +275,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.3"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.4"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Dialog", "词库"))
         self.addWordButton.setText(_translate("Dialog", "添加"))
         self.infoLabel_tab1.setText(_translate("Dialog", "就绪"))
@@ -291,6 +291,7 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
