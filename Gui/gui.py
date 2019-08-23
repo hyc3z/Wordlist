@@ -89,6 +89,13 @@ class Ui_Dialog(object):
         else:
             self.table.setColumnCount(5)
             self.table.setHorizontalHeaderLabels(['英文', '中文', '英音标', '美音标', '通用音标'])
+            self.table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setStretchLastSection(False)
+
             rows = 1
             self.table.setRowCount(rows)
         rowcount = 0
@@ -103,6 +110,9 @@ class Ui_Dialog(object):
                     QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
                 self.table.setItem(rowcount, 1, item1)
                 rowcount += 1
+            self.table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setStretchLastSection(False)
         elif type == 'query':
             for i in wordlist:
                 item0 = QtWidgets.QTableWidgetItem(i[0])
@@ -275,7 +285,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.4"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.5"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Dialog", "词库"))
         self.addWordButton.setText(_translate("Dialog", "添加"))
         self.infoLabel_tab1.setText(_translate("Dialog", "就绪"))
