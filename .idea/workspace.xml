@@ -2,8 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gui/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/Clipboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clipboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/_word.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/_wordlist.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/clipboard_version.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/clipboard_version.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/iFindWord.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/ifind_parse.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/progressbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/progressbar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console/wordlist.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/_word.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/_wordlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/first.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/first.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/first.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/first.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/gui.spec" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/ifind_parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ifind_parse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/progressbar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gui/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/wordlist.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,13 +109,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Gui" />
+      <recent name="$PROJECT_DIR$/Windows" />
+      <recent name="$PROJECT_DIR$/Linux" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Windows" />
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Windows" />
-      <recent name="$PROJECT_DIR$/Linux" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -112,8 +131,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gui">
-    <configuration name="_wordlist" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.gui (1)">
+    <configuration name="Clipboard" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -126,7 +145,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Gui/_wordlist.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Gui/Clipboard.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -157,7 +176,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="first2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="gui (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Vertigo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -165,12 +184,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PyQt5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PyQt5/first2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/gui.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -225,11 +244,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gui (1)" />
+        <item itemvalue="Python.Clipboard" />
         <item itemvalue="Python.gui" />
         <item itemvalue="Python.first" />
         <item itemvalue="Python.iFindWord" />
-        <item itemvalue="Python._wordlist" />
-        <item itemvalue="Python.first2" />
       </list>
     </recent_temporary>
   </component>
@@ -314,6 +333,7 @@
       <workItem from="1566116964048" duration="18000" />
       <workItem from="1566263410571" duration="41000" />
       <workItem from="1566562373665" duration="312000" />
+      <workItem from="1572401871957" duration="258000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -646,14 +666,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add bitarray bitwise operation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1565372620016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
-    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1556531057203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/iFindWord$_wordlist.coverage" NAME="_wordlist Coverage Results" MODIFIED="1564961268537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
+    <SUITE FILE_PATH="coverage/iFindWord$Clipboard.coverage" NAME="Clipboard Coverage Results" MODIFIED="1572402000452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
     <SUITE FILE_PATH="coverage/iFindWord$Wordlist.coverage" NAME="Wordlist Coverage Results" MODIFIED="1556102609415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linux" />
     <SUITE FILE_PATH="coverage/iFindWord$first.coverage" NAME="first Coverage Results" MODIFIED="1565089152956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
-    <SUITE FILE_PATH="coverage/iFindWord$iFindWord.coverage" NAME="iFindWord Coverage Results" MODIFIED="1564961399838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LinuxConsole" />
     <SUITE FILE_PATH="coverage/ifindword$gui.coverage" NAME="gui Coverage Results" MODIFIED="1566562689533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
-    <SUITE FILE_PATH="coverage/iFindWord$first2.coverage" NAME="first2 Coverage Results" MODIFIED="1564957646827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PyQt5" />
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord_Linux.coverage" NAME="iFindWord_Linux Coverage Results" MODIFIED="1556106717088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/iFindWord$iFindWord.coverage" NAME="iFindWord Coverage Results" MODIFIED="1564961399838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LinuxConsole" />
+    <SUITE FILE_PATH="coverage/iFindWord$first2.coverage" NAME="first2 Coverage Results" MODIFIED="1564957646827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PyQt5" />
+    <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1565372620016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
+    <SUITE FILE_PATH="coverage/iFindWord$gui__1_.coverage" NAME="gui (1) Coverage Results" MODIFIED="1572402133524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

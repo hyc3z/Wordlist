@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'first.ui'
 #
-# Created by: Gui UI code generator 5.13.0
+# Created by: src UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -79,6 +79,7 @@ class Ui_Dialog(object):
     def setTable(self,wordlist,type='wordlist'):
         t1 = time.time()
         self.table.horizontalHeader().setStretchLastSection(True)
+        self.table.verticalHeader().setHidden(True)
         self.laststate = bitarray.bitarray(len(wordlist))
         self.laststate.setall(False)
         if type != 'search_result':
