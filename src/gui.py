@@ -286,7 +286,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.5"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.6"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Dialog", "词库"))
         self.addWordButton.setText(_translate("Dialog", "添加"))
         self.infoLabel_tab1.setText(_translate("Dialog", "就绪"))

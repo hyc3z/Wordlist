@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2fbc734d-d990-4b95-b04d-cd12ebd53646" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/Clipboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Clipboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/_word.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/_wordlist.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/clipboard_version.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/clipboard_version.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/iFindWord.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/ifind_parse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/progressbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/progressbar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/wordlist.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/_word.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/_wordlist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/first.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/first.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/first.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/first.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/gui.spec" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/ifind_parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ifind_parse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/progressbar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gui/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/wordlist.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_wordlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/_wordlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wordlist.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/wordlist.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -333,7 +316,8 @@
       <workItem from="1566116964048" duration="18000" />
       <workItem from="1566263410571" duration="41000" />
       <workItem from="1566562373665" duration="312000" />
-      <workItem from="1572401871957" duration="258000" />
+      <workItem from="1572401871957" duration="344000" />
+      <workItem from="1572752553743" duration="127000" />
     </task>
     <task id="LOCAL-00001" summary="Clipboard For Linux">
       <created>1545447075656</created>
@@ -608,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565163274582</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Check redundancy">
+      <created>1572402189298</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1572402189298</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
@@ -638,7 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="restructure project file" />
     <MESSAGE value="update demo wordlist" />
     <MESSAGE value="add phonetic review support" />
     <MESSAGE value="update readme" />
@@ -663,7 +653,8 @@
     <MESSAGE value="Change sys.path[0] to os.getcwd to enable standalone .exe file to run&#10;Add multiple lines of commentary to help guide through the gui part." />
     <MESSAGE value="Change requirements for Windows users." />
     <MESSAGE value="Add bitarray bitwise operation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add bitarray bitwise operation" />
+    <MESSAGE value="Check redundancy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Check redundancy" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/iFindWord$_wordlist.coverage" NAME="_wordlist Coverage Results" MODIFIED="1564961268537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
@@ -675,6 +666,6 @@
     <SUITE FILE_PATH="coverage/iFindWord$iFindWord.coverage" NAME="iFindWord Coverage Results" MODIFIED="1564961399838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LinuxConsole" />
     <SUITE FILE_PATH="coverage/iFindWord$first2.coverage" NAME="first2 Coverage Results" MODIFIED="1564957646827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PyQt5" />
     <SUITE FILE_PATH="coverage/iFindWord$gui.coverage" NAME="gui Coverage Results" MODIFIED="1565372620016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Gui" />
-    <SUITE FILE_PATH="coverage/iFindWord$gui__1_.coverage" NAME="gui (1) Coverage Results" MODIFIED="1572402133524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/iFindWord$gui__1_.coverage" NAME="gui (1) Coverage Results" MODIFIED="1572752766517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

@@ -275,7 +275,7 @@ class WordList:
             return []
 
     def add_new_word(self, en_word, cn_word, save_to_sqlite=True, table_name='wordlist'):
-        newWord = Word(en_word, cn_word, recordedtime=str(datetime.datetime.now()))
+        newWord = Word(en_word.strip(), cn_word, recordedtime=str(datetime.datetime.now()))
         self.__wordList.append(newWord)
         self.__unvisitedList.append(newWord)
         self.__engList.append(newWord.it_self())
