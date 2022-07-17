@@ -1,13 +1,16 @@
 
 背单词py软件
 
+Update 2022.7:
+Added Pyqt6 support
+
 1、安装python3，并配置好环境变量
 
 2、安装需求
 
 <i>gui版</i>
 
-`pip3 install pyqt5 requests`
+`pip3 install pyqt6 requests`
 
 <i>控制台剪贴板</i>
 

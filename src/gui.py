@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 import os
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 import ifind_parse
 import _wordlist
 import time
@@ -90,11 +90,11 @@ class Ui_Dialog(object):
         else:
             self.table.setColumnCount(5)
             self.table.setHorizontalHeaderLabels(['英文', '中文', '英音标', '美音标', '通用音标'])
-            self.table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-            self.table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-            self.table.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-            self.table.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-            self.table.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
             self.table.horizontalHeader().setStretchLastSection(False)
 
             rows = 1
@@ -104,25 +104,25 @@ class Ui_Dialog(object):
             for i in wordlist:
                 item0 = QtWidgets.QTableWidgetItem(i.it_self())
                 item0.setFlags(
-                    QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+                    QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEnabled)
                 self.table.setItem(rowcount, 0, item0)
                 item1 = QtWidgets.QTableWidgetItem(i.explanation())
                 item1.setFlags(
-                    QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+                    QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEnabled)
                 self.table.setItem(rowcount, 1, item1)
                 rowcount += 1
-            self.table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-            self.table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
             self.table.horizontalHeader().setStretchLastSection(False)
         elif type == 'query':
             for i in wordlist:
                 item0 = QtWidgets.QTableWidgetItem(i[0])
                 item0.setFlags(
-                    QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+                    QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEnabled)
                 self.table.setItem(rowcount, 0, item0)
                 item1 = QtWidgets.QTableWidgetItem(i[1])
                 item1.setFlags(
-                    QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+                    QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEnabled)
                 self.table.setItem(rowcount, 1, item1)
                 # check = QtWidgets.QTableWidgetItem()
                 # check.setCheckState(QtCore.Qt.Unchecked)
@@ -134,7 +134,7 @@ class Ui_Dialog(object):
             for i in wordlist:
                 item = QtWidgets.QTableWidgetItem(wordlist[i])
                 item.setFlags(
-                    QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+                    QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEnabled)
                 self.table.setItem(0, col_count, item)
                 col_count += 1
 
@@ -183,7 +183,7 @@ class Ui_Dialog(object):
         self.tabWidget = QtWidgets.QTabWidget(Dialog)
         self.tabWidget.setGeometry(QtCore.QRect(10, 10, 281, 331))
         self.tabWidget.setObjectName("tabWidget")
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
         self.tabWidget.setMinimumSize(QtCore.QSize(400, 400))
@@ -199,7 +199,7 @@ class Ui_Dialog(object):
         self.horizontalLayout_1_tab1 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_1_tab1.setObjectName("horizontalLayout_1_tab1")
         self.lineEdit = QtWidgets.QLineEdit(self.tab_1)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
@@ -229,8 +229,8 @@ class Ui_Dialog(object):
         self.horizontalLayout_2_tab1 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2_tab1.setObjectName("horizontalLayout_2_tab1")
         self.addWordButton = QtWidgets.QPushButton(self.tab_1)
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.addWordButton.sizePolicy().hasHeightForWidth())
@@ -240,7 +240,7 @@ class Ui_Dialog(object):
         self.addWordButton.setObjectName("addWordButton")
         self.horizontalLayout_2_tab1.addWidget(self.addWordButton)
         # self.checkBox = QtWidgets.QCheckBox(self.tab_1)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         # sizePolicy.setHeightForWidth(self.checkBox.sizePolicy().hasHeightForWidth())
@@ -263,11 +263,11 @@ class Ui_Dialog(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(self.tab_2)
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.label_2 = QtWidgets.QLabel(self.tab_2)
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
         self.gridLayout_tab_2.addLayout(self.verticalLayout, 0, 0, 1, 1)
@@ -286,7 +286,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.3.6"))
+        Dialog.setWindowTitle(_translate("Dialog", "iFindWord v1.4.0"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Dialog", "词库"))
         self.addWordButton.setText(_translate("Dialog", "添加"))
         self.infoLabel_tab1.setText(_translate("Dialog", "就绪"))
@@ -302,10 +302,9 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

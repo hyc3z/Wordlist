@@ -92,7 +92,7 @@ def impatient_search(word, wordlist):
         word_cn_complete = word_cn.replace('\n', "").replace('\r', "")
         word_cnt = word.split(' ')
         get_phonetic(page_src)
-        if len(word_cnt) is 1:
+        if len(word_cnt) == 1:
             print(word, word_cn_complete, "要把这个单词加入列表吗?(Y/N)")
         else:
             print(word, word_cn_complete, "要把这个词组加入列表吗?(Y/N)")
